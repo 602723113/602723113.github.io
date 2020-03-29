@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一个个人博客">
+  <meta name="author" content="Zoyn">
+  <meta name="keywords" content="Blog|博客|Zoyn">
+  <title>从零开始的MC特效(三 | 向量的旋转) - Zoyn的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zoyn的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                从零开始的MC特效(三 | 向量的旋转)
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期六, 一月 19日 2019, 9:51 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    2.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      9 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 2:40 下午</p>
+            
+            <div class="markdown-body">
+              <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
+<li>导读</li>
+<li>Yaw，Pitch，Roll与向量的旋转</li>
+<li>利用向量旋转一个圆</li>
+</ul>
+<hr>
+<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4><p>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>Spigot1.10.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和<strong>选修4-4坐标系与参数方程</strong>和<strong>Java基础</strong>的知识<br>(没有我不会解释的)</p>
+<blockquote>
+<p>高三时间有限，我就不解释了，请读者见谅! —— 作者 2019/1/12</p>
+</blockquote>
+<p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
+<hr>
+<h4 id="Yaw，Pitch，Roll与向量的旋转"><a href="#Yaw，Pitch，Roll与向量的旋转" class="headerlink" title="Yaw，Pitch，Roll与向量的旋转"></a>Yaw，Pitch，Roll与向量的旋转</h4><p>这次我们来讲讲一些概念上的东西，在Minecraft中除了X, Y, Z之外Location还有两个量一个是Yaw一个是Pitch，这两个东西在学术上被称为<strong>欧拉角</strong>(飞机姿态角)<br>怎么理解这三个内容呢？</p>
+<p><strong>Yaw</strong>: 我们 <strong>水平旋转</strong> 我们的头，也就是左右转头，这就是一次Yaw转动</p>
+<p><strong>Pitch</strong>: 我们 <strong>上下旋转</strong> 我们的头，也就是上下点头，这就是一次Pitch转动</p>
+<p><em>Roll: 这个东西在Minecraft里面没有，但是我也讲一下，大家都玩过绝地求生吧，里面的人物QE摇头时就是一次Roll转动</em></p>
+<p><a href="https://jingyan.baidu.com/article/0bc808fc2c0e851bd485b9ce.html" target="_blank" rel="noopener">看不懂我说的可以看别的有图的</a></p>
+<p>那么它们跟我们的向量旋转有什么关系呢？其实在Minecraft中，我们利用Yaw和Pitch就可以描述出一个Vector向量，如我们看如下的图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-145349f2b1b9e144.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="Minecraft Yaw 图.png"></p>
+<p>在Minecraft当中，Yaw为0时，它表示的就是Z轴正半轴的方向，为-90°时则表示X轴正半轴的方向</p>
+<h6 id="Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0"><a href="#Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0" class="headerlink" title="Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0"></a>Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0</h6><hr>
+<p>概念的东西都讲完了，我们来谈谈向量的旋转，那么在数学上的话，平面向量的旋转是有直接的公式套用，或者利用矩阵也可以达到目的，<a href="https://blog.csdn.net/hjq376247328/article/details/45113563" target="_blank" rel="noopener">点我看相关资料</a></p>
+<p>那么通过上面的资料，我们就可以得到三个方法</p>
+<pre><code>    /**
+     * 将一个向量围绕X轴旋转angle个角度
+     *
+     * @param v     向量
+     * @param angle 角度
+     * @return {@link Vector}
+     */
+    public static Vector rotateAroundAxisX(Vector v, double angle) {
+        angle = Math.toRadians(angle);
+        double y, z, cos, sin;
+        cos = Math.cos(angle);
+        sin = Math.sin(angle);
+        y = v.getY() * cos - v.getZ() * sin;
+        z = v.getY() * sin + v.getZ() * cos;
+        return v.setY(y).setZ(z);
+    }
+
+    /**
+     * 将一个向量围绕Y轴旋转angle个角度
+     *
+     * @param v     向量
+     * @param angle 角度
+     * @return {@link Vector}
+     */
+    public static Vector rotateAroundAxisY(Vector v, double angle) {
+        angle = -angle;
+        angle = Math.toRadians(angle);
+        double x, z, cos, sin;
+        cos = Math.cos(angle);
+        sin = Math.sin(angle);
+        x = v.getX() * cos + v.getZ() * sin;
+        z = v.getX() * -sin + v.getZ() * cos;
+        return v.setX(x).setZ(z);
+    }
+
+    /**
+     * 将一个向量围绕Z轴旋转angle个角度
+     *
+     * @param v     向量
+     * @param angle 角度
+     * @return {@link Vector}
+     */
+    public static Vector rotateAroundAxisZ(Vector v, double angle) {
+        angle = Math.toRadians(angle);
+        double x, y, cos, sin;
+        cos = Math.cos(angle);
+        sin = Math.sin(angle);
+        x = v.getX() * cos - v.getY() * sin;
+        y = v.getX() * sin + v.getY() * cos;
+        return v.setX(x).setY(y);
+    }</code></pre><p>那么如果我们想用Yaw和Pitch来旋转向量应该怎么做呢？这里我直接给出方法，来自开源项目<a href="https://github.com/Slikey/EffectLib" target="_blank" rel="noopener">EffectLib</a>里的<a href="https://github.com/Slikey/EffectLib/blob/master/src/main/java/de/slikey/effectlib/util/VectorUtils.java" target="_blank" rel="noopener">VectorUtils.java</a></p>
+<pre><code>    /**
+     * This handles non-unit vectors, with yaw and pitch instead of X,Y,Z angles.
+     * &lt;p&gt;
+     * Thanks to SexyToad!
+     * &lt;p&gt;
+     * 将一个非单位向量使用yaw和pitch来代替X, Y, Z的角旋转方式
+     *
+     * @param v            向量
+     * @param yawDegrees   yaw的角度
+     * @param pitchDegrees pitch的角度
+     * @return
+     */
+    public static final Vector rotateVector(Vector v, float yawDegrees, float pitchDegrees) {
+        double yaw = Math.toRadians(-1 * (yawDegrees + 90));
+        double pitch = Math.toRadians(-pitchDegrees);
+
+        double cosYaw = Math.cos(yaw);
+        double cosPitch = Math.cos(pitch);
+        double sinYaw = Math.sin(yaw);
+        double sinPitch = Math.sin(pitch);
+
+        double initialX, initialY, initialZ;
+        double x, y, z;
+
+        // Z_Axis rotation (Pitch)
+        initialX = v.getX();
+        initialY = v.getY();
+        x = initialX * cosPitch - initialY * sinPitch;
+        y = initialX * sinPitch + initialY * cosPitch;
+
+        // Y_Axis rotation (Yaw)
+        initialZ = v.getZ();
+        initialX = x;
+        z = initialZ * cosYaw - initialX * sinYaw;
+        x = initialZ * sinYaw + initialX * cosYaw;
+
+        return new Vector(x, y, z);
+    }</code></pre><h5 id="具体的证明过程我这里就不阐述了，请读者自行解决吧…"><a href="#具体的证明过程我这里就不阐述了，请读者自行解决吧…" class="headerlink" title="具体的证明过程我这里就不阐述了，请读者自行解决吧…"></a>具体的证明过程我这里就不阐述了，请读者自行解决吧…</h5><p>那么有了上面的基础我们就可以来做一个简单向量旋转的特效</p>
+<h4 id="利用向量旋转一个圆"><a href="#利用向量旋转一个圆" class="headerlink" title="利用向量旋转一个圆"></a>利用向量旋转一个圆</h4><p>首先我们需要做个分析<br>如果我们要用向量制作一个围绕Y轴的圆可以怎么做呢？<br>我们看下方的代码</p>
+<pre><code>public void createACircleWithVector(Location loc) {
+    double radius = 1D;
+    // 我们直接在X轴正半轴上加一个单位, 用来制作我们的第一个向量
+    Vector originalVector = getVector(loc, loc.clone().add(1, 0, 0));
+    originalVector.multiply(radius); // 圆的半径长度
+    for (int degree = 0; degree &lt; 360; degree++) {
+        // 我们将向量进行旋转
+        Vector vector = VectorUtils.rotateAroundAxisY(originalVector, degree);
+        loc.add(vector);
+        loc.getWorld().spawnParticle(Particle.FLAME, loc, 0);
+        loc.subtract(vector);
+    }
+}
+
+/**
+ * 取第一个坐标到第二个坐标的向量
+ *
+ * @param firstLocation  坐标1
+ * @param secondLocation 坐标2
+ * @return {@link Vector}
+ */
+public static Vector getVector(Location firstLocation, Location secondLocation) {
+    return secondLocation.clone().subtract(firstLocation).toVector();
+}</code></pre><p>首先我们看这行代码<br><code>Vector originalVector = getVector(loc, loc.clone().add(1, 0, 0));</code><br>这行要怎么理解呢？我们看下方的图来理解一下<br><img src="https://upload-images.jianshu.io/upload_images/8109631-370b6d67e0caf43d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="向量OA"></p>
+<p>首先我们在loc的X轴上增加了一个单位也就是图中的<strong>A点</strong>，那么我们利用<strong>终点减起点</strong>来得到向量OA(看不懂的去复习<strong>MC特效二</strong>)，那么这个向量OA我们将做为我们的<strong><em>待旋转向量</em></strong></p>
+<p>之后我们进入循环，我们<strong>假设</strong>degree是2<br><code>Vector vector = VectorUtils.rotateAroundAxisY(originalVector, 2);</code><br>那么我们调用该方法即可得到<strong>绕Y轴逆时针旋转2个角度</strong>后的向量</p>
+<p>之后就是<strong>坐标加向量，绘制粒子，坐标减去向量保持坐标不变</strong>等一系列通法<br>最终的效果就是这样啦<br><img src="https://upload-images.jianshu.io/upload_images/8109631-f1492c926c67a7e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="绕Y轴旋转"></p>
+<hr>
+<p>那么我们如果想制作一个类似物品掉落时，然后物品围绕Y轴旋转的那种效果，我们又要怎么做呢？这里我们就要利用到Yaw和Pitch</p>
+<p>首先我们这里新建一个类用于旋转圆特效的实现，并且让它继承BukkitRunnable，当然Runnable也是可以的</p>
+<pre><code>public class RotatableCircle extends BukkitRunnable {
+
+    // 原点
+    private Location location;
+    // X轴上的单位向量
+    private Vector originalVector;
+
+    private float yaw = 0;
+    private double radius = 1D;
+
+    public RotatableCircle(Location location) {
+        this.location = location.clone();
+        // getVector() 方法是上面已经发过的一个方法，目的是构造一个向量OA
+        originalVector = getVector(location, location.clone().add(1, 0, 0));
+    }
+
+    @Override
+    public void run() {
+
+    }
+    /**
+     * 取第一个坐标到第二个坐标的向量
+     *
+     * @param firstLocation  坐标1
+     * @param secondLocation 坐标2
+     * @return {@link Vector}
+     */
+    public static Vector getVector(Location firstLocation, Location secondLocation) {
+        return secondLocation.clone().subtract(firstLocation).toVector();
+    }
+}</code></pre><p>从上方的代码我们先简单的需要几个基本量，<strong>待旋转向量和原点</strong>即可，之后yaw和radius分别是yaw和圆的半径</p>
+<p><strong>在构造函数里，我们将传入的location参数进行克隆以防原location的变动</strong><br>之后我们依然<strong>做一个向量OA，当作待旋转向量</strong></p>
+<p>之后我们进行几何分析，看下图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-370b6d67e0caf43d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="向量OA"></p>
+<p>首先这是一个向量OA，如果我们想让它旋转1个yaw单位可以使用以下方法<br><code>Vector vector = VectorUtils.rotateVector(originalVector, 1, 0)</code><br><img src="https://upload-images.jianshu.io/upload_images/8109631-0e200fe6aa94c495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="旋转θ个yaw角"><br>那么这就是旋转一个θ yaw角，那么pitch角要怎么旋转呢？<br><img src="https://upload-images.jianshu.io/upload_images/8109631-fc7c340b7847a6fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="旋转θ个pitch角"><br>根据上方的图我们将向量OA旋转θ个角之后得到了向量OB，那么我们就可以这么写我们的代码</p>
+<pre><code>// 请注意第三个参数 θ 是角度
+Vector vector = VectorUtils.rotateVector(originalVector, 0, θ)</code></pre><p>那么有了上面的铺垫我们可以这么写我们的RotatableCircle</p>
+<pre><code>public class RotatableCircle extends BukkitRunnable {
+
+    // 原点
+    private Location location;
+    // X轴上的单位向量
+    private Vector originalVector;
+
+    private float yaw = 0;
+    private double radius = 1D;
+
+    public RotatableCircle(Location location) {
+        this.location = location.clone();
+        originalVector = VectorUtils.getVector(location, location.clone().add(1, 0, 0));
+    }
+
+    @Override
+    public void run() {
+        // 我们假设是第一次yaw旋转, 那么是0, 所以我们先将originalVector旋转yaw个单位
+        Vector vectorYaw = VectorUtils.rotateVector(originalVector, yaw, 0);
+        // 之后我们将pitch进行 90 ~ -90 的一个循环用于将向量进行上下翻转
+        for (float pitch = 90; pitch &gt; -90; pitch--) {
+            Vector vector = VectorUtils.rotateVector(vectorYaw, 0, pitch);
+            // 这样得出来的vector只有一个半圆, 那么另外一个向量我们可以通过得到相反向量来制造出
+            Vector reverseVector = vector.clone().multiply(-1);
+
+            // 在正方向上绘制粒子
+            location.add(vector);
+            location.getWorld().spawnParticle(Particle.FLAME, location, 0);
+            location.subtract(vector);
+
+            // 在反方向上绘制粒子
+            location.add(reverseVector);
+            location.getWorld().spawnParticle(Particle.FLAME, location, 0);
+            location.subtract(reverseVector);
+        }
+
+        // 将yaw设定在0~360之间进行循环
+        if (yaw &gt;= 360) {
+            yaw = 0;
+        } else {
+            yaw++;
+        }
+    }
+}</code></pre><p>我们在代码中像下方一样调用</p>
+<pre><code>RotatableCircle rotatableCircle = new RotatableCircle(location);
+rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><strong>最终的效果</strong><br><img src="https://upload-images.jianshu.io/upload_images/8109631-59e4a6143a87f196.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="最终效果"></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Minecraft/">Minecraft</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/12/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%8C)/">
+                        <span class="hidden-mobile">从零开始的MC特效(二 | 向量基础)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

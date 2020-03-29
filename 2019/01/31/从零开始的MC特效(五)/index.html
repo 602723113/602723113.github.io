@@ -17,7 +17,7 @@
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
-  <title>你好, 世界 - Zoyn的个人博客</title>
+  <title>从零开始的MC特效(五 | BukkitRunnable与粒子特效) - Zoyn的个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -118,7 +118,7 @@
           <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
-                你好, 世界
+                从零开始的MC特效(五 | BukkitRunnable与粒子特效)
               
             </span>
 
@@ -126,7 +126,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期日, 三月 29日 2020, 1:17 下午
+                  星期四, 一月 31日 2019, 10:56 晚上
                 </p>
               
 
@@ -135,7 +135,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    19 字
+                    1.1k 字
                   </span>
                 
 
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      1 分钟
+                      4 分钟
                   </span>
                 
 
@@ -171,11 +171,194 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 2:06 下午</p>
+                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 2:45 下午</p>
             
             <div class="markdown-body">
-              <p>新搭建的博客嗷, 测试一下啦啦啦</p>
-<pre><code>print(&quot;Hello World!&quot;)</code></pre>
+              <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
+<li>导读</li>
+<li>BukkitRunnable之逐渐在玩家身旁出现的粒子<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>Spigot1.10.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和和<strong>Java基础</strong>的知识</li>
+</ul>
+<p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
+<hr>
+<h4 id="BukkitRunnable之逐渐在玩家身旁出现的粒子"><a href="#BukkitRunnable之逐渐在玩家身旁出现的粒子" class="headerlink" title="BukkitRunnable之逐渐在玩家身旁出现的粒子"></a>BukkitRunnable之逐渐在玩家身旁出现的粒子</h4><p>如果读者还不知道这是个什么东西的话，可以通过以下几个地方进行了解<br><a href="https://docs.windit.net/Chinese_BukkitAPI/org/bukkit/scheduler/BukkitRunnable.html" target="_blank" rel="noopener">Bukkit中文文档</a> 或者 <a href="https://bukkit.windit.net/javadoc/org/bukkit/scheduler/BukkitScheduler.html" target="_blank" rel="noopener">这个</a> 还有就是我自己的 <a href="https://www.bilibili.com/video/av20352427/" target="_blank" rel="noopener">视频教程</a></p>
+<p>首先利用BukkitRunnable的Task性质，我们可以制造一个 <strong>粒子特效逐渐渲染</strong> 的效果，而不是像以前那样一下子就渲染完毕，我们来看以下的例子</p>
+<pre><code>public class CrownEffect extends BukkitRunnable {
+    /**
+     * 玩家
+     */
+    private Player player;
+    private double degree = 0;
+
+    public CrownEffect(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public void run() {
+
+    }
+}</code></pre><p>首先我们创建了一个类称之为 CrownEffect 之后我们让它继承于 BukkitRunnable，之后我们需要往run方法里写粒子的出现方式</p>
+<pre><code>@Override
+public void run() {
+    // 用于检查玩家是否不在线的情况
+    if (player == null || !player.isOnline()) {
+        cancel();
+    }
+    Location playerLocation = player.getLocation();
+    // 转弧度制
+    double radians = Math.toRadians(degree);
+
+    // 这里我写得简单了一点，我们将玩家的坐标克隆之后直接进行x, y, z的变换
+    // 不难看出，我们这里是想建立一个 0.3 为半径的圆，作为我们想要实现的皇冠
+    Location playEffectLocation = playerLocation.clone().add(0.3 * Math.cos(radians), 2D, 0.3 * Math.sin(radians));
+    // 粒子播放，这里我使用了类库
+    ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.ORANGE), playEffectLocation, 50);
+
+    // 我们只需要degree在0~360度内即可
+    if (degree &gt;= 360) { 
+       degree = 0;
+    } else {
+       // 这里其实就是修改了步长为20 degree
+       degree += 20;
+    }
+}</code></pre><p>通过上方的代码，相信你已经可以理解我们所要实现的内容了，之后我们对这个类进行进一步的完善</p>
+<pre><code>/**
+ * 王冠特效
+ *
+ * @author Zoyn
+ */
+public class CrownEffect extends BukkitRunnable {
+
+    /**
+     * 玩家
+     */
+    private Player player;
+    private double degree = 0;
+
+    public CrownEffect(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public void run() {
+        if (player == null || !player.isOnline()) {
+            cancel();
+        }
+        Location playerLocation = player.getLocation();
+        double radians = Math.toRadians(degree);
+
+        Location playEffectLocation = playerLocation.clone().add(0.3 * Math.cos(radians), 2D, 0.3 * Math.sin(radians));
+        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.ORANGE), playEffectLocation, 50);
+
+        if (degree &gt;= 360) {
+            degree = 0;
+        } else {
+            degree += 20;
+        }
+    }
+
+    /**
+     * 开启特效的方法
+     */
+    public void startEffect() {
+        runTaskTimer(主类的实例, 0L, 1L);
+    }
+
+    /**
+     * 关闭特效的方法
+     */
+    public void stopEffect() {
+        cancel();
+    }
+}</code></pre><p>调用方法</p>
+<pre><code>CrownEffect crownEffect = new CrownEffect(player);
+crownEffect.startEffect();</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8109631-f53c0c5e9fae7f1a.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="王冠"></p>
+<h6 id="如果我们将run内的绘制算法更改一下会怎样呢？"><a href="#如果我们将run内的绘制算法更改一下会怎样呢？" class="headerlink" title="如果我们将run内的绘制算法更改一下会怎样呢？"></a>如果我们将run内的绘制算法更改一下会怎样呢？</h6><pre><code>    @Override
+    public void run() {
+        // 依然还是要判断玩家
+        if (player == null || !player.isOnline()) {
+            cancel();
+        }
+        Location playerLocation = player.getLocation().add(0, 1D, 0);
+        double radians = Math.toRadians(degree);
+        double x = 半径 * Math.cos(radians);
+        double y = Math.sin(radians);
+        double z = 半径 * Math.sin(radians);
+
+        Location playEffectLocation = playerLocation.clone().add(x, y, z);
+        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), playEffectLocation, 50);
+
+        if (degree &gt;= 360) {
+            degree = 0;
+        } else {
+            degree += 10;
+        }
+    }</code></pre><p>那么你就可以看到这样的效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-071525f1c388ab37.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="我也不懂叫什么的特效"></p>
+<p>以上便是BukkitRunnable与粒子特效的小技巧，下面放送一个自己利用前几节课的知识加上本节的知识所写的一个特效</p>
+<pre><code>// 会旋转的DNA
+public class RotatableDNA extends BukkitRunnable {
+
+    // 原点
+    private Location location;
+
+    private float yaw = 0;
+    private double y = 0D;
+
+    public RotatableDNA(Location location) {
+        this.location = location.clone();
+    }
+
+    @Override
+    public void run() {
+        for (double degree = 0, angle = 180; degree &lt; 480; degree += 5, angle += 5) {
+            // 第一条
+            double radians = Math.toRadians(degree);
+            double x = Math.cos(radians);
+            double z = Math.sin(radians);
+            Vector vector = VectorUtils.getVector(location, location.clone().add(x, y, z));
+            Vector rotatedVector = VectorUtils.rotateVector(vector, yaw, 0);
+            location.add(rotatedVector);
+            ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), location, 50);
+            location.subtract(rotatedVector);
+
+            // 第二条
+            double radians2 = Math.toRadians(angle);
+            double x2 = Math.cos(radians2);
+            double z2 = Math.sin(radians2);
+
+            Vector vector2 = VectorUtils.getVector(location, location.clone().add(x2, y, z2));
+            Vector rotatedVector2 = VectorUtils.rotateVector(vector2, yaw, 0);
+            location.add(rotatedVector2);
+            ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), location, 20);
+            location.subtract(rotatedVector2);
+
+            //中间连线
+            if (degree % 30 == 0) {
+                Location pointA = location.clone().add(rotatedVector);
+                Location pointB = location.clone().add(rotatedVector2);
+                EntityNBT.buildLine(pointA, pointB);
+            }
+
+            y += 0.1;
+        }
+
+        // 将yaw设定在0~360之间进行循环
+        if (yaw &gt;= 360) {
+            yaw = 0;
+        } else {
+            yaw += 5;
+        }
+        y = 0;
+    }
+
+    public void startEffect() {
+        runTaskTimer(主类实例, 0L, 1L);
+    }
+}</code></pre><p>调用方法</p>
+<pre><code>RotatableDNA rotatableDNA = new RotatableDNA(location);
+rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-8985ef792a6522cb.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="period为3时"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8109631-acfedba833aea5fd.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="period为1时"></p>
+
             </div>
             <hr>
             <div>
@@ -184,11 +367,26 @@
                   <span>
                 <i class="iconfont icon-inbox"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E9%9A%8F%E6%89%8B%E5%8F%91/">随手发</a>
+                      <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
                       &nbsp;
                     
                   </span>&nbsp;&nbsp;
                 
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Minecraft/">Minecraft</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+                    
+                  </span>
                 
               </p>
               
@@ -199,9 +397,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/">
+                      <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/">
                         <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">可能是最简单Scoreboard教程</span>
+                        <span class="hidden-mobile">从零开始的MC特效(六 | 坐标系的旋转)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -209,8 +407,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/">
-                        <span class="hidden-mobile">从零开始的MC特效(六 | 坐标系的旋转)</span>
+                      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">
+                        <span class="hidden-mobile">从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>

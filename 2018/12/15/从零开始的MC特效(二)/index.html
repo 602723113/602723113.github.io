@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一个个人博客">
+  <meta name="author" content="Zoyn">
+  <meta name="keywords" content="Blog|博客|Zoyn">
+  <title>从零开始的MC特效(二 | 向量基础) - Zoyn的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zoyn的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+                从零开始的MC特效(二 | 向量基础)
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期六, 十二月 15日 2018, 8:07 晚上
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    2.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      9 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 2:39 下午</p>
+            
+            <div class="markdown-body">
+              <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
+<li>导读</li>
+<li>数学上的向量与BukkitAPI中的向量</li>
+<li>利用向量进行画线操作</li>
+<li>利用画线进行多边形的绘制</li>
+<li>一个五角星</li>
+</ul>
+<hr>
+<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4><p>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 Spigot1.10.2-R0.1-SNAPSHOT 核心<br>在阅读之前请确保你具有高中数学必修4和Java基础的知识<br>(没有我也会适当的解释的)</p>
+<p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
+<hr>
+<h4 id="1-数学上的向量与BukkitAPI中的向量"><a href="#1-数学上的向量与BukkitAPI中的向量" class="headerlink" title="1.数学上的向量与BukkitAPI中的向量"></a>1.数学上的向量与BukkitAPI中的向量</h4><p><strong>此处只讲平面向量</strong></p>
+<p>在教程开始之前我们来谈一下数学上对向量的定义<br>*<em>定义:<br>*</em><br>向量由长度和方向组成，总是用来描述从一个点到另一个的移动。<br>和我们平常所说的数量不同的是，向量则是有了方向这一概念<br>那么我们利用图来理解一下向量</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8109631-f9171d288c45fa74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 1-1"></p>
+<p>在 图 1-1 当中我们定义两个点一个是<strong>点A</strong>一个是<strong>点B</strong>，那么我们<strong>以A为起点，B为终点作一条有向线段</strong>，得到下图<br><img src="http://upload-images.jianshu.io/upload_images/8109631-b4f38fb09033b50d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 1-2"></p>
+<p>在 图1-2 当中我们作了一条<strong>有向线段</strong>，而这条有向线段我们称之为<strong>向量AB</strong>，那么这就是向量的一个基本定义</p>
+<p><strong>向量的坐标表示: 假设A = (1, 3), B = (2, 4)，则向量AB = (2 - 1, 4 - 3)，即终点减起点<br>(在BukkitAPI中，向量以坐标来表示所以突出这一段)</strong></p>
+<p>我们再来谈谈关于向量的一些相关概念<br><strong>向量的模:</strong> 若我们有一个向量AB，那么它的模可以使用 <strong>|AB|</strong> 来进行表示，表示的则是<strong>AB之间的距离，即向量AB的长度</strong><br><strong>单位向量:</strong> 我们把一个模等于1个单位长度的向量叫做单位向量<br><strong>相反向量:</strong> 与<strong>向量A</strong>长度相等，方向相反的向量，叫做向量<strong>A的相反向量</strong><br><strong>零向量:</strong> 我们把<strong>模长等于0</strong>的向量叫做零向量</p>
+<hr>
+<h4 id="向量的基本运算"><a href="#向量的基本运算" class="headerlink" title="向量的基本运算"></a>向量的基本运算</h4><p>向量是有加和乘的，那么我们根据以下的一些图来了解一下它们的基本运算，<br><img src="http://upload-images.jianshu.io/upload_images/8109631-aebba809ea979a09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"><br><strong>向量相加应满足平行四边形定则或三角形定则<br>若向量A = (1, 3), 向量B = (2, 4)，则向量A+向量B = (3, 7)</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8109631-239da7f92cda0b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
+<p><strong>在上方我们给一个向量乘以-1，得到了反方向的向量，这个我们称之为相反向量<br>若向量A = (1, 3),向量A * 2 = (2, 4)<br>若向量A = (1, 3),向量A * -1 = (-1, -3)</strong></p>
+<hr>
+<h4 id="BukkitAPI上的向量-——-Vector"><a href="#BukkitAPI上的向量-——-Vector" class="headerlink" title="BukkitAPI上的向量 —— Vector"></a>BukkitAPI上的向量 —— Vector</h4><p>那么BukkitAPI上对向量的定义又是怎么样的呢？首先我们在 <strong>org.bukkit.util</strong> 包下找到一个叫<a href="https://docs.windit.net/Chinese_BukkitAPI/org/bukkit/util/Vector.html" target="_blank" rel="noopener">Vector</a>的类</p>
+<p><strong>那么在BukkitAPI上，Vector类用于表示从一个Location到另一个Location的”趋势”。</strong></p>
+<p>若我们想获取从LocationA到LocationB的向量，我们可以使用以下的代码，即<strong>终点减起点</strong></p>
+<pre><code>/**
+ * 取第一个坐标到第二个坐标的向量
+ *
+ * @param firstLocation  坐标1
+ * @param secondLocation 坐标2
+ * @return {@link Vector}
+ */
+public static Vector getVector(Location firstLocation, Location secondLocation) {
+    return secondLocation.subtract(firstLocation).toVector();
+}</code></pre><p><strong>请注意！这里的 secondLocation.subtract() 将会改变secondLocation的值</strong></p>
+<h4 id="2-利用向量进行画线操作"><a href="#2-利用向量进行画线操作" class="headerlink" title="2.利用向量进行画线操作"></a>2.利用向量进行画线操作</h4><p>首先我们来看张图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8109631-fe75e046e164e74f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 2-1"><br>图 2-1</p>
+<p>在上方的图中，我们定义两个点，一个是A一个是B，那么对应到MC中它们就是两个Location，LocationA和LocationB，那么我们要怎么使用向量来给这两个点进行画线的操作呢？</p>
+<p>思路：</p>
+<ul>
+<li>首先我们要获取一下这两个点的一个向量，我们称之为向量AB</li>
+<li>之后我们把向量AB转为单位向量，方向不变</li>
+<li>在Vector类里有个叫multiply的函数，这个函数是对Vector进行乘的操作</li>
+<li>若向量AB乘以2，那么它的长度就会乘以了2，之后我们再使用locationA的add函数进行增加Vector，这样我们就可以获得在AB上期中的一个点了，然后我们进行遍历的操作以此类推…（看不懂的话喝杯茶…）</li>
+</ul>
+<p>我们把上方的思路转为几何来理解一下<br><img src="http://upload-images.jianshu.io/upload_images/8109631-66c189ab14d15704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"><br>有了上面的思路，我们就可以打代码了</p>
+<p>首先我们要获取它们向量，这里我调用了<strong>location的clone函数</strong>，因此不会改变locB的值<br><code>Vector vectorAB = locB.clone().subtract(locA).toVector();</code><br>之后我们先获取一下该向量的长度，等下要用<br><code>double vectorLength = vectorAB.length();</code><br>然后我们再把该向量转为单位向量<br><code>vectorAB.normalize();</code><br>然后我们就需要利用for循环<strong>来计算出一个每一个需要multiply的值</strong></p>
+<pre><code>for (double i = 0; i &lt; vectorLength; i += 0.1) {
+     // 这里如果我们直接进行multiply的话则会修改vectorAB的值，所以我们先clone再multiply
+     Vector vector = vectorAB.clone().multiply(i);
+}</code></pre><p><strong>i的类型:</strong></p>
+<ul>
+<li>首先我们来解释为什么这里的i的类型为double</li>
+<li>因为在坐标运算中，精确度是比较高的，当两个点相近时可能他们的值还没有到1，可能只有0.8左右的长度，所以我们使用double来修饰</li>
+</ul>
+<p><strong>结束值:</strong> 之后我们来谈谈这里为什么要循环到向量的模长的时候就结束，在上面的思路我们只举了当i == 2时的一个情况，而我们想获得这两个点之间的点，所以我们要填入向量的模长</p>
+<p><strong>步长:</strong> 这里我们依然修改了循环的步长，那么它的作用是什么？其实就是在设定每一个add出来后的点的<strong>间距</strong> （这里我不懂怎么解释，直接画了个图给你们，按照图来理解会很好哦~）<br><img src="http://upload-images.jianshu.io/upload_images/8109631-03035b9b0cddc4f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"><br>那么我就会得到每一次从点A往点B进行逐步偏移的一个效果，然后我们每次给locA，进行add的操作就可以得到当前循环应该得到的Location</p>
+<pre><code>locA.add(vector);
+locA.getWorld().playEffect(locA, Effect.HAPPY_VILLAGER, 1); // 这里是播放粒子的代码...
+locA.subtract(vector);</code></pre><p><strong>完整代码:</strong></p>
+<pre><code>public static void buildLine(Location locA, Location locB) {
+    Vector vectorAB = locB.clone().subtract(locA).toVector();
+    double vectorLength = vectorAB.length();
+    vectorAB.normalize();
+    for (double i = 0; i &lt; vectorLength; i += 0.1) {
+        Vector vector = vectorAB.clone().multiply(i);
+        locA.add(vector);
+        locA.getWorld().playEffect(locA, Effect.HAPPY_VILLAGER, 1);
+        locA.subtract(vector);
+    }
+}</code></pre><p>游戏内的效果:<br><img src="http://upload-images.jianshu.io/upload_images/8109631-c32ef6631b2344a8.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="image"></p>
+<blockquote>
+<p><strong>注: 以下的内容则是对于画线的一些实践，跟上方的理论知识有部分的联系，所以可看可不看，不属于应掌握内容</strong></p>
+</blockquote>
+<h4 id="3-利用画线进行多边形的绘制"><a href="#3-利用画线进行多边形的绘制" class="headerlink" title="3.利用画线进行多边形的绘制"></a>3.利用画线进行多边形的绘制</h4><p>在第一章的时候，我们利用三角函数画出了一个圆，如果我们向画的是一个多边形该怎么做呢？</p>
+<p>这里顺便讲个小故事，在很久以前有个人叫<strong>阿基米德</strong>，他使用了一种叫做<strong>割圆法</strong>的方式计算出了圆周率，那么这个<strong>割圆法的步骤</strong>可以<a href="https://www.bilibili.com/video/av25406675" target="_blank" rel="noopener">看这个视频</a>来了解一下</p>
+<p>那么我们提到这个割圆法有什么用呢，首先这个割圆法利用的是<strong>内接六边形</strong>，再使用<strong>勾股定理</strong>求出来的，之后再<strong>内接八边形，十六边形</strong>一直下去…那么我们多边形始终都离不开一个圆，当然了是内接的多边形，而且还是<strong>规则的多边形</strong>，那么如果我们要画一个五边形或者三角形该怎么画呢？</p>
+<p>首先既然是多边形，就会有点，我们找到点之后就成功了一半，我们来看一张图<br><img src="http://upload-images.jianshu.io/upload_images/8109631-7ec23efd4f399402.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 3-1"></p>
+<p>在上图中我们找到了五个点，这五个点，每两两之间的夹角都为72°，这72°是怎么来的呢？我们利用<strong>360° / 5就可以得到72°，那么从360°/5得到的是一个单位圆中平均分成五块，且每块跟X轴正半轴的夹角都为72的倍数</strong>，那么这五个点就是这么找出来的</p>
+<p>我们把它放入代码中看看要怎么操作<br>我们依然使用玩家的location作为原点O，之后我们实例化一个List用于保存这五个点</p>
+<pre><code>Location playerLocation = player.getLocation();
+List&lt;Location&gt; locations = Lists.newArrayList();</code></pre><p>因为我们只是需要72的倍数的角度，所以我们把步长修改为 i += 72 (等价于 i = i + 72)</p>
+<pre><code>for (int i = 0; i &lt; 360; i += 72) {
+    // 转弧度制
+    double radians = Math.toRadians(i);
+    locations.add(playerLocation.clone().add(3 * 
+    Math.cos(radians), 0D, 3 * Math.sin(radians)));
+}</code></pre><p>为了以便于观看我将每次cos和sin计算的值都乘以3来扩大点到原点的距离<br>之后我们的locations里就存放有那5个点了<br>如果我们现在对这五个点播放粒子的话你可以看到以下这样的图<br><img src="http://upload-images.jianshu.io/upload_images/8109631-e8916358317f7123.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"><br>那么我们剩下的就是每个点依次顺序进行画线操作，然后你就可以看到以下的效果了<br><img src="http://upload-images.jianshu.io/upload_images/8109631-c9268d1984e316c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
+<h4 id="4-一个五角星"><a href="#4-一个五角星" class="headerlink" title="4.一个五角星"></a>4.一个五角星</h4><p>其实也没什么好说的…看代码吧…</p>
+<pre><code>Location playerLocation = player.getLocation();
+List&lt;Location&gt; locations = Lists.newArrayList();
+for (int i = 0; i &lt; 360; i += 72) {
+    // 转弧度制
+    double radians = Math.toRadians(i);
+    locations.add(playerLocation.clone().add(3 * Math.cos(radians), 0D, 3 * Math.sin(radians)));
+}
+
+buildLine(locations.get(0), locations.get(2));
+buildLine(locations.get(0), locations.get(3));
+buildLine(locations.get(1), locations.get(3));
+buildLine(locations.get(1), locations.get(4));
+buildLine(locations.get(2), locations.get(4));</code></pre><p><strong>备注: 这里的buildLine是上方我所发出来的一个方法哦</strong></p>
+<p>上方的locations的画线操作我们可以利用图来理解一下就可以</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8109631-6bebbbb151b102c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
+<p>为了方便解释我给每个点都起了名字括号内的是它在locations中的下标</p>
+<p>如果我们要画一个五角星，可以这么画<br>连接AC, AD，即0 -&gt; 2，0 -&gt; 3<br>连接BD, BE，即1 -&gt; 3，1 -&gt; 4<br>连接CE，即 2 -&gt; 4<br>然后你就可以看到这样的五角星了<br><img src="http://upload-images.jianshu.io/upload_images/8109631-eccd92b040cd93db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Minecraft/">Minecraft</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%89)/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">从零开始的MC特效(三 | 向量的旋转)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/05/20/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%80)/">
+                        <span class="hidden-mobile">从零开始的MC特效(一 | 在X, Z轴上的画圆操作)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
