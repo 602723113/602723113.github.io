@@ -118,8 +118,6 @@
           <div class="container text-center white-text fadeInUp">
             <span class="h2" id="subtitle">
               
-                可能是最简单Scoreboard教程
-              
             </span>
 
             
@@ -774,6 +772,24 @@ public class TeamCommand implements CommandExecutor {
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "可能是最简单Scoreboard教程&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: true,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
 
 
 
