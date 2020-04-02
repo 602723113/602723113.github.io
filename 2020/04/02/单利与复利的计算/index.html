@@ -19,7 +19,7 @@
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
-  <title>LaTeX与Markdown - Zoyn的个人博客</title>
+  <title>单利与复利的计算 - Zoyn的个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -121,7 +121,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期四, 四月 2日 2020, 11:44 中午
+                  星期四, 四月 2日 2020, 2:56 下午
                 </p>
               
 
@@ -130,7 +130,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    652 字
+                    377 字
                   </span>
                 
 
@@ -140,7 +140,7 @@
                       <i class="far fa-clock"></i>
                     
                     
-                    9
+                    4
                      分钟
                   </span>
                 
@@ -169,584 +169,46 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：星期四, 四月 2日 2020, 4:52 下午</p>
+                class="note note-warning">本文最后更新于：星期四, 四月 2日 2020, 6:01 晚上</p>
             
             <div class="markdown-body">
-              <p>$$LaTeX$$<br>总所周知, LaTeX是一个优秀的基于TeX的文档排版系统。<br>在Markdown中插入数学公式的语法是 <code>$数学公式$</code> 和 <code>$$数学公式$$</code>。</p>
+              <center><font size="5" color="dark">本节内容主要是我在课上的笔记</font></center>
+
+<p>$$利息率 = \frac{利息}{本金} * 100\%$$<br>利息 = <strong>补偿、报偿、代价、收益、利润、价格、剩余价值</strong><br>0.35%活期存款 100<br>$$社会平均利率率 &gt; 利息率 &gt; 0$$<br><a href="https://baike.baidu.com/item/%E5%88%A9%E7%8E%87%E5%80%92%E6%8C%82" target="_blank" rel="noopener">利率倒挂</a></p>
 <hr>
-<h1 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h1><p>行内公式是可以让公式在文中与文字或其他东西混编，<strong>不独占一行</strong>.在数学模式下, 符号会使用单独的字体<br>字母通常是<em>倾斜</em>的意大利体, 数字和符号则是直立体. 而且,数学符号之间的距离也与一般的水平模式不同:</p>
-<table>
-<thead>
-<tr>
-<th>实例</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>$2x+3y=34$</code></td>
-<td>$2x+3y=34$</td>
-</tr>
-<tr>
-<td>2x+3y=34</td>
-<td>2x+3y=34</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="独立公式"><a href="#独立公式" class="headerlink" title="独立公式"></a>独立公式</h1><p>独立公式顾名思义，就是单独的占一行<br>比如 <code>$$E = mc^2$$</code> 其可以展示为<br>$$E = mc^2$$</p>
-<p>它单独占用了一行, 而不是在 <strong>单行</strong> 内显示</p>
-<hr>
-<h1 id="多行公式"><a href="#多行公式" class="headerlink" title="多行公式"></a>多行公式</h1><p>在独立公式中使用\\来换行<br>示例: </p>
-<pre><code>$$
-2x+3y=34\\
-x+4y=25
-$$</code></pre><p>显示:<br>$$<br>2x+3y=34\\<br>x+4y=25<br>$$</p>
+<h3 id="利息的计算"><a href="#利息的计算" class="headerlink" title="利息的计算:"></a>利息的计算:</h3><ol>
+<li>为期5年，年利率6% 10万元贷款<br>以单利和复利算出应缴利息</li>
+</ol>
+<ul>
+<li><p>单利:</p>
 <blockquote>
-<p><strong>如果你的解析器会自动转义, 那么请写四个 <code>\\\\</code></strong></p>
+<p>解: 本金10w，年利率6%，期限5年<br>∵ $利息率 = \frac{利息}{本金} * 100\%$<br>计算公式为:<br>$$I = P * R * N\\I=利息;P=本金;\\R=利率;N=时间$$<br>∴ $100000 * 6\% * 5 = 30000(元)$<br>故: 单利的应缴利息为 30000 元</p>
+</blockquote>
+</li>
+<li><p>复利: </p>
+<blockquote>
+<p>∵ 计算公式为: $$S = P * (1 + R)^N\\I = S - P\\I=应缴利息; S=本息和\\P=本金; R=利率; N=时间$$<br>∴ 代入公式计算得: $100000 * (1 + 6\%)^5 = 133822.56(元)$<br>故本息和为$133822.56$<br>则利息为$133822.56 - 100000 = 33822.56(元)$</p>
+</blockquote>
+<h4 id="计息时-期限单位与利率的期限单位一致"><a href="#计息时-期限单位与利率的期限单位一致" class="headerlink" title="(计息时, 期限单位与利率的期限单位一致!!!)"></a>(计息时, <strong>期限单位</strong>与<strong>利率的期限</strong>单位一致!!!)</h4></li>
+</ul>
+<hr>
+<h3 id="现值与终值"><a href="#现值与终值" class="headerlink" title="现值与终值"></a>现值与终值</h3><p>现值 PV(Present Value)<br>终值 FV(Future Value)</p>
+<p>本=50000元, r=5%, n=3年<br>$$FV = PV \times (1+r)^n$$</p>
+<blockquote>
+<p>解: $50000 \times (1 + 5\%)^3 = 57881.25(元)$</p>
 </blockquote>
 <hr>
-<h1 id="常用符号"><a href="#常用符号" class="headerlink" title="常用符号"></a>常用符号</h1><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>实例</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>上下标</td>
-<td><code>S=a_{1}^2+a_{2}^2+a_{3}^2$</code></td>
-<td>$S=a_{1}^2+a_{2}^2+a_{3}^2$</td>
-</tr>
-<tr>
-<td>括号</td>
-<td><code>$f(x, y) = 100 * \lbrace[(x + y) * 3] - 5\rbrace$</code></td>
-<td>$f(x, y) = 100 * \lbrace[(x + y) * 3] - 5\rbrace$</td>
-</tr>
-<tr>
-<td>分数</td>
-<td><code>$\frac{1}{3} 与 \cfrac{1}{3}$</code></td>
-<td>$\frac{1}{3} 与 \cfrac{1}{3}$</td>
-</tr>
-<tr>
-<td>开方</td>
-<td><code>$\sqrt[3]{X}$ 和 $\sqrt{5 - x}$</code></td>
-<td>$\sqrt[3]{X}$ 和 $\sqrt{5 - x}$</td>
-</tr>
-</tbody></table>
+<h3 id="利率的区分与换算"><a href="#利率的区分与换算" class="headerlink" title="利率的区分与换算:"></a>利率的区分与换算:</h3><p>看到百分之几：5%的，年息5厘<br>$$月利率 = \frac{5\%}{12}\\日利率 = \frac{5\%}{360}$$</p>
 <hr>
-<h1 id="其他字符"><a href="#其他字符" class="headerlink" title="其他字符"></a>其他字符</h1><h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>\pm</code></td>
-<td>$\pm$</td>
-</tr>
-<tr>
-<td><code>\times</code></td>
-<td>$\times$</td>
-</tr>
-<tr>
-<td><code>\div</code></td>
-<td>$\div$</td>
-</tr>
-<tr>
-<td><code>\mid</code></td>
-<td>$\mid$</td>
-</tr>
-<tr>
-<td><code>\nmid</code></td>
-<td>$\nmid$</td>
-</tr>
-<tr>
-<td><code>\cdot</code></td>
-<td>$\cdot$</td>
-</tr>
-<tr>
-<td><code>\circ</code></td>
-<td>$\circ$</td>
-</tr>
-<tr>
-<td><code>\ast</code></td>
-<td>$\ast$</td>
-</tr>
-<tr>
-<td><code>\bigodot</code></td>
-<td>$\bigodot$</td>
-</tr>
-<tr>
-<td><code>\bigotimes</code></td>
-<td>$\bigotimes$</td>
-</tr>
-<tr>
-<td><code>\bigoplus</code></td>
-<td>$\bigoplus$</td>
-</tr>
-<tr>
-<td><code>\leq</code></td>
-<td>$\leq$</td>
-</tr>
-<tr>
-<td><code>\geq</code></td>
-<td>$\geq$</td>
-</tr>
-<tr>
-<td><code>\neq</code></td>
-<td>$\neq$</td>
-</tr>
-<tr>
-<td><code>\approx</code></td>
-<td>$\approx$</td>
-</tr>
-<tr>
-<td><code>\equiv</code></td>
-<td>$\equiv$</td>
-</tr>
-<tr>
-<td><code>\sum</code></td>
-<td>$\sum$</td>
-</tr>
-<tr>
-<td><code>\prod</code></td>
-<td>$\prod$</td>
-</tr>
-</tbody></table>
+<p>看到千分之几：3‰的，月息3厘<br>$$年利率 = 3‰\times12\\日利率 = \frac{3‰}{30}$$</p>
 <hr>
-<h2 id="对数运算符"><a href="#对数运算符" class="headerlink" title="对数运算符"></a>对数运算符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>\log</code></td>
-<td>$\log$</td>
-</tr>
-<tr>
-<td><code>\lg</code></td>
-<td>$\lg$</td>
-</tr>
-<tr>
-<td><code>\ln</code></td>
-<td>$\ln$</td>
-</tr>
-</tbody></table>
+<p>看到万分之几: 2.5‱的 日息2.5厘<br>$$月利率 = 2.5‱\times30\\年利率 = 2.5‱\times360$$</p>
 <hr>
-<h2 id="三角运算符"><a href="#三角运算符" class="headerlink" title="三角运算符"></a>三角运算符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>\bot</code></td>
-<td>$\bot$</td>
-</tr>
-<tr>
-<td><code>\angle</code></td>
-<td>$\angle$</td>
-</tr>
-<tr>
-<td><code>\sin</code></td>
-<td>$\sin$</td>
-</tr>
-<tr>
-<td><code>\cos</code></td>
-<td>$\cos$</td>
-</tr>
-<tr>
-<td><code>\tan</code></td>
-<td>$\tan$</td>
-</tr>
-<tr>
-<td><code>\cot</code></td>
-<td>$\cot$</td>
-</tr>
-<tr>
-<td><code>\sec</code></td>
-<td>$\sec$</td>
-</tr>
-<tr>
-<td><code>\csc</code></td>
-<td>$\csc$</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="微积分运算符"><a href="#微积分运算符" class="headerlink" title="微积分运算符"></a>微积分运算符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>\prime</code></td>
-<td>$\prime$</td>
-</tr>
-<tr>
-<td><code>\int</code></td>
-<td>$\int$</td>
-</tr>
-<tr>
-<td><code>\iint</code></td>
-<td>$\iint$</td>
-</tr>
-<tr>
-<td><code>\iiint</code></td>
-<td>$\iiint$</td>
-</tr>
-<tr>
-<td><code>\oint</code></td>
-<td>$\oint$</td>
-</tr>
-<tr>
-<td><code>\lim</code></td>
-<td>$\lim$</td>
-</tr>
-<tr>
-<td><code>\infty</code></td>
-<td>$\infty$</td>
-</tr>
-<tr>
-<td><code>\nabls</code></td>
-<td>$∇$</td>
-</tr>
-<tr>
-<td><code>\mathrm{d}</code></td>
-<td>$\mathrm{d}$</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="集合运算符"><a href="#集合运算符" class="headerlink" title="集合运算符"></a>集合运算符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>\emptyset</code></td>
-<td>$\emptyset$</td>
-</tr>
-<tr>
-<td><code>\in</code></td>
-<td>$\in$</td>
-</tr>
-<tr>
-<td><code>\notin</code></td>
-<td>$\notin$</td>
-</tr>
-<tr>
-<td><code>\subset</code></td>
-<td>$\subset$</td>
-</tr>
-<tr>
-<td><code>\subseteq</code></td>
-<td>$\subseteq$</td>
-</tr>
-<tr>
-<td><code>\supseteq</code></td>
-<td>$\supseteq$</td>
-</tr>
-<tr>
-<td><code>\bigcap</code></td>
-<td>$\bigcap$</td>
-</tr>
-<tr>
-<td><code>\bigcup</code></td>
-<td>$\bigcup$</td>
-</tr>
-<tr>
-<td><code>\bigvee</code></td>
-<td>$\bigvee$</td>
-</tr>
-<tr>
-<td><code>\bigwedge</code></td>
-<td>$\bigwedge$</td>
-</tr>
-<tr>
-<td><code>\biguplus</code></td>
-<td>$\biguplus$</td>
-</tr>
-<tr>
-<td><code>\bigsqcup</code></td>
-<td>$\bigsqcup$</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><table>
-<thead>
-<tr>
-<th>代码</th>
-<th>大写</th>
-<th>代码</th>
-<th>小写</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>A</code></td>
-<td>$A$</td>
-<td><code>\alpha</code></td>
-<td>$\alpha$</td>
-</tr>
-<tr>
-<td><code>B</code></td>
-<td>$B$</td>
-<td><code>\beta</code></td>
-<td>$\beta$</td>
-</tr>
-<tr>
-<td><code>\Gamma</code></td>
-<td>$\Gamma$</td>
-<td><code>\gamma</code></td>
-<td>$\gamma$</td>
-</tr>
-<tr>
-<td><code>\Delta</code></td>
-<td>$\Delta$</td>
-<td><code>\delta</code></td>
-<td>$\delta$</td>
-</tr>
-<tr>
-<td><code>E</code></td>
-<td>$E$</td>
-<td><code>\epsilon</code></td>
-<td>$\epsilon$</td>
-</tr>
-<tr>
-<td><code>Z</code></td>
-<td>$Z$</td>
-<td><code>\zeta</code></td>
-<td>$\zeta$</td>
-</tr>
-<tr>
-<td><code>H</code></td>
-<td>$H$</td>
-<td><code>\eta</code></td>
-<td>$\eta$</td>
-</tr>
-<tr>
-<td><code>\Theta</code></td>
-<td>$\Theta$</td>
-<td><code>\theta</code></td>
-<td>$\theta$</td>
-</tr>
-<tr>
-<td><code>I</code></td>
-<td>$I$</td>
-<td><code>\iota</code></td>
-<td>$\iota$</td>
-</tr>
-<tr>
-<td><code>K</code></td>
-<td>$K$</td>
-<td><code>\kappa</code></td>
-<td>$\kappa$</td>
-</tr>
-<tr>
-<td><code>Lambda</code></td>
-<td>$Lambda$</td>
-<td><code>\lambda</code></td>
-<td>$\lambda$</td>
-</tr>
-<tr>
-<td><code>M</code></td>
-<td>$M$</td>
-<td><code>\mu</code></td>
-<td>$\mu$</td>
-</tr>
-<tr>
-<td><code>N</code></td>
-<td>$N$</td>
-<td><code>\nu</code></td>
-<td>$\nu$</td>
-</tr>
-<tr>
-<td><code>Xi</code></td>
-<td>$Xi$</td>
-<td><code>\xi</code></td>
-<td>$\xi$</td>
-</tr>
-<tr>
-<td><code>O</code></td>
-<td>$O$</td>
-<td><code>\omicron</code></td>
-<td>$\omicron$</td>
-</tr>
-<tr>
-<td><code>\Pi</code></td>
-<td>$\Pi$</td>
-<td><code>\pi</code></td>
-<td>$\pi$</td>
-</tr>
-<tr>
-<td><code>P</code></td>
-<td>$P$</td>
-<td><code>\rho</code></td>
-<td>$\rho$</td>
-</tr>
-<tr>
-<td><code>\Sigma</code></td>
-<td>$\Sigma$</td>
-<td><code>\sigma</code></td>
-<td>$\sigma$</td>
-</tr>
-<tr>
-<td><code>T</code></td>
-<td>$T$</td>
-<td><code>\tau</code></td>
-<td>$\tau$</td>
-</tr>
-<tr>
-<td><code>\Upsilon</code></td>
-<td>$\Upsilon$</td>
-<td><code>\upsilon</code></td>
-<td>$\upsilon$</td>
-</tr>
-<tr>
-<td><code>\Phi</code></td>
-<td>$\Phi$</td>
-<td><code>\phi</code></td>
-<td>$\phi$</td>
-</tr>
-<tr>
-<td><code>X</code></td>
-<td>$X$</td>
-<td><code>\chi</code></td>
-<td>$\chi$</td>
-</tr>
-<tr>
-<td><code>\Psi</code></td>
-<td>$\Psi$</td>
-<td><code>\psi</code></td>
-<td>$\psi$</td>
-</tr>
-<tr>
-<td><code>\Omega</code></td>
-<td>$\Omega$</td>
-<td><code>\omega</code></td>
-<td>$\omega$</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="定界符"><a href="#定界符" class="headerlink" title="定界符"></a>定界符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>显示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>(</code></td>
-<td>$($</td>
-</tr>
-<tr>
-<td><code>)</code></td>
-<td>$($</td>
-</tr>
-<tr>
-<td><code>[ 或 \lbrack</code></td>
-<td>$\lbrack$</td>
-</tr>
-<tr>
-<td><code>] 或 \rbrack</code></td>
-<td>$\rbrack$</td>
-</tr>
-<tr>
-<td><code>\{ 或\lbrace</code></td>
-<td>$($</td>
-</tr>
-<tr>
-<td><code>\} 或\rbrace</code></td>
-<td>$($</td>
-</tr>
-<tr>
-<td><code>\langle</code></td>
-<td>$\langle$</td>
-</tr>
-<tr>
-<td><code>\rangle</code></td>
-<td>$\rangle$</td>
-</tr>
-<tr>
-<td><code>\lfloor</code></td>
-<td>$\lfloor$</td>
-</tr>
-<tr>
-<td><code>\rfloor</code></td>
-<td>$\rfloor$</td>
-</tr>
-<tr>
-<td><code>/</code></td>
-<td>$/$</td>
-</tr>
-<tr>
-<td><code>\backslash</code></td>
-<td>$\backslash$</td>
-</tr>
-<tr>
-<td><code>\uparrow</code></td>
-<td>$\uparrow$</td>
-</tr>
-<tr>
-<td><code>\Uparrow</code></td>
-<td>$\Uparrow$</td>
-</tr>
-<tr>
-<td><code>\downarrow</code></td>
-<td>$\downarrow$</td>
-</tr>
-<tr>
-<td><code>\Downarrow</code></td>
-<td>$\Downarrow$</td>
-</tr>
-<tr>
-<td><code>\updownarrow</code></td>
-<td>$\updownarrow$</td>
-</tr>
-<tr>
-<td><code>\Updownarrow</code></td>
-<td>$\Updownarrow$</td>
-</tr>
-<tr>
-<td><code>\leftarrow</code></td>
-<td>$\leftarrow$</td>
-</tr>
-<tr>
-<td><code>\Leftarrow</code></td>
-<td>$\Leftarrow$</td>
-</tr>
-<tr>
-<td><code>\rightarrow</code></td>
-<td>$\rightarrow$</td>
-</tr>
-<tr>
-<td><code>\Rightarrow</code></td>
-<td>$\Rightarrow$</td>
-</tr>
-<tr>
-<td><code>\vert</code></td>
-<td>$\vert$</td>
-</tr>
-<tr>
-<td><code>\Vert</code></td>
-<td>$\Vert$</td>
-</tr>
-<tr>
-<td><code>\lceil</code></td>
-<td>$\lceil$</td>
-</tr>
-<tr>
-<td><code>\rceil</code></td>
-<td>$\rceil$</td>
-</tr>
-</tbody></table>
-
+<center><font size="30">所以总的来说</font></center>
+$$
+月利率 = 日利率 \times 30\\\\
+年利率 = 月利率 \times 12
+$$
             </div>
             <hr>
             <div>
@@ -755,7 +217,7 @@ $$</code></pre><p>显示:<br>$$<br>2x+3y=34\\<br>x+4y=25<br>$$</p>
                   <span>
                 <i class="iconfont icon-inbox"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/">其他教程</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
                       &nbsp;
                     
                   </span>&nbsp;&nbsp;
@@ -764,9 +226,9 @@ $$</code></pre><p>显示:<br>$$<br>2x+3y=34\\<br>x+4y=25<br>$$</p>
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Markdown/">Markdown</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
                     
-                      <a class="hover-with-bg" href="/tags/LaTeX/">LaTeX</a>
+                      <a class="hover-with-bg" href="/tags/%E9%87%91%E8%9E%8D%E5%AD%A6/">金融学</a>
                     
                   </span>
                 
@@ -779,18 +241,12 @@ $$</code></pre><p>显示:<br>$$<br>2x+3y=34\\<br>x+4y=25<br>$$</p>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">单利与复利的计算</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/">
-                        <span class="hidden-mobile">可能是最简单Scoreboard教程</span>
+                      <a href="/2020/04/02/Latex%E4%B8%8EMarkdown/">
+                        <span class="hidden-mobile">LaTeX与Markdown</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -994,7 +450,7 @@ $$</code></pre><p>显示:<br>$$<br>2x+3y=34\\<br>x+4y=25<br>$$</p>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "LaTeX与Markdown&nbsp;",
+        "单利与复利的计算&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
