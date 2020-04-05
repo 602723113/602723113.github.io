@@ -19,7 +19,7 @@
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
-  <title>标签 - Zoyn的个人博客</title>
+  <title>归档 - Zoyn的个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -137,9 +137,34 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="text-center tagcloud">
-  <a href="/tags/Bukkit/" style="font-size: 30px; color: #337ab7">Bukkit</a> <a href="/tags/Bukkit%E6%95%99%E7%A8%8B/" style="font-size: 15px; color: #bbe">Bukkit教程</a> <a href="/tags/Java/" style="font-size: 30px; color: #337ab7">Java</a> <a href="/tags/LaTeX/" style="font-size: 15px; color: #bbe">LaTeX</a> <a href="/tags/MC%E7%89%B9%E6%95%88/" style="font-size: 22.5px; color: #779bd3">MC特效</a> <a href="/tags/Markdown/" style="font-size: 15px; color: #bbe">Markdown</a> <a href="/tags/Minecraft/" style="font-size: 30px; color: #337ab7">Minecraft</a> <a href="/tags/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/" style="font-size: 15px; color: #bbe">其他教程</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 30px; color: #337ab7">数学</a> <a href="/tags/%E9%87%91%E8%9E%8D%E5%AD%A6/" style="font-size: 15px; color: #bbe">金融学</a>
+<div class="list-group">
+  <p class="h4">共计 11 篇文章</p>
+  <hr>
+  
+    
+      
+      <p class="h5">2018</p>
+    
+    <a href="/2018/05/20/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%80)/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">从零开始的MC特效(一 | 在X, Z轴上的画圆操作)</span>
+      <span style="float: right;">05-20</span>
+    </a>
+  
 </div>
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <a class="extend prev" rel="prev" href="/archives/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
 
               </div>
             </div>
@@ -252,7 +277,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签&nbsp;",
+        "归档&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

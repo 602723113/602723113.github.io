@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>我的所有公开的教程</title>
+    <link href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/"/>
+    <url>/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Bukkit插件开发-视频"><a href="#Bukkit插件开发-视频" class="headerlink" title="Bukkit插件开发 | 视频"></a>Bukkit插件开发 | 视频</h1><ul><li><a href="https://www.mcbbs.net/thread-684323-1-1.html" target="_blank" rel="noopener">Bukkit插件开发 - 从入门到弃坑(索引)</a><blockquote><p>这个教程适合<strong>Minecraft1.12以下</strong>的版本, 1.13以上的版本建议还是去看别的作者的吧</p></blockquote></li><li><a href="https://www.bilibili.com/video/BV1o7411J7gM/" target="_blank" rel="noopener">[动画版]Minecraft粒子教程(一) 这个教程明明通俗易懂却过分简短</a><blockquote><p>这个教程主要是试试<code>manim</code>引擎来制作数学动画, 总的来说, <strong>适合入门</strong></p></blockquote></li></ul><h1 id="Bukkit插件开发"><a href="#Bukkit插件开发" class="headerlink" title="Bukkit插件开发"></a>Bukkit插件开发</h1><ul><li><p><a href="https://www.mcbbs.net/thread-792576-1-1.html" target="_blank" rel="noopener">如何给实体增加NBT数据</a></p><blockquote><p>这个教程主要是利用了 <code>org.bukkit.attribute</code> 包下的内容进行操作<br>因为在高版本时, 给实体设置最大血量最好还是使用NBT来做</p></blockquote></li><li><p><a href="https://www.mcbbs.net/thread-897858-1-1.html" target="_blank" rel="noopener">可能是最简单的Scoreboard教程</a></p><blockquote><p>这个教程主要使用了 <code>org.bukkit.scoreboard</code> 包下的相关内容进行了操作<br>本教程写于2020-3-22日, 理论上来说可以兼容1.8-1.15.2</p><ul><li>基础使用</li><li>无闪计分板</li><li>计分板自带的Team</li></ul></blockquote></li></ul><h1 id="Minecraft粒子教程"><a href="#Minecraft粒子教程" class="headerlink" title="Minecraft粒子教程"></a>Minecraft粒子教程</h1><ul><li><a href="https://www.mcbbs.net/thread-837600-1-1.html" target="_blank" rel="noopener">从零开始的MC特效(索引)</a><blockquote><p>这个帖子在我的<strong>简书</strong>上也有介绍, 详情可以点击<a href="https://www.jianshu.com/p/cf267acfe719" target="_blank" rel="noopener">这里</a><br>其中有如下的几个章节</p><ul><li>一、在X, Z轴上的画圆操作</li><li>二、向量基础</li><li>三、向量的旋转</li><li>四、Sin函数与Cos函数在Y轴上体现</li><li>五、BukkitRunnable与粒子特效</li><li>六、坐标系的旋转</li></ul></blockquote></li></ul><h1 id="NMS类"><a href="#NMS类" class="headerlink" title="NMS类"></a>NMS类</h1><ul><li><p><a href="https://www.mcbbs.net/thread-811096-1-1.html" target="_blank" rel="noopener">如何自定义你的实体</a></p><blockquote><p>这个教程主要适用于<strong>1.12以下</strong>的版本使用, 更高的版本请查询这个教程: <a href="https://www.mcbbs.net/thread-966358-1-1.html" target="_blank" rel="noopener">点我</a></p><ul><li>自定义僵尸</li><li>实体的WASD移动</li><li>PathfinderGoal (实体AI)</li><li>Navigation (实体的寻路系统)</li></ul></blockquote></li><li><p><a href="https://www.mcbbs.net/thread-697478-1-1.html" target="_blank" rel="noopener">如何给物品增加NBT数据</a></p><blockquote><p>这个教程主要是使用了NMS下的 <code>NBTTagCompound</code>, 并对物品进行增加, 查找, 删除NBT数据的操作进行的讲解</p></blockquote></li></ul><h1 id="其他教程"><a href="#其他教程" class="headerlink" title="其他教程"></a>其他教程</h1><ul><li><a href="https://www.mcbbs.net/thread-711754-1-1.html" target="_blank" rel="noopener">如何利用Maven来管理你的插件</a><blockquote><p>看看就好…毕竟只是以前的<em>屑文章</em></p></blockquote></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Bukkit教程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Bukkit教程</tag>
+      
+      <tag>其他教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>单利与复利的计算</title>
     <link href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/"/>
     <url>/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/</url>
