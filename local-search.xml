@@ -4,6 +4,50 @@
   
   
   <entry>
+    <title>久违的博客更新</title>
+    <link href="/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/"/>
+    <url>/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/</url>
+    
+    <content type="html"><![CDATA[<p>距离我上一次发博文的时候还是四月初，而现在却是八月中旬了  </p><p>期间发生了什么事呢？  </p><p>首先我考完了我大一的最后一场考试，并且只是获得了平均绩点3.44的成绩，很辣鸡  </p><p>之后我把我的绿宝石全部给卖出，赚取了8800的收入，于是我便买了一台主机和显示器，配置如下<br><img src="/img/%E9%85%8D%E7%BD%AE.png" srcset="/img/loading.gif" alt=""></p><p>很辣鸡的配置，包括显示器花了5300，心痛…</p><p>此外，对于以后的计划，我可能还会继续出相关的教程，或者更新一些我自己看了一些电影之后的想法吧。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>唠嗑</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>唠嗑</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>你好, 世界</title>
+    <link href="/2020/08/14/%E4%BD%A0%E5%A5%BDZoyn/"/>
+    <url>/2020/08/14/%E4%BD%A0%E5%A5%BDZoyn/</url>
+    
+    <content type="html"><![CDATA[<p>新搭建的博客嗷, 测试一下啦啦啦</p><pre><code>print(&quot;Hello World!&quot;)</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>随手发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>我的所有公开的教程</title>
     <link href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/"/>
     <url>/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/</url>
@@ -108,25 +152,6 @@
       <tag>Java</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>你好, 世界</title>
-    <link href="/2020/03/29/%E4%BD%A0%E5%A5%BDZoyn/"/>
-    <url>/2020/03/29/%E4%BD%A0%E5%A5%BDZoyn/</url>
-    
-    <content type="html"><![CDATA[<p>新搭建的博客嗷, 测试一下啦啦啦</p><pre><code>print(&quot;Hello World!&quot;)</code></pre>]]></content>
-    
-    
-    <categories>
-      
-      <category>随手发</category>
-      
-    </categories>
-    
     
   </entry>
   
