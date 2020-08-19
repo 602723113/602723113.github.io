@@ -1,41 +1,44 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#0f59a4">
+  <meta name="theme-color" content="#2775b6">
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
   <title>Zoyn的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
 
-  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 
@@ -60,46 +63,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,12 +136,12 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
@@ -122,7 +151,7 @@
 
           
             <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
+              <i class="iconfont icon-arrowdown"></i>
             </div>
           
         </div>
@@ -145,25 +174,24 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/" target="_self">
-          <img src="/img/punch.jpg" srcset="/img/loading.gif" alt="我的所有公开的教程"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/punch.jpg" srcset="/img/loading.gif" alt="我的所有公开的教程">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/">
-        <p class="h4 index-header">我的所有公开的教程</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/">我的所有公开的教程</a>
+      </h1>
 
-      <a href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/05/%E6%88%91%E7%9A%84%E6%89%80%E6%9C%89%E5%85%AC%E5%BC%80%E7%9A%84%E6%95%99%E7%A8%8B/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Bukkit插件开发 | 视频
+          
+            
+          
+          Bukkit插件开发 | 视频
 Bukkit插件开发 - 从入门到弃坑(索引)
 这个教程适合Minecraft1.12以下的版本, 1.13以上的版本建议还是去看别的作者的吧
 
@@ -176,151 +204,114 @@ Bukkit插件开发 - 从入门到弃坑(索引)
 Bukkit插件开发
 如何给实体增加NBT数据
 
-这个教程主要是利用了 org.bukkit.attribute 包下的内容进行操作因为在高版本时, 给实体设置最大血量最好还是使用NBT来做
+这个教程主要是利
+        </a>
+      </p>
 
-
-可能是最简单的Scoreboard教程
-
-这个教程主要使用了 org.</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-05 11:15" pubdate>
+              2020-04-05
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          
-            <a href="/tags/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/">其他教程</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+              <a href="/tags/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/">其他教程</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/" target="_self">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="久违的博客更新"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/">
-        <p class="h4 index-header">久违的博客更新</p>
-      </a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/">久违的博客更新</a>
+      </h1>
 
-      <a href="/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/08/14/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">距离我上一次发博文的时候还是四月初，而现在却是八月中旬了  
+          
+            
+          
+          距离我上一次发博文的时候还是四月初，而现在却是八月中旬了  
 期间发生了什么事呢？  
 首先我考完了我大一的最后一场考试，并且只是获得了平均绩点3.44的成绩，很辣鸡  
 之后我把我的绿宝石全部给卖出，赚取了8800的收入，于是我便买了一台主机和显示器，配置如下
 很辣鸡的配置，包括显示器花了5300，心痛…
-此外，对于以后的计划，我可能还会继续出相关的教程，或者更新一些我自己看了一些电影之后的想法吧。
-</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-14&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%94%A0%E5%97%91/">唠嗑</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E5%94%A0%E5%97%91/">唠嗑</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/08/14/%E4%BD%A0%E5%A5%BDZoyn/" target="_self">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="你好, 世界"
-               class="index-img img-fluid rounded index-thumbnails">
+此外，对于以后的计划，我可能还会继续出相关的教程，或者更新一些我自己看了一些电影之后的想法
         </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/08/14/%E4%BD%A0%E5%A5%BDZoyn/">
-        <p class="h4 index-header">你好, 世界</p>
-      </a>
+      </p>
 
-      <a href="/2020/08/14/%E4%BD%A0%E5%A5%BDZoyn/" class="index-excerpt-wrap">
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-14 13:13" pubdate>
+              2020-08-14
+            </time>
+          </div>
         
         
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">新搭建的博客嗷, 测试一下啦啦啦
-print(&quot;Hello World!&quot;)</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-08-14&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%94%A0%E5%97%91/">唠嗑</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E9%9A%8F%E6%89%8B%E5%8F%91/">随手发</a>&nbsp;
-          &nbsp;
-        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%94%A0%E5%97%91/">唠嗑</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/" target="_self">
-          <img src="/img/money.jpg" srcset="/img/loading.gif" alt="单利与复利的计算"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/money.jpg" srcset="/img/loading.gif" alt="单利与复利的计算">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/">
-        <p class="h4 index-header">单利与复利的计算</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/">单利与复利的计算</a>
+      </h1>
 
-      <a href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/02/%E5%8D%95%E5%88%A9%E4%B8%8E%E5%A4%8D%E5%88%A9%E7%9A%84%E8%AE%A1%E7%AE%97/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">本节内容主要是我在课上的笔记
+          
+            
+          
+          本节内容主要是我在课上的笔记
 
 $$利息率 = \frac{利息}{本金} \times 100\%$$利息 = 补偿、报偿、代价、收益、利润、价格、剩余价值0.35%活期存款 100$$社会平均利率率 &gt; 利息率 &gt; 0$$利率倒挂
 
@@ -330,54 +321,62 @@ $$利息率 = \frac{利息}{本金} \times 100\%$$利息 = 补偿、报偿、代
 
 单利:
 
-解: 本金100000元，年利率6%，期限5年∵ $利息率 = \frac{利息}{本金} \times 100\%$计算公式为:$$I = P \times R \times N\\I=利息;P=本金;\\R=利率;N=时间$$∴ $100000 \times</div>
-        </div>
-      </a>
+解: 本金100000元，年利率6%，期限5年∵ $利息率 =
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-02&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-02 14:56" pubdate>
+              2020-04-02
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>&nbsp;
-          
-            <a href="/tags/%E9%87%91%E8%9E%8D%E5%AD%A6/">金融学</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/%E9%87%91%E8%9E%8D%E5%AD%A6/">金融学</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/02/Latex%E4%B8%8EMarkdown/" target="_self">
-          <img src="/img/latex.jpg" srcset="/img/loading.gif" alt="LaTeX与Markdown"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/latex.jpg" srcset="/img/loading.gif" alt="LaTeX与Markdown">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/02/Latex%E4%B8%8EMarkdown/">
-        <p class="h4 index-header">LaTeX与Markdown</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/04/02/Latex%E4%B8%8EMarkdown/">LaTeX与Markdown</a>
+      </h1>
 
-      <a href="/2020/04/02/Latex%E4%B8%8EMarkdown/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/02/Latex%E4%B8%8EMarkdown/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">$$LaTeX$$总所周知, LaTeX是一个优秀的基于TeX的文档排版系统。在Markdown中插入数学公式的语法是 $数学公式$ 和 $$数学公式$$。
+          
+            
+          
+          $$LaTeX$$总所周知, LaTeX是一个优秀的基于TeX的文档排版系统。在Markdown中插入数学公式的语法是 $数学公式$ 和 $$数学公式$$。
 
 行内公式行内公式是可以让公式在文中与文字或其他东西混编，不独占一行.在数学模式下, 符号会使用单独的字体字母通常是倾斜的意大利体, 数字和符号则是直立体. 而且,数学符号之间的距离也与一般的水平模式不同:
 
@@ -388,64 +387,62 @@ $$利息率 = \frac{利息}{本金} \times 100\%$$利息 = 补偿、报偿、代
 
 
 
-$2x+3y=34$
-$2x+3y=34$
+$2x+3
+        </a>
+      </p>
 
-
-2x+3y=34
-2x+3y=34
-
-
-
-独立公式独立公式顾名思义，就是单独的占一行比如 $$E = mc^2$$ 其可以展示为$$E = mc^2$$
-它单独占</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-02&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-02 11:44" pubdate>
+              2020-04-02
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/">其他教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/">其他教程</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Markdown/">Markdown</a>&nbsp;
-          
-            <a href="/tags/LaTeX/">LaTeX</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Markdown/">Markdown</a>
+            
+              <a href="/tags/LaTeX/">LaTeX</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/" target="_self">
-          <img src="/img/scoreboard_icon.png" srcset="/img/loading.gif" alt="可能是最简单Scoreboard教程"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/scoreboard_icon.png" srcset="/img/loading.gif" alt="可能是最简单Scoreboard教程">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/">
-        <p class="h4 index-header">可能是最简单Scoreboard教程</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/">可能是最简单Scoreboard教程</a>
+      </h1>
 
-      <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">目录:
+          
+            
+          
+          目录:
 导读
 Scoreboard的基本概念
 使用Scoreboard进行展示数据给玩家
@@ -454,241 +451,263 @@ Scoreboard的基本概念
 
 导读好久没有更新教程了，woc昨天就发过教程（锡兰梗
 本教程使用的 PaperSpigot1.15.2-R0.1-SNAPSHOT 核心在阅读之前请确保你具有Java基础的知识(别问，问就挨打)
-To 读者: 本教程适合所有年龄向的人，因为我们是面向剪切板编程
-Scoreboard的基本概念在教程开始前我们来了解一下Scoreboard  
+To 读者: 本教程适合所有年龄向的人，因为我们是面向
+        </a>
+      </p>
 
-记分板（Scoreboard）系统是一套通过命令操纵的复杂游戏机制。主要为地图作者与服务器运营者准备，记</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-29&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-29 13:31" pubdate>
+              2020-03-29
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Bukkit/">Bukkit</a>&nbsp;
-          
-            <a href="/tags/Minecraft/">Minecraft</a>&nbsp;
-          
-            <a href="/tags/Java/">Java</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit/">Bukkit</a>
+            
+              <a href="/tags/Minecraft/">Minecraft</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/" target="_self">
-          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(六 | 坐标系的旋转)"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(六 | 坐标系的旋转)">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/">
-        <p class="h4 index-header">从零开始的MC特效(六 | 坐标系的旋转)</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/">从零开始的MC特效(六 | 坐标系的旋转)</a>
+      </h1>
 
-      <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">目录:
+          
+            
+          
+          目录:
 导读
 Location点的旋转
 坐标系的修正与在玩家背部建立坐标系
 制作简易翅膀导读导读本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)本教程使用的 PaperSpigot1.12.2-R0.1-SNAPSHOT 核心在阅读之前请确保你具有高中数学必修4和和Java基础的知识
 
-&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾&lt;To大学生&gt;: 没什么好说的…
+&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&
+        </a>
+      </p>
 
-Location点的旋转首先我们引入平面上点围绕另一个点进行</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-19&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-19 19:38" pubdate>
+              2020-03-19
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Bukkit/">Bukkit</a>&nbsp;
-          
-            <a href="/tags/Minecraft/">Minecraft</a>&nbsp;
-          
-            <a href="/tags/Java/">Java</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>&nbsp;
-          
-            <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit/">Bukkit</a>
+            
+              <a href="/tags/Minecraft/">Minecraft</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2019/01/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%94)/" target="_self">
-          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(五 | BukkitRunnable与粒子特效)"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(五 | BukkitRunnable与粒子特效)">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/01/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%94)/">
-        <p class="h4 index-header">从零开始的MC特效(五 | BukkitRunnable与粒子特效)</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2019/01/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%94)/">从零开始的MC特效(五 | BukkitRunnable与粒子特效)</a>
+      </h1>
 
-      <a href="/2019/01/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%94)/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2019/01/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%94)/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">目录:
+          
+            
+          
+          目录:
 导读
 BukkitRunnable之逐渐在玩家身旁出现的粒子导读导读本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)本教程使用的 Spigot1.10.2-R0.1-SNAPSHOT 核心在阅读之前请确保你具有高中数学必修4和和Java基础的知识
 
-&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾&lt;To大学生&gt;: 没什么好说的…
+&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&lt;To高中生&gt;: 如
+        </a>
+      </p>
 
-BukkitRunnable之逐渐在玩家身旁出现的粒子如果读者还不知道这是个什么东西的话，</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-01-31&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-01-31 22:56" pubdate>
+              2019-01-31
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Bukkit/">Bukkit</a>&nbsp;
-          
-            <a href="/tags/Minecraft/">Minecraft</a>&nbsp;
-          
-            <a href="/tags/Java/">Java</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>&nbsp;
-          
-            <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit/">Bukkit</a>
+            
+              <a href="/tags/Minecraft/">Minecraft</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/" target="_self">
-          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">
-        <p class="h4 index-header">从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)</a>
+      </h1>
 
-      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">目录:
+          
+            
+          
+          目录:
 导读
 龙卷风
 环绕在玩家身旁的粒子
 DNA双螺旋结构导读导读本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)本教程使用的 Spigot1.10.2-R0.1-SNAPSHOT 核心在阅读之前请确保你具有高中数学必修4和和Java基础的知识
 
-&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾&lt;To大学生&gt;: 没什么好说的…
+&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&lt;To高中生&gt;: 如果你还未
+        </a>
+      </p>
 
-引子首先我们来看一张图
-在上图我们可以看到，Sin和Cos的图像，在Y轴上的体现就是一个螺旋，那么</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-01-19&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-01-19 21:55" pubdate>
+              2019-01-19
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Bukkit/">Bukkit</a>&nbsp;
-          
-            <a href="/tags/Minecraft/">Minecraft</a>&nbsp;
-          
-            <a href="/tags/Java/">Java</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>&nbsp;
-          
-            <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit/">Bukkit</a>
+            
+              <a href="/tags/Minecraft/">Minecraft</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%89)/" target="_self">
-          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(三 | 向量的旋转)"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(三 | 向量的旋转)">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%89)/">
-        <p class="h4 index-header">从零开始的MC特效(三 | 向量的旋转)</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%89)/">从零开始的MC特效(三 | 向量的旋转)</a>
+      </h1>
 
-      <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%89)/" class="index-excerpt-wrap">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%B8%89)/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">目录:
+          
+            
+          
+          目录:
 导读
 Yaw，Pitch，Roll与向量的旋转
 利用向量旋转一个圆
@@ -696,45 +715,122 @@ Yaw，Pitch，Roll与向量的旋转
 
 导读导读本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)本教程使用的 Spigot1.10.2-R0.1-SNAPSHOT 核心在阅读之前请确保你具有高中数学必修4和选修4-4坐标系与参数方程和Java基础的知识(没有我不会解释的)
 
-高三时间有限，我就不解释了，请读者见谅! —— 作者 2019/1/12
+高三时间有限，我就不解释了，请读者见谅! —— 作者 2019/1/1
+        </a>
+      </p>
 
-&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾&l</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-01-19&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-01-19 21:51" pubdate>
+              2019-01-19
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Bukkit/">Bukkit</a>&nbsp;
-          
-            <a href="/tags/Minecraft/">Minecraft</a>&nbsp;
-          
-            <a href="/tags/Java/">Java</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>&nbsp;
-          
-            <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit/">Bukkit</a>
+            
+              <a href="/tags/Minecraft/">Minecraft</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2018/12/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%8C)/" target="_self">
+          <img src="/img/particle.jpg" srcset="/img/loading.gif" alt="从零开始的MC特效(二 | 向量基础)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2018/12/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%8C)/">从零开始的MC特效(二 | 向量基础)</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2018/12/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%8C)/">
+          
+          
+            
+          
+          目录:
+导读
+数学上的向量与BukkitAPI中的向量
+利用向量进行画线操作
+利用画线进行多边形的绘制
+一个五角星
+
+
+导读本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)本教程使用的 Spigot1.10.2-R0.1-SNAPSHOT 核心在阅读之前请确保你具有高中数学必修4和Java基础的知识(没有我也会适当的解释的)
+&lt;To初中生&gt;: 如果你是初中的话，别慌，你有
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-12-15 20:07" pubdate>
+              2018-12-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Bukkit/">Bukkit</a>
+            
+              <a href="/tags/Minecraft/">Minecraft</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+            
+              <a href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+            
+          </div>
+        
+      </div>
+    </article>
   </div>
 
 
 
-  <nav aria-label="index posts navigation">
-    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-double-right"></i></a>
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
@@ -756,7 +852,7 @@ Yaw，Pitch，Roll与向量的旋转
 
   
     <a id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -797,23 +893,6 @@ Yaw，Pitch，Roll与向量的旋转
         <span>Fluid</span></a>
     </div>
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
     
 
@@ -823,14 +902,16 @@ Yaw，Pitch，Roll与向量的旋转
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
 
-
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
@@ -841,13 +922,6 @@ Yaw，Pitch，Roll与向量的旋转
 
 
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-<!-- Plugins -->
-
 
 
 
@@ -857,7 +931,7 @@ Yaw，Pitch，Roll与向量的旋转
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Hello! 我是Zoyn~&nbsp;",
+        "人必自侮，然后人侮之。 —— 孟子&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -872,21 +946,6 @@ Yaw，Pitch，Roll与向量的旋转
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
 
 
   <script  src="/js/local-search.js" ></script>
@@ -894,10 +953,12 @@ Yaw，Pitch，Roll与向量的旋转
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
+
+
 
 
 

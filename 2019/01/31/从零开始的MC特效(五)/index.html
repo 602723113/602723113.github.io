@@ -1,41 +1,54 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#0f59a4">
+  <meta name="theme-color" content="#2775b6">
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
   <title>从零开始的MC特效(五 | BukkitRunnable与粒子特效) - Zoyn的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 
@@ -60,46 +73,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,46 +146,50 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('/img/particle.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
               
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期四, 一月 31日 2019, 10:56 晚上
-                </p>
-              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-01-31 22:56" pubdate>
+      2019年1月31日 晚上
+    </time>
+  </div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.1k 字
-                  </span>
-                
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                    
-                    
-                    15
-                     分钟
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
 
-                
-              </p>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
             
           </div>
 
@@ -166,12 +209,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">从零开始的MC特效(五 | BukkitRunnable与粒子特效)</h1>
             
-              <p
-                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 3:32 下午</p>
-            
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
 <li>导读</li>
 <li>BukkitRunnable之逐渐在玩家身旁出现的粒子<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>Spigot1.10.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和和<strong>Java基础</strong>的知识</li>
@@ -180,199 +222,205 @@
 <hr>
 <h4 id="BukkitRunnable之逐渐在玩家身旁出现的粒子"><a href="#BukkitRunnable之逐渐在玩家身旁出现的粒子" class="headerlink" title="BukkitRunnable之逐渐在玩家身旁出现的粒子"></a>BukkitRunnable之逐渐在玩家身旁出现的粒子</h4><p>如果读者还不知道这是个什么东西的话，可以通过以下几个地方进行了解<br><a href="https://docs.windit.net/Chinese_BukkitAPI/org/bukkit/scheduler/BukkitRunnable.html" target="_blank" rel="noopener">Bukkit中文文档</a> 或者 <a href="https://bukkit.windit.net/javadoc/org/bukkit/scheduler/BukkitScheduler.html" target="_blank" rel="noopener">这个</a> 还有就是我自己的 <a href="https://www.bilibili.com/video/av20352427/" target="_blank" rel="noopener">视频教程</a></p>
 <p>首先利用BukkitRunnable的Task性质，我们可以制造一个 <strong>粒子特效逐渐渲染</strong> 的效果，而不是像以前那样一下子就渲染完毕，我们来看以下的例子</p>
-<pre><code>public class CrownEffect extends BukkitRunnable {
-    /**
-     * 玩家
-     */
-    private Player player;
-    private double degree = 0;
+<pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CrownEffect</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BukkitRunnable</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 玩家</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-type">Player</span> player;
+    <span class="hljs-keyword">private</span> double degree = <span class="hljs-number">0</span>;
 
-    public CrownEffect(Player player) {
-        this.player = player;
-    }
+    public <span class="hljs-type">CrownEffect</span>(<span class="hljs-type">Player</span> player) &#123;
+        <span class="hljs-keyword">this</span>.player = player;
+    &#125;
 
-    @Override
-    public void run() {
-
-    }
-}</code></pre><p>首先我们创建了一个类称之为 CrownEffect 之后我们让它继承于 BukkitRunnable，之后我们需要往run方法里写粒子的出现方式</p>
-<pre><code>@Override
-public void run() {
-    // 用于检查玩家是否不在线的情况
-    if (player == null || !player.isOnline()) {
+    <span class="hljs-meta">@Override</span>
+    public void run() &#123;
+        
+    &#125;
+&#125;</code></pre>
+<p>首先我们创建了一个类称之为 CrownEffect 之后我们让它继承于 BukkitRunnable，之后我们需要往run方法里写粒子的出现方式</p>
+<pre><code class="hljs angelscript">@Override
+<span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> run() &#123;
+    <span class="hljs-comment">// 用于检查玩家是否不在线的情况</span>
+    <span class="hljs-keyword">if</span> (player == <span class="hljs-literal">null</span> || !player.isOnline()) &#123;
         cancel();
-    }
+    &#125;
     Location playerLocation = player.getLocation();
-    // 转弧度制
-    double radians = Math.toRadians(degree);
+    <span class="hljs-comment">// 转弧度制</span>
+    <span class="hljs-built_in">double</span> radians = Math.toRadians(degree);
+    
+    <span class="hljs-comment">// 这里我写得简单了一点，我们将玩家的坐标克隆之后直接进行x, y, z的变换</span>
+    <span class="hljs-comment">// 不难看出，我们这里是想建立一个 0.3 为半径的圆，作为我们想要实现的皇冠</span>
+    Location playEffectLocation = playerLocation.clone().add(<span class="hljs-number">0.3</span> * Math.cos(radians), <span class="hljs-number">2</span>D, <span class="hljs-number">0.3</span> * Math.sin(radians));
+    <span class="hljs-comment">// 粒子播放，这里我使用了类库</span>
+    ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.ORANGE), playEffectLocation, <span class="hljs-number">50</span>);
 
-    // 这里我写得简单了一点，我们将玩家的坐标克隆之后直接进行x, y, z的变换
-    // 不难看出，我们这里是想建立一个 0.3 为半径的圆，作为我们想要实现的皇冠
-    Location playEffectLocation = playerLocation.clone().add(0.3 * Math.cos(radians), 2D, 0.3 * Math.sin(radians));
-    // 粒子播放，这里我使用了类库
-    ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.ORANGE), playEffectLocation, 50);
+    <span class="hljs-comment">// 我们只需要degree在0~360度内即可</span>
+    <span class="hljs-keyword">if</span> (degree &gt;= <span class="hljs-number">360</span>) &#123; 
+       degree = <span class="hljs-number">0</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+       <span class="hljs-comment">// 这里其实就是修改了步长为20 degree</span>
+       degree += <span class="hljs-number">20</span>;
+    &#125;
+&#125;</code></pre>
+<p>通过上方的代码，相信你已经可以理解我们所要实现的内容了，之后我们对这个类进行进一步的完善</p>
+<pre><code class="hljs angelscript"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 王冠特效</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @author Zoyn</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">CrownEffect</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">BukkitRunnable</span> &#123;
 
-    // 我们只需要degree在0~360度内即可
-    if (degree &gt;= 360) { 
-       degree = 0;
-    } else {
-       // 这里其实就是修改了步长为20 degree
-       degree += 20;
-    }
-}</code></pre><p>通过上方的代码，相信你已经可以理解我们所要实现的内容了，之后我们对这个类进行进一步的完善</p>
-<pre><code>/**
- * 王冠特效
- *
- * @author Zoyn
- */
-public class CrownEffect extends BukkitRunnable {
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 玩家</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> Player player;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">double</span> degree = <span class="hljs-number">0</span>;
 
-    /**
-     * 玩家
-     */
-    private Player player;
-    private double degree = 0;
-
-    public CrownEffect(Player player) {
-        this.player = player;
-    }
+    <span class="hljs-keyword">public</span> CrownEffect(Player player) &#123;
+        <span class="hljs-keyword">this</span>.player = player;
+    &#125;
 
     @Override
-    public void run() {
-        if (player == null || !player.isOnline()) {
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> run() &#123;
+        <span class="hljs-keyword">if</span> (player == <span class="hljs-literal">null</span> || !player.isOnline()) &#123;
             cancel();
-        }
+        &#125;
         Location playerLocation = player.getLocation();
-        double radians = Math.toRadians(degree);
+        <span class="hljs-built_in">double</span> radians = Math.toRadians(degree);
 
-        Location playEffectLocation = playerLocation.clone().add(0.3 * Math.cos(radians), 2D, 0.3 * Math.sin(radians));
-        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.ORANGE), playEffectLocation, 50);
+        Location playEffectLocation = playerLocation.clone().add(<span class="hljs-number">0.3</span> * Math.cos(radians), <span class="hljs-number">2</span>D, <span class="hljs-number">0.3</span> * Math.sin(radians));
+        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.ORANGE), playEffectLocation, <span class="hljs-number">50</span>);
 
-        if (degree &gt;= 360) {
-            degree = 0;
-        } else {
-            degree += 20;
-        }
-    }
+        <span class="hljs-keyword">if</span> (degree &gt;= <span class="hljs-number">360</span>) &#123;
+            degree = <span class="hljs-number">0</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            degree += <span class="hljs-number">20</span>;
+        &#125;
+    &#125;
 
-    /**
-     * 开启特效的方法
-     */
-    public void startEffect() {
-        runTaskTimer(主类的实例, 0L, 1L);
-    }
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 开启特效的方法</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> startEffect() &#123;
+        runTaskTimer(主类的实例, <span class="hljs-number">0</span>L, <span class="hljs-number">1</span>L);
+    &#125;
 
-    /**
-     * 关闭特效的方法
-     */
-    public void stopEffect() {
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 关闭特效的方法</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> stopEffect() &#123;
         cancel();
-    }
-}</code></pre><p>调用方法</p>
-<pre><code>CrownEffect crownEffect = new CrownEffect(player);
-crownEffect.startEffect();</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8109631-f53c0c5e9fae7f1a.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="王冠"></p>
-<h6 id="如果我们将run内的绘制算法更改一下会怎样呢？"><a href="#如果我们将run内的绘制算法更改一下会怎样呢？" class="headerlink" title="如果我们将run内的绘制算法更改一下会怎样呢？"></a>如果我们将run内的绘制算法更改一下会怎样呢？</h6><pre><code>    @Override
-    public void run() {
-        // 依然还是要判断玩家
-        if (player == null || !player.isOnline()) {
-            cancel();
-        }
-        Location playerLocation = player.getLocation().add(0, 1D, 0);
-        double radians = Math.toRadians(degree);
-        double x = 半径 * Math.cos(radians);
-        double y = Math.sin(radians);
-        double z = 半径 * Math.sin(radians);
+    &#125;
+&#125;</code></pre>
+<p>调用方法</p>
+<pre><code class="hljs reasonml">CrownEffect crownEffect = <span class="hljs-keyword">new</span> <span class="hljs-constructor">CrownEffect(<span class="hljs-params">player</span>)</span>;
+crownEffect.start<span class="hljs-constructor">Effect()</span>;</code></pre>
+<p><img src="https://upload-images.jianshu.io/upload_images/8109631-f53c0c5e9fae7f1a.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="王冠"></p>
+<h6 id="如果我们将run内的绘制算法更改一下会怎样呢？"><a href="#如果我们将run内的绘制算法更改一下会怎样呢？" class="headerlink" title="如果我们将run内的绘制算法更改一下会怎样呢？"></a>如果我们将run内的绘制算法更改一下会怎样呢？</h6><pre><code class="hljs processing">@Override
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> run() &#123;
+    <span class="hljs-comment">// 依然还是要判断玩家</span>
+    <span class="hljs-keyword">if</span> (player == <span class="hljs-keyword">null</span> || !player.isOnline()) &#123;
+        cancel();
+    &#125;
+    Location playerLocation = player.getLocation().<span class="hljs-built_in">add</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>D, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">double</span> <span class="hljs-built_in">radians</span> = Math.toRadians(degree);
+    <span class="hljs-keyword">double</span> x = 半径 * Math.<span class="hljs-built_in">cos</span>(<span class="hljs-built_in">radians</span>);
+    <span class="hljs-keyword">double</span> y = Math.<span class="hljs-built_in">sin</span>(<span class="hljs-built_in">radians</span>);
+    <span class="hljs-keyword">double</span> z = 半径 * Math.<span class="hljs-built_in">sin</span>(<span class="hljs-built_in">radians</span>);
 
-        Location playEffectLocation = playerLocation.clone().add(x, y, z);
-        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), playEffectLocation, 50);
+    Location playEffectLocation = playerLocation.clone().<span class="hljs-built_in">add</span>(x, y, z);
+    ParticleEffect.REDSTONE.display(<span class="hljs-keyword">new</span> ParticleEffect.OrdinaryColor(Color.RED), playEffectLocation, <span class="hljs-number">50</span>);
 
-        if (degree &gt;= 360) {
-            degree = 0;
-        } else {
-            degree += 10;
-        }
-    }</code></pre><p>那么你就可以看到这样的效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-071525f1c388ab37.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="我也不懂叫什么的特效"></p>
+    <span class="hljs-keyword">if</span> (degree &gt;= <span class="hljs-number">360</span>) &#123;
+        degree = <span class="hljs-number">0</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        degree += <span class="hljs-number">10</span>;
+    &#125;
+&#125;</code></pre>
+<p>那么你就可以看到这样的效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-071525f1c388ab37.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="我也不懂叫什么的特效"></p>
 <p>以上便是BukkitRunnable与粒子特效的小技巧，下面放送一个自己利用前几节课的知识加上本节的知识所写的一个特效</p>
-<pre><code>// 会旋转的DNA
-public class RotatableDNA extends BukkitRunnable {
+<pre><code class="hljs angelscript"><span class="hljs-comment">// 会旋转的DNA</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">RotatableDNA</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">BukkitRunnable</span> &#123;
 
-    // 原点
-    private Location location;
+    <span class="hljs-comment">// 原点</span>
+    <span class="hljs-keyword">private</span> Location location;
 
-    private float yaw = 0;
-    private double y = 0D;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">float</span> yaw = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">double</span> y = <span class="hljs-number">0</span>D;
 
-    public RotatableDNA(Location location) {
-        this.location = location.clone();
-    }
+    <span class="hljs-keyword">public</span> RotatableDNA(Location location) &#123;
+        <span class="hljs-keyword">this</span>.location = location.clone();
+    &#125;
 
     @Override
-    public void run() {
-        for (double degree = 0, angle = 180; degree &lt; 480; degree += 5, angle += 5) {
-            // 第一条
-            double radians = Math.toRadians(degree);
-            double x = Math.cos(radians);
-            double z = Math.sin(radians);
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> run() &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">double</span> degree = <span class="hljs-number">0</span>, angle = <span class="hljs-number">180</span>; degree &lt; <span class="hljs-number">480</span>; degree += <span class="hljs-number">5</span>, angle += <span class="hljs-number">5</span>) &#123;
+            <span class="hljs-comment">// 第一条</span>
+            <span class="hljs-built_in">double</span> radians = Math.toRadians(degree);
+            <span class="hljs-built_in">double</span> x = Math.cos(radians);
+            <span class="hljs-built_in">double</span> z = Math.sin(radians);
             Vector vector = VectorUtils.getVector(location, location.clone().add(x, y, z));
-            Vector rotatedVector = VectorUtils.rotateVector(vector, yaw, 0);
+            Vector rotatedVector = VectorUtils.rotateVector(vector, yaw, <span class="hljs-number">0</span>);
             location.add(rotatedVector);
-            ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), location, 50);
+            ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), location, <span class="hljs-number">50</span>);
             location.subtract(rotatedVector);
 
-            // 第二条
-            double radians2 = Math.toRadians(angle);
-            double x2 = Math.cos(radians2);
-            double z2 = Math.sin(radians2);
+            <span class="hljs-comment">// 第二条</span>
+            <span class="hljs-built_in">double</span> radians2 = Math.toRadians(angle);
+            <span class="hljs-built_in">double</span> x2 = Math.cos(radians2);
+            <span class="hljs-built_in">double</span> z2 = Math.sin(radians2);
 
             Vector vector2 = VectorUtils.getVector(location, location.clone().add(x2, y, z2));
-            Vector rotatedVector2 = VectorUtils.rotateVector(vector2, yaw, 0);
+            Vector rotatedVector2 = VectorUtils.rotateVector(vector2, yaw, <span class="hljs-number">0</span>);
             location.add(rotatedVector2);
-            ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), location, 20);
+            ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(Color.RED), location, <span class="hljs-number">20</span>);
             location.subtract(rotatedVector2);
 
-            //中间连线
-            if (degree % 30 == 0) {
+            <span class="hljs-comment">//中间连线</span>
+            <span class="hljs-keyword">if</span> (degree % <span class="hljs-number">30</span> == <span class="hljs-number">0</span>) &#123;
                 Location pointA = location.clone().add(rotatedVector);
                 Location pointB = location.clone().add(rotatedVector2);
                 EntityNBT.buildLine(pointA, pointB);
-            }
+            &#125;
 
-            y += 0.1;
-        }
+            y += <span class="hljs-number">0.1</span>;
+        &#125;
 
-        // 将yaw设定在0~360之间进行循环
-        if (yaw &gt;= 360) {
-            yaw = 0;
-        } else {
-            yaw += 5;
-        }
-        y = 0;
-    }
+        <span class="hljs-comment">// 将yaw设定在0~360之间进行循环</span>
+        <span class="hljs-keyword">if</span> (yaw &gt;= <span class="hljs-number">360</span>) &#123;
+            yaw = <span class="hljs-number">0</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            yaw += <span class="hljs-number">5</span>;
+        &#125;
+        y = <span class="hljs-number">0</span>;
+    &#125;
 
-    public void startEffect() {
-        runTaskTimer(主类实例, 0L, 1L);
-    }
-}</code></pre><p>调用方法</p>
-<pre><code>RotatableDNA rotatableDNA = new RotatableDNA(location);
-rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-8985ef792a6522cb.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="period为3时"></p>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> startEffect() &#123;
+        runTaskTimer(主类实例, <span class="hljs-number">0</span>L, <span class="hljs-number">1</span>L);
+    &#125;
+&#125;</code></pre>
+<p>调用方法</p>
+<pre><code class="hljs reasonml">RotatableDNA rotatableDNA = <span class="hljs-keyword">new</span> <span class="hljs-constructor">RotatableDNA(<span class="hljs-params">location</span>)</span>;
+rotatableDNA.start<span class="hljs-constructor">Effect()</span>;</code></pre>
+<p>具体效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-8985ef792a6522cb.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="period为3时"></p>
 <p><img src="https://upload-images.jianshu.io/upload_images/8109631-acfedba833aea5fd.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="period为1时"></p>
 
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
                     
@@ -384,48 +432,47 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
                     
                       <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/2020/03/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%85%AD)/">
-                        <i class="fa fa-chevron-left"></i>
+                        <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">从零开始的MC特效(六 | 坐标系的旋转)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
                       <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">
                         <span class="hidden-mobile">从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)</span>
                         <span class="visible-mobile">下一篇</span>
-                        <i class="fa fa-chevron-right"></i>
+                        <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
-              
-          </div>
+            
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -442,7 +489,7 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
 
   
     <a id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -483,23 +530,6 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
         <span>Fluid</span></a>
     </div>
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
     
 
@@ -509,67 +539,16 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
-
-  <script  src="/js/lazyload.js" ></script>
-
+<!-- Plugins -->
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var toc = $('#toc');
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-      var tocLimMax = 2 * boardTop + boardCtn.height();
-
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
-      }
-      var offset = boardCtn.css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
-    });
-  </script>
-
-
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
@@ -580,27 +559,31 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
 
 
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').each(function () {
-        const pre = $(this);
-        if (pre.find('code.mermaid').length > 0) {
-          return;
-        }
-        pre.addClass('prettyprint  linenums');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
       });
-      prettyPrint();
-    })
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
 
@@ -647,7 +630,7 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
@@ -667,6 +650,8 @@ rotatableDNA.startEffect();</code></pre><p>具体效果<br><img src="https://upl
       }
     );
   </script>
+
+
 
 
 

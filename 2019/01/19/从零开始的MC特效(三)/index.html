@@ -1,41 +1,54 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#0f59a4">
+  <meta name="theme-color" content="#2775b6">
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
   <title>从零开始的MC特效(三 | 向量的旋转) - Zoyn的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 
@@ -60,46 +73,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,46 +146,50 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('/img/particle.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
               
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期六, 一月 19日 2019, 9:51 晚上
-                </p>
-              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-01-19 21:51" pubdate>
+      2019年1月19日 晚上
+    </time>
+  </div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    2.1k 字
-                  </span>
-                
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                    
-                    
-                    27
-                     分钟
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
 
-                
-              </p>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
             
           </div>
 
@@ -166,12 +209,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">从零开始的MC特效(三 | 向量的旋转)</h1>
             
-              <p
-                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 3:32 下午</p>
-            
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
 <li>导读</li>
 <li>Yaw，Pitch，Roll与向量的旋转</li>
@@ -194,225 +236,239 @@
 <h6 id="Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0"><a href="#Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0" class="headerlink" title="Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0"></a>Pitch就是你的Steve上下看时的方向，看向天空时最大值是-90，看向地板时最大值是90，正视时就是0</h6><hr>
 <p>概念的东西都讲完了，我们来谈谈向量的旋转，那么在数学上的话，平面向量的旋转是有直接的公式套用，或者利用矩阵也可以达到目的，<a href="https://blog.csdn.net/hjq376247328/article/details/45113563" target="_blank" rel="noopener">点我看相关资料</a></p>
 <p>那么通过上面的资料，我们就可以得到三个方法</p>
-<pre><code>    /**
-     * 将一个向量围绕X轴旋转angle个角度
-     *
-     * @param v     向量
-     * @param angle 角度
-     * @return {@link Vector}
-     */
-    public static Vector rotateAroundAxisX(Vector v, double angle) {
-        angle = Math.toRadians(angle);
-        double y, z, cos, sin;
-        cos = Math.cos(angle);
-        sin = Math.sin(angle);
-        y = v.getY() * cos - v.getZ() * sin;
-        z = v.getY() * sin + v.getZ() * cos;
-        return v.setY(y).setZ(z);
-    }
+<pre><code class="hljs reasonml"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 将一个向量围绕X轴旋转angle个角度</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @param v     向量</span>
+<span class="hljs-comment"> * @param angle 角度</span>
+<span class="hljs-comment"> * @return &#123;@link Vector&#125;</span>
+<span class="hljs-comment"> */</span>
+public static Vector rotate<span class="hljs-constructor">AroundAxisX(Vector <span class="hljs-params">v</span>, <span class="hljs-params">double</span> <span class="hljs-params">angle</span>)</span> &#123;
+    angle = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+    double y, z, cos, sin;
+    cos = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(angle);
+    sin = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(angle);
+    y = v.get<span class="hljs-constructor">Y()</span><span class="hljs-operator"> * </span>cos - v.get<span class="hljs-constructor">Z()</span><span class="hljs-operator"> * </span>sin;
+    z = v.get<span class="hljs-constructor">Y()</span><span class="hljs-operator"> * </span>sin + v.get<span class="hljs-constructor">Z()</span><span class="hljs-operator"> * </span>cos;
+    return v.set<span class="hljs-constructor">Y(<span class="hljs-params">y</span>)</span>.set<span class="hljs-constructor">Z(<span class="hljs-params">z</span>)</span>;
+&#125;
 
-    /**
-     * 将一个向量围绕Y轴旋转angle个角度
-     *
-     * @param v     向量
-     * @param angle 角度
-     * @return {@link Vector}
-     */
-    public static Vector rotateAroundAxisY(Vector v, double angle) {
-        angle = -angle;
-        angle = Math.toRadians(angle);
-        double x, z, cos, sin;
-        cos = Math.cos(angle);
-        sin = Math.sin(angle);
-        x = v.getX() * cos + v.getZ() * sin;
-        z = v.getX() * -sin + v.getZ() * cos;
-        return v.setX(x).setZ(z);
-    }
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 将一个向量围绕Y轴旋转angle个角度</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @param v     向量</span>
+<span class="hljs-comment"> * @param angle 角度</span>
+<span class="hljs-comment"> * @return &#123;@link Vector&#125;</span>
+<span class="hljs-comment"> */</span>
+public static Vector rotate<span class="hljs-constructor">AroundAxisY(Vector <span class="hljs-params">v</span>, <span class="hljs-params">double</span> <span class="hljs-params">angle</span>)</span> &#123;
+    angle = -angle;
+    angle = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+    double x, z, cos, sin;
+    cos = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(angle);
+    sin = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(angle);
+    x = v.get<span class="hljs-constructor">X()</span><span class="hljs-operator"> * </span>cos + v.get<span class="hljs-constructor">Z()</span><span class="hljs-operator"> * </span>sin;
+    z = v.get<span class="hljs-constructor">X()</span><span class="hljs-operator"> * </span>-sin + v.get<span class="hljs-constructor">Z()</span><span class="hljs-operator"> * </span>cos;
+    return v.set<span class="hljs-constructor">X(<span class="hljs-params">x</span>)</span>.set<span class="hljs-constructor">Z(<span class="hljs-params">z</span>)</span>;
+&#125;
 
-    /**
-     * 将一个向量围绕Z轴旋转angle个角度
-     *
-     * @param v     向量
-     * @param angle 角度
-     * @return {@link Vector}
-     */
-    public static Vector rotateAroundAxisZ(Vector v, double angle) {
-        angle = Math.toRadians(angle);
-        double x, y, cos, sin;
-        cos = Math.cos(angle);
-        sin = Math.sin(angle);
-        x = v.getX() * cos - v.getY() * sin;
-        y = v.getX() * sin + v.getY() * cos;
-        return v.setX(x).setY(y);
-    }</code></pre><p>那么如果我们想用Yaw和Pitch来旋转向量应该怎么做呢？这里我直接给出方法，来自开源项目<a href="https://github.com/Slikey/EffectLib" target="_blank" rel="noopener">EffectLib</a>里的<a href="https://github.com/Slikey/EffectLib/blob/master/src/main/java/de/slikey/effectlib/util/VectorUtils.java" target="_blank" rel="noopener">VectorUtils.java</a></p>
-<pre><code>    /**
-     * This handles non-unit vectors, with yaw and pitch instead of X,Y,Z angles.
-     * &lt;p&gt;
-     * Thanks to SexyToad!
-     * &lt;p&gt;
-     * 将一个非单位向量使用yaw和pitch来代替X, Y, Z的角旋转方式
-     *
-     * @param v            向量
-     * @param yawDegrees   yaw的角度
-     * @param pitchDegrees pitch的角度
-     * @return
-     */
-    public static final Vector rotateVector(Vector v, float yawDegrees, float pitchDegrees) {
-        double yaw = Math.toRadians(-1 * (yawDegrees + 90));
-        double pitch = Math.toRadians(-pitchDegrees);
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 将一个向量围绕Z轴旋转angle个角度</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @param v     向量</span>
+<span class="hljs-comment"> * @param angle 角度</span>
+<span class="hljs-comment"> * @return &#123;@link Vector&#125;</span>
+<span class="hljs-comment"> */</span>
+public static Vector rotate<span class="hljs-constructor">AroundAxisZ(Vector <span class="hljs-params">v</span>, <span class="hljs-params">double</span> <span class="hljs-params">angle</span>)</span> &#123;
+    angle = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+    double x, y, cos, sin;
+    cos = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(angle);
+    sin = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(angle);
+    x = v.get<span class="hljs-constructor">X()</span><span class="hljs-operator"> * </span>cos - v.get<span class="hljs-constructor">Y()</span><span class="hljs-operator"> * </span>sin;
+    y = v.get<span class="hljs-constructor">X()</span><span class="hljs-operator"> * </span>sin + v.get<span class="hljs-constructor">Y()</span><span class="hljs-operator"> * </span>cos;
+    return v.set<span class="hljs-constructor">X(<span class="hljs-params">x</span>)</span>.set<span class="hljs-constructor">Y(<span class="hljs-params">y</span>)</span>;
+&#125;</code></pre>
 
-        double cosYaw = Math.cos(yaw);
-        double cosPitch = Math.cos(pitch);
-        double sinYaw = Math.sin(yaw);
-        double sinPitch = Math.sin(pitch);
+<p>那么如果我们想用Yaw和Pitch来旋转向量应该怎么做呢？这里我直接给出方法，来自开源项目<a href="https://github.com/Slikey/EffectLib" target="_blank" rel="noopener">EffectLib</a>里的<a href="https://github.com/Slikey/EffectLib/blob/master/src/main/java/de/slikey/effectlib/util/VectorUtils.java" target="_blank" rel="noopener">VectorUtils.java</a></p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * This handles non-unit vectors, with yaw and pitch instead of X,Y,Z angles.</span>
+<span class="hljs-comment"> * &lt;p&gt;</span>
+<span class="hljs-comment"> * Thanks to SexyToad!</span>
+<span class="hljs-comment"> * &lt;p&gt;</span>
+<span class="hljs-comment"> * 将一个非单位向量使用yaw和pitch来代替X, Y, Z的角旋转方式</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @param v            向量</span>
+<span class="hljs-comment"> * @param yawDegrees   yaw的角度</span>
+<span class="hljs-comment"> * @param pitchDegrees pitch的角度</span>
+<span class="hljs-comment"> * @return</span>
+<span class="hljs-comment"> */</span>
+public static final Vector rotate<span class="hljs-constructor">Vector(Vector <span class="hljs-params">v</span>, <span class="hljs-params">float</span> <span class="hljs-params">yawDegrees</span>, <span class="hljs-params">float</span> <span class="hljs-params">pitchDegrees</span>)</span> &#123;
+    double yaw = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(-1 <span class="hljs-operator">*</span> (<span class="hljs-params">yawDegrees</span> + 90)</span>);
+    double pitch = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(-<span class="hljs-params">pitchDegrees</span>)</span>;
 
-        double initialX, initialY, initialZ;
-        double x, y, z;
+    double cosYaw = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(yaw);
+    double cosPitch = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(pitch);
+    double sinYaw = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(yaw);
+    double sinPitch = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(pitch);
 
-        // Z_Axis rotation (Pitch)
-        initialX = v.getX();
-        initialY = v.getY();
-        x = initialX * cosPitch - initialY * sinPitch;
-        y = initialX * sinPitch + initialY * cosPitch;
+    double initialX, initialY, initialZ;
+    double x, y, z;
 
-        // Y_Axis rotation (Yaw)
-        initialZ = v.getZ();
-        initialX = x;
-        z = initialZ * cosYaw - initialX * sinYaw;
-        x = initialZ * sinYaw + initialX * cosYaw;
+    <span class="hljs-comment">// Z_Axis rotation (Pitch)</span>
+    initialX = v.get<span class="hljs-constructor">X()</span>;
+    initialY = v.get<span class="hljs-constructor">Y()</span>;
+    x = initialX<span class="hljs-operator"> * </span>cosPitch - initialY<span class="hljs-operator"> * </span>sinPitch;
+    y = initialX<span class="hljs-operator"> * </span>sinPitch + initialY<span class="hljs-operator"> * </span>cosPitch;
 
-        return new Vector(x, y, z);
-    }</code></pre><h5 id="具体的证明过程我这里就不阐述了，请读者自行解决吧…"><a href="#具体的证明过程我这里就不阐述了，请读者自行解决吧…" class="headerlink" title="具体的证明过程我这里就不阐述了，请读者自行解决吧…"></a>具体的证明过程我这里就不阐述了，请读者自行解决吧…</h5><p>那么有了上面的基础我们就可以来做一个简单向量旋转的特效</p>
+    <span class="hljs-comment">// Y_Axis rotation (Yaw)</span>
+    initialZ = v.get<span class="hljs-constructor">Z()</span>;
+    initialX = x;
+    z = initialZ<span class="hljs-operator"> * </span>cosYaw - initialX<span class="hljs-operator"> * </span>sinYaw;
+    x = initialZ<span class="hljs-operator"> * </span>sinYaw + initialX<span class="hljs-operator"> * </span>cosYaw;
+
+    return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Vector(<span class="hljs-params">x</span>, <span class="hljs-params">y</span>, <span class="hljs-params">z</span>)</span>;
+&#125;</code></pre>
+<h5 id="具体的证明过程我这里就不阐述了，请读者自行解决吧…"><a href="#具体的证明过程我这里就不阐述了，请读者自行解决吧…" class="headerlink" title="具体的证明过程我这里就不阐述了，请读者自行解决吧…"></a>具体的证明过程我这里就不阐述了，请读者自行解决吧…</h5><p>那么有了上面的基础我们就可以来做一个简单向量旋转的特效</p>
 <h4 id="利用向量旋转一个圆"><a href="#利用向量旋转一个圆" class="headerlink" title="利用向量旋转一个圆"></a>利用向量旋转一个圆</h4><p>首先我们需要做个分析<br>如果我们要用向量制作一个围绕Y轴的圆可以怎么做呢？<br>我们看下方的代码</p>
-<pre><code>public void createACircleWithVector(Location loc) {
-    double radius = 1D;
-    // 我们直接在X轴正半轴上加一个单位, 用来制作我们的第一个向量
-    Vector originalVector = getVector(loc, loc.clone().add(1, 0, 0));
-    originalVector.multiply(radius); // 圆的半径长度
-    for (int degree = 0; degree &lt; 360; degree++) {
-        // 我们将向量进行旋转
-        Vector vector = VectorUtils.rotateAroundAxisY(originalVector, degree);
+<pre><code class="hljs reasonml">public void create<span class="hljs-constructor">ACircleWithVector(Location <span class="hljs-params">loc</span>)</span> &#123;
+    double radius = <span class="hljs-number">1</span>D;
+    <span class="hljs-comment">// 我们直接在X轴正半轴上加一个单位, 用来制作我们的第一个向量</span>
+    Vector originalVector = get<span class="hljs-constructor">Vector(<span class="hljs-params">loc</span>, <span class="hljs-params">loc</span>.<span class="hljs-params">clone</span>()</span>.add(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));
+    originalVector.multiply(radius); <span class="hljs-comment">// 圆的半径长度</span>
+    for (<span class="hljs-built_in">int</span> degree = <span class="hljs-number">0</span>; degree &lt; <span class="hljs-number">360</span>; degree++) &#123;
+        <span class="hljs-comment">// 我们将向量进行旋转</span>
+        Vector vector = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">VectorUtils</span>.</span></span>rotate<span class="hljs-constructor">AroundAxisY(<span class="hljs-params">originalVector</span>, <span class="hljs-params">degree</span>)</span>;
         loc.add(vector);
-        loc.getWorld().spawnParticle(Particle.FLAME, loc, 0);
+        loc.get<span class="hljs-constructor">World()</span>.spawn<span class="hljs-constructor">Particle(Particle.FLAME, <span class="hljs-params">loc</span>, 0)</span>;
         loc.subtract(vector);
-    }
-}
+    &#125;
+&#125;
 
-/**
- * 取第一个坐标到第二个坐标的向量
- *
- * @param firstLocation  坐标1
- * @param secondLocation 坐标2
- * @return {@link Vector}
- */
-public static Vector getVector(Location firstLocation, Location secondLocation) {
-    return secondLocation.clone().subtract(firstLocation).toVector();
-}</code></pre><p>首先我们看这行代码<br><code>Vector originalVector = getVector(loc, loc.clone().add(1, 0, 0));</code><br>这行要怎么理解呢？我们看下方的图来理解一下<br><img src="https://upload-images.jianshu.io/upload_images/8109631-370b6d67e0caf43d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="向量OA"></p>
-<p>首先我们在loc的X轴上增加了一个单位也就是图中的<strong>A点</strong>，那么我们利用<strong>终点减起点</strong>来得到向量OA(看不懂的去复习<strong>MC特效二</strong>)，那么这个向量OA我们将做为我们的<strong><em>待旋转向量</em></strong></p>
-<p>之后我们进入循环，我们<strong>假设</strong>degree是2<br><code>Vector vector = VectorUtils.rotateAroundAxisY(originalVector, 2);</code><br>那么我们调用该方法即可得到<strong>绕Y轴逆时针旋转2个角度</strong>后的向量</p>
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 取第一个坐标到第二个坐标的向量</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> * @param firstLocation  坐标1</span>
+<span class="hljs-comment"> * @param secondLocation 坐标2</span>
+<span class="hljs-comment"> * @return &#123;@link Vector&#125;</span>
+<span class="hljs-comment"> */</span>
+public static Vector get<span class="hljs-constructor">Vector(Location <span class="hljs-params">firstLocation</span>, Location <span class="hljs-params">secondLocation</span>)</span> &#123;
+    return secondLocation.clone<span class="hljs-literal">()</span>.subtract(firstLocation).<span class="hljs-keyword">to</span><span class="hljs-constructor">Vector()</span>;
+&#125;</code></pre>
+<p>首先我们看这行代码</p>
+<pre><code class="hljs Vector">这行要怎么理解呢？我们看下方的图来理解一下
+![向量OA](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;8109631-370b6d67e0caf43d.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)
+
+首先我们在loc的X轴上增加了一个单位也就是图中的**A点**，那么我们利用**终点减起点**来得到向量OA(看不懂的去复习**MC特效二**)，那么这个向量OA我们将做为我们的***待旋转向量***
+
+之后我们进入循环，我们**假设**degree是2
+&#96;&#96;&#96;Vector vector &#x3D; VectorUtils.rotateAroundAxisY(originalVector, 2);</code></pre>
+<p>那么我们调用该方法即可得到<strong>绕Y轴逆时针旋转2个角度</strong>后的向量</p>
 <p>之后就是<strong>坐标加向量，绘制粒子，坐标减去向量保持坐标不变</strong>等一系列通法<br>最终的效果就是这样啦<br><img src="https://upload-images.jianshu.io/upload_images/8109631-f1492c926c67a7e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="绕Y轴旋转"></p>
 <hr>
 <p>那么我们如果想制作一个类似物品掉落时，然后物品围绕Y轴旋转的那种效果，我们又要怎么做呢？这里我们就要利用到Yaw和Pitch</p>
 <p>首先我们这里新建一个类用于旋转圆特效的实现，并且让它继承BukkitRunnable，当然Runnable也是可以的</p>
-<pre><code>public class RotatableCircle extends BukkitRunnable {
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RotatableCircle</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BukkitRunnable</span> </span>&#123;
 
-    // 原点
-    private Location location;
-    // X轴上的单位向量
-    private Vector originalVector;
+    <span class="hljs-comment">// 原点</span>
+    <span class="hljs-keyword">private</span> Location location;
+    <span class="hljs-comment">// X轴上的单位向量</span>
+    <span class="hljs-keyword">private</span> Vector originalVector;
 
-    private float yaw = 0;
-    private double radius = 1D;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> yaw = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> radius = <span class="hljs-number">1</span>D;
 
-    public RotatableCircle(Location location) {
-        this.location = location.clone();
-        // getVector() 方法是上面已经发过的一个方法，目的是构造一个向量OA
-        originalVector = getVector(location, location.clone().add(1, 0, 0));
-    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RotatableCircle</span><span class="hljs-params">(Location location)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.location = location.clone();
+        <span class="hljs-comment">// getVector() 方法是上面已经发过的一个方法，目的是构造一个向量OA</span>
+        originalVector = getVector(location, location.clone().add(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));
+    &#125;
 
-    @Override
-    public void run() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
 
-    }
-    /**
-     * 取第一个坐标到第二个坐标的向量
-     *
-     * @param firstLocation  坐标1
-     * @param secondLocation 坐标2
-     * @return {@link Vector}
-     */
-    public static Vector getVector(Location firstLocation, Location secondLocation) {
-        return secondLocation.clone().subtract(firstLocation).toVector();
-    }
-}</code></pre><p>从上方的代码我们先简单的需要几个基本量，<strong>待旋转向量和原点</strong>即可，之后yaw和radius分别是yaw和圆的半径</p>
+    &#125;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 取第一个坐标到第二个坐标的向量</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> firstLocation  坐标1</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> secondLocation 坐标2</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@link</span> Vector&#125;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Vector <span class="hljs-title">getVector</span><span class="hljs-params">(Location firstLocation, Location secondLocation)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> secondLocation.clone().subtract(firstLocation).toVector();
+    &#125;
+&#125;</code></pre>
+<p>从上方的代码我们先简单的需要几个基本量，<strong>待旋转向量和原点</strong>即可，之后yaw和radius分别是yaw和圆的半径</p>
 <p><strong>在构造函数里，我们将传入的location参数进行克隆以防原location的变动</strong><br>之后我们依然<strong>做一个向量OA，当作待旋转向量</strong></p>
 <p>之后我们进行几何分析，看下图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-370b6d67e0caf43d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="向量OA"></p>
-<p>首先这是一个向量OA，如果我们想让它旋转1个yaw单位可以使用以下方法<br><code>Vector vector = VectorUtils.rotateVector(originalVector, 1, 0)</code><br><img src="https://upload-images.jianshu.io/upload_images/8109631-0e200fe6aa94c495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="旋转θ个yaw角"><br>那么这就是旋转一个θ yaw角，那么pitch角要怎么旋转呢？<br><img src="https://upload-images.jianshu.io/upload_images/8109631-fc7c340b7847a6fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="旋转θ个pitch角"><br>根据上方的图我们将向量OA旋转θ个角之后得到了向量OB，那么我们就可以这么写我们的代码</p>
-<pre><code>// 请注意第三个参数 θ 是角度
-Vector vector = VectorUtils.rotateVector(originalVector, 0, θ)</code></pre><p>那么有了上面的铺垫我们可以这么写我们的RotatableCircle</p>
-<pre><code>public class RotatableCircle extends BukkitRunnable {
+<p>首先这是一个向量OA，如果我们想让它旋转1个yaw单位可以使用以下方法</p>
+<pre><code class="hljs Vector">![旋转θ个yaw角](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;8109631-0e200fe6aa94c495.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)
+那么这就是旋转一个θ yaw角，那么pitch角要怎么旋转呢？
+![旋转θ个pitch角](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;8109631-fc7c340b7847a6fd.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240)
+根据上方的图我们将向量OA旋转θ个角之后得到了向量OB，那么我们就可以这么写我们的代码</code></pre>
+<p>// 请注意第三个参数 θ 是角度<br>Vector vector = VectorUtils.rotateVector(originalVector, 0, θ)</p>
+<pre><code class="hljs plain">
+那么有了上面的铺垫我们可以这么写我们的RotatableCircle</code></pre>
+<p>public class RotatableCircle extends BukkitRunnable {</p>
+<pre><code>// 原点
+private Location location;
+// X轴上的单位向量
+private Vector originalVector;
 
-    // 原点
-    private Location location;
-    // X轴上的单位向量
-    private Vector originalVector;
+private float yaw = 0;
+private double radius = 1D;
 
-    private float yaw = 0;
-    private double radius = 1D;
+public RotatableCircle(Location location) {
+    this.location = location.clone();
+    originalVector = VectorUtils.getVector(location, location.clone().add(1, 0, 0));
+}
 
-    public RotatableCircle(Location location) {
-        this.location = location.clone();
-        originalVector = VectorUtils.getVector(location, location.clone().add(1, 0, 0));
+@Override
+public void run() {
+    // 我们假设是第一次yaw旋转, 那么是0, 所以我们先将originalVector旋转yaw个单位
+    Vector vectorYaw = VectorUtils.rotateVector(originalVector, yaw, 0);
+    // 之后我们将pitch进行 90 ~ -90 的一个循环用于将向量进行上下翻转
+    for (float pitch = 90; pitch &gt; -90; pitch--) {
+        Vector vector = VectorUtils.rotateVector(vectorYaw, 0, pitch);
+        // 这样得出来的vector只有一个半圆, 那么另外一个向量我们可以通过得到相反向量来制造出
+        Vector reverseVector = vector.clone().multiply(-1);
+
+        // 在正方向上绘制粒子
+        location.add(vector);
+        location.getWorld().spawnParticle(Particle.FLAME, location, 0);
+        location.subtract(vector);
+
+        // 在反方向上绘制粒子
+        location.add(reverseVector);
+        location.getWorld().spawnParticle(Particle.FLAME, location, 0);
+        location.subtract(reverseVector);
     }
 
-    @Override
-    public void run() {
-        // 我们假设是第一次yaw旋转, 那么是0, 所以我们先将originalVector旋转yaw个单位
-        Vector vectorYaw = VectorUtils.rotateVector(originalVector, yaw, 0);
-        // 之后我们将pitch进行 90 ~ -90 的一个循环用于将向量进行上下翻转
-        for (float pitch = 90; pitch &gt; -90; pitch--) {
-            Vector vector = VectorUtils.rotateVector(vectorYaw, 0, pitch);
-            // 这样得出来的vector只有一个半圆, 那么另外一个向量我们可以通过得到相反向量来制造出
-            Vector reverseVector = vector.clone().multiply(-1);
-
-            // 在正方向上绘制粒子
-            location.add(vector);
-            location.getWorld().spawnParticle(Particle.FLAME, location, 0);
-            location.subtract(vector);
-
-            // 在反方向上绘制粒子
-            location.add(reverseVector);
-            location.getWorld().spawnParticle(Particle.FLAME, location, 0);
-            location.subtract(reverseVector);
-        }
-
-        // 将yaw设定在0~360之间进行循环
-        if (yaw &gt;= 360) {
-            yaw = 0;
-        } else {
-            yaw++;
-        }
+    // 将yaw设定在0~360之间进行循环
+    if (yaw &gt;= 360) {
+        yaw = 0;
+    } else {
+        yaw++;
     }
-}</code></pre><p>我们在代码中像下方一样调用</p>
-<pre><code>RotatableCircle rotatableCircle = new RotatableCircle(location);
-rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><strong>最终的效果</strong><br><img src="https://upload-images.jianshu.io/upload_images/8109631-59e4a6143a87f196.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="最终效果"></p>
+}</code></pre><p>}</p>
+<pre><code class="hljs plain">我们在代码中像下方一样调用</code></pre>
+<p>RotatableCircle rotatableCircle = new RotatableCircle(location);<br>rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</p>
+<p>```<br><strong>最终的效果</strong><br><img src="https://upload-images.jianshu.io/upload_images/8109631-59e4a6143a87f196.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="最终效果"></p>
 
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
                     
@@ -424,48 +480,47 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
                     
                       <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/2019/01/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E5%9B%9B)/">
-                        <i class="fa fa-chevron-left"></i>
+                        <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">从零开始的MC特效(四 | Sin与Cos函数在Y轴上的体现)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
                       <a href="/2018/12/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%8C)/">
                         <span class="hidden-mobile">从零开始的MC特效(二 | 向量基础)</span>
                         <span class="visible-mobile">下一篇</span>
-                        <i class="fa fa-chevron-right"></i>
+                        <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
-              
-          </div>
+            
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -482,7 +537,7 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
 
   
     <a id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -523,23 +578,6 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
         <span>Fluid</span></a>
     </div>
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
     
 
@@ -549,67 +587,16 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
-
-  <script  src="/js/lazyload.js" ></script>
-
+<!-- Plugins -->
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var toc = $('#toc');
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-      var tocLimMax = 2 * boardTop + boardCtn.height();
-
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
-      }
-      var offset = boardCtn.css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
-    });
-  </script>
-
-
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
@@ -620,27 +607,31 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
 
 
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').each(function () {
-        const pre = $(this);
-        if (pre.find('code.mermaid').length > 0) {
-          return;
-        }
-        pre.addClass('prettyprint  linenums');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
       });
-      prettyPrint();
-    })
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
 
@@ -687,7 +678,7 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
@@ -707,6 +698,8 @@ rotatableCircle.runTaskTimer(你插件的主类实例, 0L, 3L);</code></pre><p><
       }
     );
   </script>
+
+
 
 
 

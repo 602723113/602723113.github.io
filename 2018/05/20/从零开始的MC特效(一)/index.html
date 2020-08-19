@@ -1,41 +1,54 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#0f59a4">
+  <meta name="theme-color" content="#2775b6">
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
   <title>从零开始的MC特效(一 | 在X, Z轴上的画圆操作) - Zoyn的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 
@@ -60,46 +73,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,46 +146,50 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('/img/particle.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
               
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期日, 五月 20日 2018, 3:33 下午
-                </p>
-              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-05-20 15:33" pubdate>
+      2018年5月20日 下午
+    </time>
+  </div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    2.6k 字
-                  </span>
-                
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                    
-                    
-                    31
-                     分钟
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
 
-                
-              </p>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
             
           </div>
 
@@ -166,12 +209,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">从零开始的MC特效(一 | 在X, Z轴上的画圆操作)</h1>
             
-              <p
-                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 3:32 下午</p>
-            
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <h3 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h3><ul>
 <li>导读</li>
 <li>数学与Minecraft的融合</li>
@@ -198,35 +240,40 @@
 </blockquote>
 <p><strong>P(cos(30°), sin(30°))， 弧度制: P(cos(PI/6), sin(PI/6))</strong></p>
 <p>那么P的横坐标和纵坐标都是可以利用函数 cos和sin 求出，那么我们为什么不可以<strong>遍历一下把360°全部都给算出</strong>呢？所以我看写出下方的代码这样我们就可以把一周角里所有的角度都给遍历了一便，并且我们都算出了<strong>每个角度所对应的cos值和sin值</strong>吧，然后我们需要把他们作用到Minecraft当中</p>
-<pre><code>// 我们把玩家脚下的location作为是原点O 
-Location location = player.getLocation(); 
-for (int degree = 0; degree &lt; 360; degree++) {
-    double radians = Math.toRadians(degree);
-    double x = Math.cos(radians);
-    double y = Math.sin(radians);
-}</code></pre><p>那么在上图的for循环语句块中我们有两个变量 x y，也就是 <strong>P(x, y)</strong> 吧，之后我们回头看一下for循环语句块外的那个<strong>变量location</strong>，那个我们可以理解成是在上图中的<strong>原点O</strong>，那么我们做个假设，我们需要把点P转换成MC中的Location要怎么做？，其实很简单</p>
-<pre><code>location.add(x, 0, y);</code></pre><p>我们把location的X轴假想为0, Z轴假想为0（这里的X轴和Z轴指的是Minecraft中的那两个轴）即<strong>图中原点O为(0, 0)</strong>，那么<strong>在Minecraft中不可能任何时候原点的X Z轴都是0</strong>，所以我们需要做相加的操作</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">// 我们把玩家脚下的location作为是原点O </span>
+Location location = player.get<span class="hljs-constructor">Location()</span>; 
+for (<span class="hljs-built_in">int</span> degree = <span class="hljs-number">0</span>; degree &lt; <span class="hljs-number">360</span>; degree++) &#123;
+    double radians = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">degree</span>)</span>;
+    double x = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians);
+    double y = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians);
+&#125;</code></pre>
+<p>那么在上图的for循环语句块中我们有两个变量 x y，也就是 <strong>P(x, y)</strong> 吧，之后我们回头看一下for循环语句块外的那个<strong>变量location</strong>，那个我们可以理解成是在上图中的<strong>原点O</strong>，那么我们做个假设，我们需要把点P转换成MC中的Location要怎么做？，其实很简单</p>
+<pre><code class="hljs dockerfile">location.<span class="hljs-keyword">add</span><span class="bash">(x, 0, y);</span></code></pre>
+<p>我们把location的X轴假想为0, Z轴假想为0（这里的X轴和Z轴指的是Minecraft中的那两个轴）即<strong>图中原点O为(0, 0)</strong>，那么<strong>在Minecraft中不可能任何时候原点的X Z轴都是0</strong>，所以我们需要做相加的操作</p>
 <p>（上面可能会听得一头雾水，简单来说当<strong>原点O不为(0, 0)时</strong>，假设为(2, 2)，那么我们要做的是给<strong>玩家的周围建立圆</strong>吧，那么这时候点P的坐标应该为 <strong>P(2 + x, 2 + y)）</strong></p>
 <blockquote>
 <p>要是还听不懂的话那就去喝杯茶，洗个澡吧2333</p>
 </blockquote>
 <p>那么我们可以做以下的操作了</p>
-<pre><code>location.add(x, 0D, y);
-// 播放粒子
-location.getWorld.playEffect(location, Effect.HAPPY_VILLAGER, 1);
-// 为什么要减？因为我们要确保原点是不变的状态才可以哦~
-location.subtract(x, 0D, y);</code></pre><p>游戏内效果<br><img src="http://upload-images.jianshu.io/upload_images/8109631-512ddf977900c346.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="游戏内的效果"></p>
+<pre><code class="hljs glsl"><span class="hljs-keyword">location</span>.add(x, <span class="hljs-number">0</span>D, y);
+<span class="hljs-comment">// 播放粒子</span>
+<span class="hljs-keyword">location</span>.getWorld.playEffect(<span class="hljs-keyword">location</span>, Effect.HAPPY_VILLAGER, <span class="hljs-number">1</span>);
+<span class="hljs-comment">// 为什么要减？因为我们要确保原点是不变的状态才可以哦~</span>
+<span class="hljs-keyword">location</span>.subtract(x, <span class="hljs-number">0</span>D, y);</code></pre>
+<p>游戏内效果<br><img src="http://upload-images.jianshu.io/upload_images/8109631-512ddf977900c346.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="游戏内的效果"></p>
 <p>完整代码</p>
-<pre><code>// 我们把玩家脚下的location作为是原点O
-Location location = player.getLocation();
-for (int degree = 0; degree &lt; 360; degree++) {
-    double radians = Math.toRadians(degree);
-    double x = Math.cos(radians);
-    double y = Math.sin(radians);
-    location.add(x, 0, y);
-    location.getWorld().playEffect(location, Effect.HAPPY_VILLAGER, 1);
-    location.subtract(x, 0, y);
-}</code></pre><h5 id="利用数学在Minecraft中画一个球"><a href="#利用数学在Minecraft中画一个球" class="headerlink" title="利用数学在Minecraft中画一个球"></a>利用数学在Minecraft中画一个球</h5><p>首先我们来观察一下sin的<strong>函数图像</strong>，具体如下</p>
+<pre><code class="hljs glsl"><span class="hljs-comment">// 我们把玩家脚下的location作为是原点O</span>
+Location <span class="hljs-keyword">location</span> = player.getLocation();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> degree = <span class="hljs-number">0</span>; degree &lt; <span class="hljs-number">360</span>; degree++) &#123;
+    <span class="hljs-type">double</span> <span class="hljs-built_in">radians</span> = Math.toRadians(degree);
+    <span class="hljs-type">double</span> x = Math.<span class="hljs-built_in">cos</span>(<span class="hljs-built_in">radians</span>);
+    <span class="hljs-type">double</span> y = Math.<span class="hljs-built_in">sin</span>(<span class="hljs-built_in">radians</span>);
+    <span class="hljs-keyword">location</span>.add(x, <span class="hljs-number">0</span>, y);
+    <span class="hljs-keyword">location</span>.getWorld().playEffect(<span class="hljs-keyword">location</span>, Effect.HAPPY_VILLAGER, <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">location</span>.subtract(x, <span class="hljs-number">0</span>, y);
+&#125;</code></pre>
+
+<h5 id="利用数学在Minecraft中画一个球"><a href="#利用数学在Minecraft中画一个球" class="headerlink" title="利用数学在Minecraft中画一个球"></a>利用数学在Minecraft中画一个球</h5><p>首先我们来观察一下sin的<strong>函数图像</strong>，具体如下</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/8109631-c004142745f40231.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 2-1"></p>
 <p>从上图可以看出 sin函数 始终在 1~-1 之间徘徊，所以我们认为它是有<strong>周期性</strong>的，那么这跟球的生成有什么联系呢？我们看下图</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/8109631-0a5961213221bee9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 2-2"></p>
@@ -234,71 +281,47 @@ for (int degree = 0; degree &lt; 360; degree++) {
 <p>首先我们回到sin的函数图像，我们看<strong>当x在0~π之间时</strong>连起来的y轴是不是像一个半圆啊？而且它们的<strong>半径(这里的半径可以理解为sin函数中的y轴)</strong>也是不同的，那么我们是不是可以这么认为，我们只需要 <strong>0 ~ **</strong>π** 之间的x值，然后代入函数当中就可以求出对应的y轴的值了？</p>
 <p>那么 <strong>0 ~ π</strong> 是什么值呢？其实在上面的圆中我就讲过 <strong>π=180°，</strong>所以我们求得其实就是 <strong>sin(0 ~ 180°)。</strong></p>
 <p>那么有了上面的思路我们可以<strong>求出每个圆的半径</strong>对吧，那么我们写出下面的代码</p>
-<pre><code>for (double i = 0; i &lt; 180; i++) {
-    double radians = Math.toRadians(i);     
-    double radius = Math.sin(radians);
-}</code></pre><p>在上方的代码当中我们求出了一个球中每个圆的半径, 但是我们还需要考虑一件事，我们是不是要规定一下每个圆之间的距离啊？</p>
+<pre><code class="hljs routeros"><span class="hljs-keyword">for</span> (double i = 0; i &lt; 180; i++) &#123;
+    double radians = Math.toRadians(i);     
+    double<span class="hljs-built_in"> radius </span>= Math.sin(radians);
+&#125;</code></pre>
+<p>在上方的代码当中我们求出了一个球中每个圆的半径, 但是我们还需要考虑一件事，我们是不是要规定一下每个圆之间的距离啊？</p>
 <p>那么我们引入<strong>cos</strong>的函数图像<br><img src="https://upload-images.jianshu.io/upload_images/8109631-1c1ac82cccdbfd35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 2-3"></p>
 <p>从上图可以看出 f(x) = cos(x),<br>当<strong>x=0</strong>时, f(x)则为1.<br>当<strong>x=π</strong>时，f(x)则为-1.</p>
 <p>那么我跟sin的函数图像联系一下, 在上面的代码中我们发现，radius的值是从小到大再到小，那么我们想一下，如果半径是小的那么那个圆是也是小的，而我们要画的圆是<strong>从上往下</strong>画的（观察图 2-2）对吧，所以我们是不是要给那个<strong>最小的圆的y轴是最高的</strong>？（没看懂？喝杯茶吧）而<strong>cos函数</strong>就可以帮我们达到这一点，所以我们写出以下的代码</p>
-<p><code>double y = Math.cos(radians);</code><br>那么这样我们就可以获得<strong>当前for循环时</strong>那个圆的高度了。</p>
-<p>在上面的结构中我们得到了当前圆的<strong>半径和高度</strong>，那么我们要怎么通过这两个东西画出来呢？</p>
-<p>我们在第三章画圆时曾经做过这么一个操作</p>
-<pre><code>for (int degree = 0; degree &lt; 360; degree++) {
-    double radians = Math.toRadians(degree);    
-    double x = Math.cos(radians);     
-    double y = Math.sin(radians);
-}</code></pre><p>上方的代码中我们只能制造出一个<strong>半径为1</strong>的圆，那么我们想扩大它的半径需要怎么做？</p>
-<p>我们这里又引入一个函数<strong>y=Asin(ωx + φ)</strong> <em>(这里的sin也可以为cos)</em>，其实这个函数跟sin函数差不多只不过多了几个变量，那么这里我们只需要考虑A的值，</p>
-<p>为什么呢？我们来看一下这个函数在数学上的定义：</p>
-<ul>
-<li><em>φ（初相位）：决定波形与X轴位置关系或横向移动距离（左加右减）</em></li>
-<li><em>ω：决定周期（最小正周期T=2π/|ω|）</em></li>
-<li><strong>A：决定峰值（即纵向拉伸压缩的倍数）</strong></li>
-</ul>
-<p><strong>由于这里我们只考虑A所以我们可以把上方的函数简写为 y = Asin(x)，假设我们的A为2，那就是sin(x) * 2了，那么反应在函数图像上是这样的</strong></p>
-<p><strong><img src="http://upload-images.jianshu.io/upload_images/8109631-d8fa9a9d746e0d0c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></strong> </p>
-<p>那么有了上面的概念<strong>我们不妨使用 Math.cos(x) * 半径 来扩大本次循环时所对应的半径</strong>，所以我们写出以下的代码</p>
-<pre><code>for (double j = 0; j &lt; 360; j ++) {
-    // 依然需要做角度转弧度的操作 
-    double radiansCircle = Math.*toRadians*(j);     
-    double x = Math.*cos*(radiansCircle) * radius;     
-    double z = Math.*sin*(radiansCircle) * radius;
-}</code></pre><p>那么这样就可以控制好本次循环我们需要这个圆多少半径了，那么我们写好之后就可以放在Minecraft中看看效果</p>
-<p>完整代码:</p>
-<pre><code>for (double i = 0; i &lt; 180; i++) {
-    // 依然要做角度与弧度的转换
-    double radians = Math.toRadians(i);
-    // 计算出来的半径
-    double radius = Math.sin(radians);
-    double y = Math.cos(radians);
-    for (double j = 0; j &lt; 360; j++) {
-        // 依然需要做角度转弧度的操作
-        double radiansCircle = Math.toRadians(j);
-        double x = Math.cos(radiansCircle) * radius;
-        double z = Math.sin(radiansCircle) * radius;
-        location.add(x, y, z);
-        location.getWorld().playEffect(location, Effect.HAPPY_VILLAGER, 1);
-        location.subtract(x, y, z);
-    }
-}</code></pre><p>游戏内的效果<br><img src="http://upload-images.jianshu.io/upload_images/8109631-78b42b28cadfa8ba.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="效果"></p>
-<p>然后你就会发现你的游戏卡得一匹2333，因为我们是在360°全方位的进行渲染粒子的操作2333，但实际业务中我们可能并不需要做这种需求，那么我们就需要做一个关于跳跃的操作呗，我们看下面的代码</p>
-<pre><code>for (double i = 0; i &lt; 180; i += 180 / 6) {
-    // 依然要做角度与弧度的转换
-    double radians = Math.toRadians(i);
-    // 计算出来的半径
-    double radius = Math.sin(radians);
-    double y = Math.cos(radians);
-    for (double j = 0; j &lt; 360; j += 180 / 6) {
-        // 依然需要做角度转弧度的操作
-        double radiansCircle = Math.toRadians(j);
-        double x = Math.cos(radiansCircle) * radius;
-        double z = Math.sin(radiansCircle) * radius;
-        location.add(x, y, z);
-        location.getWorld().playEffect(location, Effect.HAPPY_VILLAGER, 1);
-        location.subtract(x, y, z);
-    }
-}</code></pre><p>跟上面的代码不同的是我在遍历的时候修改了<strong>步长(step)</strong>，那这一个有什么讲究呢？我们在每一次循环给 i 和 j就加的是<strong>30</strong>了对吧，而不是自加1，</p>
+<pre><code class="hljs double">那么这样我们就可以获得**当前for循环时**那个圆的高度了。
+
+在上面的结构中我们得到了当前圆的**半径和高度**，那么我们要怎么通过这两个东西画出来呢？
+
+我们在第三章画圆时曾经做过这么一个操作</code></pre>
+<p>for (int degree = 0; degree &lt; 360; degree++) {<br>    double radians = Math.toRadians(degree);<br>    double x = Math.cos(radians);<br>    double y = Math.sin(radians);<br>}</p>
+<pre><code class="hljs asciidoc">上方的代码中我们只能制造出一个*<span class="hljs-strong">*半径为1*</span><span class="hljs-strong">*的圆，那么我们想扩大它的半径需要怎么做？</span>
+<span class="hljs-strong"></span>
+<span class="hljs-strong">我们这里又引入一个函数*</span><span class="hljs-strong">*y=Asin(ωx + φ)*</span>* <span class="hljs-strong">*(这里的sin也可以为cos)*</span>，其实这个函数跟sin函数差不多只不过多了几个变量，那么这里我们只需要考虑A的值，
+
+为什么呢？我们来看一下这个函数在数学上的定义：
+
+<span class="hljs-bullet">*   </span><span class="hljs-strong">*φ（初相位）：决定波形与X轴位置关系或横向移动距离（左加右减）*</span>
+<span class="hljs-bullet">*   </span><span class="hljs-strong">*ω：决定周期（最小正周期T=2π/|ω|）*</span>
+<span class="hljs-bullet">*   </span>*<span class="hljs-strong">*A：决定峰值（即纵向拉伸压缩的倍数）*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span>
+<span class="hljs-strong">*</span><span class="hljs-strong">*由于这里我们只考虑A所以我们可以把上方的函数简写为 y = Asin(x)，假设我们的A为2，那就是sin(x) *</span> 2了，那么反应在函数图像上是这样的*<span class="hljs-strong">*</span>
+<span class="hljs-strong"></span>
+<span class="hljs-strong">*</span><span class="hljs-strong">*![image](http://upload-images.jianshu.io/upload_images/8109631-d8fa9a9d746e0d0c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)*</span>* 
+
+那么有了上面的概念*<span class="hljs-strong">*我们不妨使用 Math.cos(x) *</span> 半径 来扩大本次循环时所对应的半径*<span class="hljs-strong">*，所以我们写出以下的代码</span></code></pre>
+<p>for (double j = 0; j &lt; 360; j ++) {<br>    // 依然需要做角度转弧度的操作<br>    double radiansCircle = Math.<em>toRadians</em>(j);<br>    double x = Math.<em>cos</em>(radiansCircle) * radius;<br>    double z = Math.<em>sin</em>(radiansCircle) * radius;<br>}</p>
+<pre><code class="hljs makefile">
+那么这样就可以控制好本次循环我们需要这个圆多少半径了，那么我们写好之后就可以放在Minecraft中看看效果
+
+<span class="hljs-section">完整代码:</span></code></pre>
+<p>for (double i = 0; i &lt; 180; i++) {<br>    // 依然要做角度与弧度的转换<br>    double radians = Math.toRadians(i);<br>    // 计算出来的半径<br>    double radius = Math.sin(radians);<br>    double y = Math.cos(radians);<br>    for (double j = 0; j &lt; 360; j++) {<br>        // 依然需要做角度转弧度的操作<br>        double radiansCircle = Math.toRadians(j);<br>        double x = Math.cos(radiansCircle) * radius;<br>        double z = Math.sin(radiansCircle) * radius;<br>        location.add(x, y, z);<br>        location.getWorld().playEffect(location, Effect.HAPPY_VILLAGER, 1);<br>        location.subtract(x, y, z);<br>    }<br>}</p>
+<pre><code class="hljs markdown">游戏内的效果
+![<span class="hljs-string">效果</span>](<span class="hljs-link">http://upload-images.jianshu.io/upload_images/8109631-78b42b28cadfa8ba.gif?imageMogr2/auto-orient/strip</span>)
+
+然后你就会发现你的游戏卡得一匹2333，因为我们是在360°全方位的进行渲染粒子的操作2333，但实际业务中我们可能并不需要做这种需求，那么我们就需要做一个关于跳跃的操作呗，我们看下面的代码</code></pre>
+<p>for (double i = 0; i &lt; 180; i += 180 / 6) {<br>    // 依然要做角度与弧度的转换<br>    double radians = Math.toRadians(i);<br>    // 计算出来的半径<br>    double radius = Math.sin(radians);<br>    double y = Math.cos(radians);<br>    for (double j = 0; j &lt; 360; j += 180 / 6) {<br>        // 依然需要做角度转弧度的操作<br>        double radiansCircle = Math.toRadians(j);<br>        double x = Math.cos(radiansCircle) * radius;<br>        double z = Math.sin(radiansCircle) * radius;<br>        location.add(x, y, z);<br>        location.getWorld().playEffect(location, Effect.HAPPY_VILLAGER, 1);<br>        location.subtract(x, y, z);<br>    }<br>}</p>
+<p>```<br>跟上面的代码不同的是我在遍历的时候修改了<strong>步长(step)</strong>，那这一个有什么讲究呢？我们在每一次循环给 i 和 j就加的是<strong>30</strong>了对吧，而不是自加1，</p>
 <p>那么我们看<strong>第一层循环</strong>，这一层循环控制的步长其实是我们其实需要多少圈，为什么呢？我们看下面的图来理解一下</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/8109631-c5aa3f61a470cab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
 <p>这里我为了方便读者理解我把图 2-1 旋转了一下，上图我们假想黑点是玩家的location，那么那几个红点就是我们把<strong>步长</strong>修改后所得到的产物</p>
@@ -310,19 +333,18 @@ for (int degree = 0; degree &lt; 360; degree++) {
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
                     
@@ -334,42 +356,41 @@ for (int degree = 0; degree &lt; 360; degree++) {
                     
                       <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/2018/12/15/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%8C)/">
-                        <i class="fa fa-chevron-left"></i>
+                        <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">从零开始的MC特效(二 | 向量基础)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
-              
-          </div>
+            
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -386,7 +407,7 @@ for (int degree = 0; degree &lt; 360; degree++) {
 
   
     <a id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -427,23 +448,6 @@ for (int degree = 0; degree &lt; 360; degree++) {
         <span>Fluid</span></a>
     </div>
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
     
 
@@ -453,67 +457,16 @@ for (int degree = 0; degree &lt; 360; degree++) {
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
-
-  <script  src="/js/lazyload.js" ></script>
-
+<!-- Plugins -->
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var toc = $('#toc');
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-      var tocLimMax = 2 * boardTop + boardCtn.height();
-
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
-      }
-      var offset = boardCtn.css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
-    });
-  </script>
-
-
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
@@ -524,27 +477,31 @@ for (int degree = 0; degree &lt; 360; degree++) {
 
 
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').each(function () {
-        const pre = $(this);
-        if (pre.find('code.mermaid').length > 0) {
-          return;
-        }
-        pre.addClass('prettyprint  linenums');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
       });
-      prettyPrint();
-    })
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
 
@@ -591,7 +548,7 @@ for (int degree = 0; degree &lt; 360; degree++) {
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
@@ -611,6 +568,8 @@ for (int degree = 0; degree &lt; 360; degree++) {
       }
     );
   </script>
+
+
 
 
 

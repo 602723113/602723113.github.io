@@ -1,41 +1,54 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#0f59a4">
+  <meta name="theme-color" content="#2775b6">
   <meta name="description" content="一个个人博客">
   <meta name="author" content="Zoyn">
   <meta name="keywords" content="Blog|博客|Zoyn">
   <title>从零开始的MC特效(六 | 坐标系的旋转) - Zoyn的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 
@@ -60,46 +73,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,46 +146,50 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('/img/particle.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
               
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期四, 三月 19日 2020, 7:38 晚上
-                </p>
-              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-03-19 19:38" pubdate>
+      2020年3月19日 晚上
+    </time>
+  </div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.6k 字
-                  </span>
-                
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                    
-                    
-                    23
-                     分钟
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
 
-                
-              </p>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
             
           </div>
 
@@ -166,12 +209,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">从零开始的MC特效(六 | 坐标系的旋转)</h1>
             
-              <p
-                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 3:32 下午</p>
-            
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
 <li>导读</li>
 <li>Location点的旋转</li>
@@ -181,198 +223,205 @@
 <p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
 <hr>
 <h4 id="Location点的旋转"><a href="#Location点的旋转" class="headerlink" title="Location点的旋转"></a>Location点的旋转</h4><p>首先我们引入<strong>平面上点围绕另一个点进行旋转</strong>的公式 (数学上)<br>平面中，一个点(x,y)绕任意点(x0,y0)逆时针旋转a度后的坐标</p>
-<pre><code>dx = (x - x0)*cos(a) - (y - y0)*sin(a) + x0 ;
-dy = (x - x0)*sin(a) + (y - y0)*cos(a) + y0 ;</code></pre><p>那么我们写入代码看看是怎么样的</p>
-<pre><code>/**
- * 在二维平面上利用给定的中心点逆时针旋转一个点
- * 
- * @param location 待旋转的点
- * @param angle    旋转角度
- * @param point    中心点
- * @return {@link Location}
-*/
-public static Location rotateLocationAboutPoint(Location location, double angle, Location point) {
-    double radians = Math.toRadians(angle);
-    double dx = location.getX() - point.getX();
-    double dz = location.getZ() - point.getZ();
+<pre><code class="hljs lisp">dx = (<span class="hljs-name">x</span> - x0)*cos(<span class="hljs-name">a</span>) - (<span class="hljs-name">y</span> - y0)*sin(<span class="hljs-name">a</span>) + x0 <span class="hljs-comment">;</span>
+dy = (<span class="hljs-name">x</span> - x0)*sin(<span class="hljs-name">a</span>) + (<span class="hljs-name">y</span> - y0)*cos(<span class="hljs-name">a</span>) + y0 <span class="hljs-comment">;</span></code></pre>
+<p>那么我们写入代码看看是怎么样的</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 在二维平面上利用给定的中心点逆时针旋转一个点</span>
+<span class="hljs-comment"> * </span>
+<span class="hljs-comment"> * @param location 待旋转的点</span>
+<span class="hljs-comment"> * @param angle    旋转角度</span>
+<span class="hljs-comment"> * @param point    中心点</span>
+<span class="hljs-comment"> * @return &#123;@link Location&#125;</span>
+<span class="hljs-comment">*/</span>
+public static Location rotate<span class="hljs-constructor">LocationAboutPoint(Location <span class="hljs-params">location</span>, <span class="hljs-params">double</span> <span class="hljs-params">angle</span>, Location <span class="hljs-params">point</span>)</span> &#123;
+    double radians = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+    double dx = location.get<span class="hljs-constructor">X()</span> - point.get<span class="hljs-constructor">X()</span>;
+    double dz = location.get<span class="hljs-constructor">Z()</span> - point.get<span class="hljs-constructor">Z()</span>;
 
-    double newX = dx * Math.cos(radians) - dz * Math.sin(radians) + point.getX();
-    double newZ = dz * Math.cos(radians) + dx * Math.sin(radians) + point.getZ();
-    return new Location(location.getWorld(), newX, location.getY(), newZ);
-}</code></pre><p>总所周知，在mc坐标内，玩家走动的二维平面，其实是<strong>影响x轴和z轴</strong>的内容，所以我们上方的代码就套用x，y</p>
+    double newX = dx<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians) - dz<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians) + point.get<span class="hljs-constructor">X()</span>;
+    double newZ = dz<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians) + dx<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians) + point.get<span class="hljs-constructor">Z()</span>;
+    return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Location(<span class="hljs-params">location</span>.<span class="hljs-params">getWorld</span>()</span>, newX, location.get<span class="hljs-constructor">Y()</span>, newZ);
+&#125;</code></pre>
+<p>总所周知，在mc坐标内，玩家走动的二维平面，其实是<strong>影响x轴和z轴</strong>的内容，所以我们上方的代码就套用x，y</p>
 <h4 id="坐标系的修正与在玩家背部建立坐标系"><a href="#坐标系的修正与在玩家背部建立坐标系" class="headerlink" title="坐标系的修正与在玩家背部建立坐标系"></a>坐标系的修正与在玩家背部建立坐标系</h4><p>在我们之前的教程中，我们都会发现，我们在做一些让特效出现在<strong><em>玩家面前</em></strong>时，会出现<strong>特效</strong>出现在另外一边，这其实就是我们没有经过<strong>玩家朝向的修正</strong>，而发生的情况，比如下面这一张图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-786f3cf0345d9fda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="爱心.png"></p>
 <p>那么我们可以重新建立一个<strong>修正过后的</strong>坐标系，用的方法就是利用Location点的旋转</p>
-<pre><code>import org.bukkit.Location;
+<pre><code class="hljs reasonml">import org.bukkit.Location;
 
-/**
- * 自动修正在平面上的粒子朝向
- * 
- * @author Zoyn
- */
-public class PlayerFixedCoordinate {
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 自动修正在平面上的粒子朝向</span>
+<span class="hljs-comment"> * </span>
+<span class="hljs-comment"> * @author Zoyn</span>
+<span class="hljs-comment"> */</span>
+public <span class="hljs-keyword">class</span> PlayerFixedCoordinate &#123;
 
-    private Location zeroDot;
-    private double rotateAngle;
+	<span class="hljs-keyword">private</span> Location zeroDot;
+	<span class="hljs-keyword">private</span> double rotateAngle;
 
-    public PlayerFixedCoordinate(Location playerLocation) {
-        // 旋转的角度
-        rotateAngle = playerLocation.getYaw();
-        zeroDot = playerLocation.clone();
-        zeroDot.setPitch(0);
-        // 重设仰俯角, 防止出现仰头后旋转角度不正确的问题
-    }
+	public <span class="hljs-constructor">PlayerFixedCoordinate(Location <span class="hljs-params">playerLocation</span>)</span> &#123;
+		<span class="hljs-comment">// 旋转的角度</span>
+		rotateAngle = playerLocation.get<span class="hljs-constructor">Yaw()</span>;
+		zeroDot = playerLocation.clone<span class="hljs-literal">()</span>;
+		zeroDot.set<span class="hljs-constructor">Pitch(0)</span>;
+		<span class="hljs-comment">// 重设仰俯角, 防止出现仰头后旋转角度不正确的问题</span>
+	&#125;
 
-    public Location getZeroDot() {
-        return zeroDot;
-    }
+	public Location get<span class="hljs-constructor">ZeroDot()</span> &#123;
+		return zeroDot;
+	&#125;
 
-    public Location newLocation(double x, double z) {
-        return rotateLocationAboutPoint(zeroDot.clone().add(-x, 0, z), rotateAngle, zeroDot);
-    }
+	public Location <span class="hljs-keyword">new</span><span class="hljs-constructor">Location(<span class="hljs-params">double</span> <span class="hljs-params">x</span>, <span class="hljs-params">double</span> <span class="hljs-params">z</span>)</span> &#123;
+		return rotate<span class="hljs-constructor">LocationAboutPoint(<span class="hljs-params">zeroDot</span>.<span class="hljs-params">clone</span>()</span>.add(-x, <span class="hljs-number">0</span>, z), rotateAngle, zeroDot);
+	&#125;
+	
+        <span class="hljs-comment">/**</span>
+<span class="hljs-comment">	 * 在二维平面上利用给定的中心点逆时针旋转一个点</span>
+<span class="hljs-comment">	 * </span>
+<span class="hljs-comment">	 * @param location 待旋转的点</span>
+<span class="hljs-comment">	 * @param angle    旋转角度</span>
+<span class="hljs-comment">	 * @param point    中心点</span>
+<span class="hljs-comment">	 * @return &#123;@link Location&#125;</span>
+<span class="hljs-comment">	 */</span>
+	public static Location rotate<span class="hljs-constructor">LocationAboutPoint(Location <span class="hljs-params">location</span>, <span class="hljs-params">double</span> <span class="hljs-params">angle</span>, Location <span class="hljs-params">point</span>)</span> &#123;
+		double radians = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+		double dx = location.get<span class="hljs-constructor">X()</span> - point.get<span class="hljs-constructor">X()</span>;
+		double dz = location.get<span class="hljs-constructor">Z()</span> - point.get<span class="hljs-constructor">Z()</span>;
 
-        /**
-     * 在二维平面上利用给定的中心点逆时针旋转一个点
-     * 
-     * @param location 待旋转的点
-     * @param angle    旋转角度
-     * @param point    中心点
-     * @return {@link Location}
-     */
-    public static Location rotateLocationAboutPoint(Location location, double angle, Location point) {
-        double radians = Math.toRadians(angle);
-        double dx = location.getX() - point.getX();
-        double dz = location.getZ() - point.getZ();
-
-        double newX = dx * Math.cos(radians) - dz * Math.sin(radians) + point.getX();
-        double newZ = dz * Math.cos(radians) + dx * Math.sin(radians) + point.getZ();
-        return new Location(location.getWorld(), newX, location.getY(), newZ);
-    }
-}</code></pre><p>首先我们来分析这个类是怎么写的，首先我们要旋转一个点，就需要旋转的角度，那么这时候 <strong><em>location</em></strong> 里的 <strong><em>yaw</em></strong> 就可以帮助我们完成这个工作，所以我在构造器里将 <strong><em>yaw</em></strong> 记录为 <strong><em>rotateAngle</em></strong> </p>
+		double newX = dx<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians) - dz<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians) + point.get<span class="hljs-constructor">X()</span>;
+		double newZ = dz<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians) + dx<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians) + point.get<span class="hljs-constructor">Z()</span>;
+		return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Location(<span class="hljs-params">location</span>.<span class="hljs-params">getWorld</span>()</span>, newX, location.get<span class="hljs-constructor">Y()</span>, newZ);
+	&#125;
+&#125;</code></pre>
+<p>首先我们来分析这个类是怎么写的，首先我们要旋转一个点，就需要旋转的角度，那么这时候 <strong><em>location</em></strong> 里的 <strong><em>yaw</em></strong> 就可以帮助我们完成这个工作，所以我在构造器里将 <strong><em>yaw</em></strong> 记录为 <strong><em>rotateAngle</em></strong> </p>
 <p>之后我们看<strong><em>newLocation</em></strong>这个方法，需要填入两个参数分别是 <strong><em>x, y</em></strong> （为了方便理解，我其实直接将其设计为数学上的平面直角坐标系（右手坐标系））</p>
 <p>而我们在看</p>
-<pre><code>zeroDot.clone().add(-x, 0, z)</code></pre><p>这行代码, 首先它是 <strong><em>rotateLocationAboutPoint</em></strong> 方法里的<strong>待旋转的点</strong>，那么我们为什么要add呢？<br>因为啊, <strong><em>zeroDot</em></strong> 就是我们坐标系的原点，经过add之后就可以得到新的x，y了，</p>
+<pre><code class="hljs css"><span class="hljs-selector-tag">zeroDot</span><span class="hljs-selector-class">.clone</span>()<span class="hljs-selector-class">.add</span>(<span class="hljs-selector-tag">-x</span>, 0, <span class="hljs-selector-tag">z</span>)</code></pre>
+<p>这行代码, 首先它是 <strong><em>rotateLocationAboutPoint</em></strong> 方法里的<strong>待旋转的点</strong>，那么我们为什么要add呢？<br>因为啊, <strong><em>zeroDot</em></strong> 就是我们坐标系的原点，经过add之后就可以得到新的x，y了，</p>
 <blockquote>
 <p>比如说，zeroDot是(0, 0)，方法填入3, 2, 那么add完之后就得到 (3, 2) 这个点</p>
 </blockquote>
 <p><strong>那么为什么是-x呢？？？</strong><br>因为啊，在Mc中的坐标系是遵循左手坐标系来设计的，所以它的x轴我们要乘以一个-1才能按照我们平常理解的右手坐标系来绘图</p>
 <p>之后我们套用上这个修复过的坐标系来看看效果<br><img src="https://upload-images.jianshu.io/upload_images/8109631-2d53f06a77171156.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="jdfw3.gif"><br>完整代码:</p>
-<pre><code>Player player = ........
+<pre><code class="hljs routeros">Player player = <span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>
 PlayerFixedCoordinate coordinate = new PlayerFixedCoordinate(player.getLocation());
 
-double radius = 10;
-for (double t = -1; t &lt;= 1; t += 0.001) {
-    double x = radius * Math.sin(t) * Math.cos(t) * Math.log(Math.abs(t));
-    double y = radius * Math.sqrt(Math.abs(t)) * Math.cos(t);
+double<span class="hljs-built_in"> radius </span>= 10;
+<span class="hljs-keyword">for</span> (double t = -1; t &lt;= 1; t += 0.001) &#123;
+	double x =<span class="hljs-built_in"> radius </span>* Math.sin(t) * Math.cos(t) * Math.log(Math.abs(t));
+	double y =<span class="hljs-built_in"> radius </span>* Math.sqrt(Math.abs(t)) * Math.cos(t);
 
-    Location loc = coordinate.newLocation(x, y);
-    loc.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, loc, 1, 0, 0, 0, 0);
-}</code></pre><p>下面分享一个<strong><em>PlayerBackCoordinate</em></strong>为了让读者能够举一反三，希望读者能够<strong><em>自行添加 z 轴的变化（思考：z轴的变化在右手坐标系中是如何变化，又应该如何将其转换至MC坐标系内）</em></strong></p>
+	Location loc = coordinate.newLocation(x, y);
+	loc.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, loc, 1, 0, 0, 0, 0);
+&#125;</code></pre>
+<p>下面分享一个<strong><em>PlayerBackCoordinate</em></strong>为了让读者能够举一反三，希望读者能够<strong><em>自行添加 z 轴的变化（思考：z轴的变化在右手坐标系中是如何变化，又应该如何将其转换至MC坐标系内）</em></strong></p>
 <p>绘图思考可以参照这张图：<br><img src="https://upload-images.jianshu.io/upload_images/8109631-9ffc52cc57748de2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="PlayerBackCoordinate的思考"></p>
-<pre><code>import org.bukkit.Location;
+<pre><code class="hljs reasonml">import org.bukkit.Location;
 
-/**
- * 将玩家背后转换为一个平面直角坐标系
- * 
- * @author Zoyn
- */
-public class PlayerBackCoordinate {
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 将玩家背后转换为一个平面直角坐标系</span>
+<span class="hljs-comment"> * </span>
+<span class="hljs-comment"> * @author Zoyn</span>
+<span class="hljs-comment"> */</span>
+public <span class="hljs-keyword">class</span> PlayerBackCoordinate &#123;
 
-    private Location zeroDot;
-    private double rotateAngle;
+	<span class="hljs-keyword">private</span> Location zeroDot;
+	<span class="hljs-keyword">private</span> double rotateAngle;
 
-    public PlayerBackCoordinate(Location playerLocation) {
-        // 旋转的角度
-        rotateAngle = playerLocation.getYaw();
-        zeroDot = playerLocation.clone();
-        zeroDot.setPitch(0); // 重设仰俯角
-        zeroDot.add(zeroDot.getDirection().multiply(-0.3)); // 使原点与玩家有一点点距离
-    }
+	public <span class="hljs-constructor">PlayerBackCoordinate(Location <span class="hljs-params">playerLocation</span>)</span> &#123;
+		<span class="hljs-comment">// 旋转的角度</span>
+		rotateAngle = playerLocation.get<span class="hljs-constructor">Yaw()</span>;
+		zeroDot = playerLocation.clone<span class="hljs-literal">()</span>;
+		zeroDot.set<span class="hljs-constructor">Pitch(0)</span>; <span class="hljs-comment">// 重设仰俯角</span>
+		zeroDot.add(zeroDot.get<span class="hljs-constructor">Direction()</span>.multiply<span class="hljs-number">(-0.3)</span>); <span class="hljs-comment">// 使原点与玩家有一点点距离</span>
+	&#125;
 
-    public Location getZeroDot() {
-        return zeroDot;
-    }
+	public Location get<span class="hljs-constructor">ZeroDot()</span> &#123;
+		return zeroDot;
+	&#125;
 
-    public Location newLocation(double x, double y) {
-        return rotateLocationAboutPoint(zeroDot.clone().add(-x, y, 0), rotateAngle, zeroDot);
-    }
+	public Location <span class="hljs-keyword">new</span><span class="hljs-constructor">Location(<span class="hljs-params">double</span> <span class="hljs-params">x</span>, <span class="hljs-params">double</span> <span class="hljs-params">y</span>)</span> &#123;
+		return rotate<span class="hljs-constructor">LocationAboutPoint(<span class="hljs-params">zeroDot</span>.<span class="hljs-params">clone</span>()</span>.add(-x, y, <span class="hljs-number">0</span>), rotateAngle, zeroDot);
+	&#125;
 
-        /**
-     * 在二维平面上利用给定的中心点逆时针旋转一个点
-     * 
-     * @param location 待旋转的点
-     * @param angle    旋转角度
-     * @param point    中心点
-     * @return {@link Location}
-     */
-    public static Location rotateLocationAboutPoint(Location location, double angle, Location point) {
-        double radians = Math.toRadians(angle);
-        double dx = location.getX() - point.getX();
-        double dz = location.getZ() - point.getZ();
+        <span class="hljs-comment">/**</span>
+<span class="hljs-comment">	 * 在二维平面上利用给定的中心点逆时针旋转一个点</span>
+<span class="hljs-comment">	 * </span>
+<span class="hljs-comment">	 * @param location 待旋转的点</span>
+<span class="hljs-comment">	 * @param angle    旋转角度</span>
+<span class="hljs-comment">	 * @param point    中心点</span>
+<span class="hljs-comment">	 * @return &#123;@link Location&#125;</span>
+<span class="hljs-comment">	 */</span>
+	public static Location rotate<span class="hljs-constructor">LocationAboutPoint(Location <span class="hljs-params">location</span>, <span class="hljs-params">double</span> <span class="hljs-params">angle</span>, Location <span class="hljs-params">point</span>)</span> &#123;
+		double radians = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+		double dx = location.get<span class="hljs-constructor">X()</span> - point.get<span class="hljs-constructor">X()</span>;
+		double dz = location.get<span class="hljs-constructor">Z()</span> - point.get<span class="hljs-constructor">Z()</span>;
 
-        double newX = dx * Math.cos(radians) - dz * Math.sin(radians) + point.getX();
-        double newZ = dz * Math.cos(radians) + dx * Math.sin(radians) + point.getZ();
-        return new Location(location.getWorld(), newX, location.getY(), newZ);
-    }
-}</code></pre><p>上方代码的使用：实例1：在玩家后背绘制一个圆</p>
-<pre><code>Player player = (Player) sender;
-PlayerBackCoordinate coordinate = new PlayerBackCoordinate(player.getLocation().add(0, 1.6D, 0));
+		double newX = dx<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians) - dz<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians) + point.get<span class="hljs-constructor">X()</span>;
+		double newZ = dz<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians) + dx<span class="hljs-operator"> * </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians) + point.get<span class="hljs-constructor">Z()</span>;
+		return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Location(<span class="hljs-params">location</span>.<span class="hljs-params">getWorld</span>()</span>, newX, location.get<span class="hljs-constructor">Y()</span>, newZ);
+	&#125;
+&#125;</code></pre>
+<p>上方代码的使用：实例1：在玩家后背绘制一个圆</p>
+<pre><code class="hljs reasonml">Player player = (Player) sender;
+PlayerBackCoordinate coordinate = <span class="hljs-keyword">new</span> <span class="hljs-constructor">PlayerBackCoordinate(<span class="hljs-params">player</span>.<span class="hljs-params">getLocation</span>()</span>.add(<span class="hljs-number">0</span>, <span class="hljs-number">1.6</span>D, <span class="hljs-number">0</span>));
 
-for (int angle = 0; angle &lt; 360; angle++) {
-    double radians = Math.toRadians(angle);
-    double x = Math.cos(radians);
-    double y = Math.sin(radians);
+for (<span class="hljs-built_in">int</span> angle = <span class="hljs-number">0</span>; angle &lt; <span class="hljs-number">360</span>; angle++) &#123;
+    double radians = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Radians(<span class="hljs-params">angle</span>)</span>;
+    double x = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>cos(radians);
+    double y = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Math</span>.</span></span>sin(radians);
 
-    Location loc = coordinate.newLocation(x, y);
-    loc.getWorld().spawnParticle(Particle.FLAME, loc, 1, 0, 0, 0, 0);
-}</code></pre><p>具体效果：<br><img src="https://upload-images.jianshu.io/upload_images/8109631-630f0e23257a8242.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="背后的火圈"></p>
+    Location loc = coordinate.<span class="hljs-keyword">new</span><span class="hljs-constructor">Location(<span class="hljs-params">x</span>, <span class="hljs-params">y</span>)</span>;
+    loc.get<span class="hljs-constructor">World()</span>.spawn<span class="hljs-constructor">Particle(Particle.FLAME, <span class="hljs-params">loc</span>, 1, 0, 0, 0, 0)</span>;
+&#125;</code></pre>
+<p>具体效果：<br><img src="https://upload-images.jianshu.io/upload_images/8109631-630f0e23257a8242.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="背后的火圈"></p>
 <h4 id="制作简易翅膀"><a href="#制作简易翅膀" class="headerlink" title="制作简易翅膀"></a>制作简易翅膀</h4><p>不说这么多，直接上代码好吧，用的就是上面的代码</p>
-<pre><code>Player player = (Player) sender;
-PlayerBackCoordinate coordinate = new PlayerBackCoordinate(player.getLocation().add(0, 1.5D, 0));
+<pre><code class="hljs angelscript">Player player = (Player) sender;
+PlayerBackCoordinate coordinate = new PlayerBackCoordinate(player.getLocation().add(<span class="hljs-number">0</span>, <span class="hljs-number">1.5</span>D, <span class="hljs-number">0</span>));
 
-for (double angle = 0; angle &lt;= 135; angle++) {
-    double x = Math.toRadians(angle);
-    double y = Math.sin(2 * x);
-
-    Location loc = coordinate.newLocation(x, y);
-    loc.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, loc, 1, 0, 0, 0, 0);
-}
-
-for (double angle = -135; angle &lt;= 0; angle++) {
-    double x = Math.toRadians(angle);
-    double y = Math.cos((2 * x) + (Math.PI / 2));
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">double</span> angle = <span class="hljs-number">0</span>; angle &lt;= <span class="hljs-number">135</span>; angle++) &#123;
+    <span class="hljs-built_in">double</span> x = Math.toRadians(angle);
+    <span class="hljs-built_in">double</span> y = Math.sin(<span class="hljs-number">2</span> * x);
 
     Location loc = coordinate.newLocation(x, y);
-    loc.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, loc, 1, 0, 0, 0, 0);
-}
+    loc.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, loc, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+&#125;
 
-coordinate = new PlayerBackCoordinate(player.getLocation().add(0, 1, 0));
-double radius = 0;
-for (double angle = 0; angle &lt;= 3 * 360; angle++) {
-    double radians = Math.toRadians(angle);
-    double x = radius * Math.cos(radians);
-    double y = radius * Math.sin(radians);
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">double</span> angle = <span class="hljs-number">-135</span>; angle &lt;= <span class="hljs-number">0</span>; angle++) &#123;
+    <span class="hljs-built_in">double</span> x = Math.toRadians(angle);
+    <span class="hljs-built_in">double</span> y = Math.cos((<span class="hljs-number">2</span> * x) + (Math.PI / <span class="hljs-number">2</span>));
 
     Location loc = coordinate.newLocation(x, y);
-    loc.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, loc, 1, 0, 0, 0, 0);
-    radius += 0.001;
-}</code></pre><p>具体效果:<br><img src="https://upload-images.jianshu.io/upload_images/8109631-f1633dad8c40835b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="函数翅膀"></p>
+    loc.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, loc, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+&#125;
+
+coordinate = new PlayerBackCoordinate(player.getLocation().add(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));
+<span class="hljs-built_in">double</span> radius = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">double</span> angle = <span class="hljs-number">0</span>; angle &lt;= <span class="hljs-number">3</span> * <span class="hljs-number">360</span>; angle++) &#123;
+    <span class="hljs-built_in">double</span> radians = Math.toRadians(angle);
+    <span class="hljs-built_in">double</span> x = radius * Math.cos(radians);
+    <span class="hljs-built_in">double</span> y = radius * Math.sin(radians);
+
+    Location loc = coordinate.newLocation(x, y);
+    loc.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, loc, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+    radius += <span class="hljs-number">0.001</span>;
+&#125;</code></pre>
+<p>具体效果:<br><img src="https://upload-images.jianshu.io/upload_images/8109631-f1633dad8c40835b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="函数翅膀"></p>
 
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
                     
@@ -384,48 +433,47 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
                     
                       <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                  <article class="post-prev col-6">
                     
                     
                       <a href="/2020/03/29/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95Scoreboard%E6%95%99%E7%A8%8B/">
-                        <i class="fa fa-chevron-left"></i>
+                        <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">可能是最简单Scoreboard教程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
                       <a href="/2019/01/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84MC%E7%89%B9%E6%95%88(%E4%BA%94)/">
                         <span class="hidden-mobile">从零开始的MC特效(五 | BukkitRunnable与粒子特效)</span>
                         <span class="visible-mobile">下一篇</span>
-                        <i class="fa fa-chevron-right"></i>
+                        <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
-              
-          </div>
+            
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -442,7 +490,7 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
 
   
     <a id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -483,23 +531,6 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
         <span>Fluid</span></a>
     </div>
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
     
 
@@ -509,67 +540,16 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
-
-  <script  src="/js/lazyload.js" ></script>
-
+<!-- Plugins -->
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var toc = $('#toc');
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-      var tocLimMax = 2 * boardTop + boardCtn.height();
-
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
-      }
-      var offset = boardCtn.css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
-    });
-  </script>
-
-
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
@@ -580,27 +560,31 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
 
 
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').each(function () {
-        const pre = $(this);
-        if (pre.find('code.mermaid').length > 0) {
-          return;
-        }
-        pre.addClass('prettyprint  linenums');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
       });
-      prettyPrint();
-    })
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
 
@@ -647,7 +631,7 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
@@ -667,6 +651,8 @@ for (double angle = 0; angle &lt;= 3 * 360; angle++) {
       }
     );
   </script>
+
+
 
 
 
