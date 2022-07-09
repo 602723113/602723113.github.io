@@ -232,8 +232,9 @@
 <li>导读</li>
 <li>Location点的旋转</li>
 <li>坐标系的修正与在玩家背部建立坐标系</li>
-<li>制作简易翅膀<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>PaperSpigot1.12.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和和<strong>Java基础</strong>的知识</li>
+<li>制作简易翅膀</li>
 </ul>
+<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4><p>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>PaperSpigot1.12.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和和<strong>Java基础</strong>的知识</p>
 <p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
 <hr>
 <h4 id="Location点的旋转"><a href="#Location点的旋转" class="headerlink" title="Location点的旋转"></a>Location点的旋转</h4><p>首先我们引入<strong>平面上点围绕另一个点进行旋转</strong>的公式 (数学上)<br>平面中，一个点(x,y)绕任意点(x0,y0)逆时针旋转a度后的坐标</p>
@@ -258,7 +259,7 @@ public static Location rotate<span class="hljs-constructor">LocationAboutPoint(L
     return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Location(<span class="hljs-params">location</span>.<span class="hljs-params">getWorld</span>()</span>, newX, location.get<span class="hljs-constructor">Y()</span>, newZ);
 &#125;</code></pre>
 <p>总所周知，在mc坐标内，玩家走动的二维平面，其实是<strong>影响x轴和z轴</strong>的内容，所以我们上方的代码就套用x，y</p>
-<h4 id="坐标系的修正与在玩家背部建立坐标系"><a href="#坐标系的修正与在玩家背部建立坐标系" class="headerlink" title="坐标系的修正与在玩家背部建立坐标系"></a>坐标系的修正与在玩家背部建立坐标系</h4><p>在我们之前的教程中，我们都会发现，我们在做一些让特效出现在<strong><em>玩家面前</em></strong>时，会出现<strong>特效</strong>出现在另外一边，这其实就是我们没有经过<strong>玩家朝向的修正</strong>，而发生的情况，比如下面这一张图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-786f3cf0345d9fda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="爱心.png"></p>
+<h4 id="坐标系的修正与在玩家背部建立坐标系"><a href="#坐标系的修正与在玩家背部建立坐标系" class="headerlink" title="坐标系的修正与在玩家背部建立坐标系"></a>坐标系的修正与在玩家背部建立坐标系</h4><p>在我们之前的教程中，我们都会发现，我们在做一些让特效出现在<em><strong>玩家面前</strong></em>时，会出现<strong>特效</strong>出现在另外一边，这其实就是我们没有经过<strong>玩家朝向的修正</strong>，而发生的情况，比如下面这一张图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-786f3cf0345d9fda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="爱心.png"></p>
 <p>那么我们可以重新建立一个<strong>修正过后的</strong>坐标系，用的方法就是利用Location点的旋转</p>
 <pre><code class="hljs reasonml">import org.bukkit.Location;
 
@@ -306,11 +307,11 @@ public <span class="hljs-keyword">class</span> PlayerFixedCoordinate &#123;
 		return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Location(<span class="hljs-params">location</span>.<span class="hljs-params">getWorld</span>()</span>, newX, location.get<span class="hljs-constructor">Y()</span>, newZ);
 	&#125;
 &#125;</code></pre>
-<p>首先我们来分析这个类是怎么写的，首先我们要旋转一个点，就需要旋转的角度，那么这时候 <strong><em>location</em></strong> 里的 <strong><em>yaw</em></strong> 就可以帮助我们完成这个工作，所以我在构造器里将 <strong><em>yaw</em></strong> 记录为 <strong><em>rotateAngle</em></strong> </p>
-<p>之后我们看<strong><em>newLocation</em></strong>这个方法，需要填入两个参数分别是 <strong><em>x, y</em></strong> （为了方便理解，我其实直接将其设计为数学上的平面直角坐标系（右手坐标系））</p>
+<p>首先我们来分析这个类是怎么写的，首先我们要旋转一个点，就需要旋转的角度，那么这时候 <em><strong>location</strong></em> 里的 <em><strong>yaw</strong></em> 就可以帮助我们完成这个工作，所以我在构造器里将 <em><strong>yaw</strong></em> 记录为 <em><strong>rotateAngle</strong></em> </p>
+<p>之后我们看<em><strong>newLocation</strong></em>这个方法，需要填入两个参数分别是 <em><strong>x, y</strong></em> （为了方便理解，我其实直接将其设计为数学上的平面直角坐标系（右手坐标系））</p>
 <p>而我们在看</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">zeroDot</span><span class="hljs-selector-class">.clone</span>()<span class="hljs-selector-class">.add</span>(<span class="hljs-selector-tag">-x</span>, 0, <span class="hljs-selector-tag">z</span>)</code></pre>
-<p>这行代码, 首先它是 <strong><em>rotateLocationAboutPoint</em></strong> 方法里的<strong>待旋转的点</strong>，那么我们为什么要add呢？<br>因为啊, <strong><em>zeroDot</em></strong> 就是我们坐标系的原点，经过add之后就可以得到新的x，y了，</p>
+<p>这行代码, 首先它是 <em><strong>rotateLocationAboutPoint</strong></em> 方法里的<strong>待旋转的点</strong>，那么我们为什么要add呢？<br>因为啊, <em><strong>zeroDot</strong></em> 就是我们坐标系的原点，经过add之后就可以得到新的x，y了，</p>
 <blockquote>
 <p>比如说，zeroDot是(0, 0)，方法填入3, 2, 那么add完之后就得到 (3, 2) 这个点</p>
 </blockquote>
@@ -327,7 +328,7 @@ double<span class="hljs-built_in"> radius </span>= 10;
 	Location loc = coordinate.newLocation(x, y);
 	loc.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, loc, 1, 0, 0, 0, 0);
 &#125;</code></pre>
-<p>下面分享一个<strong><em>PlayerBackCoordinate</em></strong>为了让读者能够举一反三，希望读者能够<strong><em>自行添加 z 轴的变化（思考：z轴的变化在右手坐标系中是如何变化，又应该如何将其转换至MC坐标系内）</em></strong></p>
+<p>下面分享一个<em><strong>PlayerBackCoordinate</strong></em>为了让读者能够举一反三，希望读者能够<em><strong>自行添加 z 轴的变化（思考：z轴的变化在右手坐标系中是如何变化，又应该如何将其转换至MC坐标系内）</strong></em></p>
 <p>绘图思考可以参照这张图：<br><img src="https://upload-images.jianshu.io/upload_images/8109631-9ffc52cc57748de2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="PlayerBackCoordinate的思考"></p>
 <pre><code class="hljs reasonml">import org.bukkit.Location;
 

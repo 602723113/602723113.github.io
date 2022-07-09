@@ -232,8 +232,9 @@
 <li>导读</li>
 <li>龙卷风</li>
 <li>环绕在玩家身旁的粒子</li>
-<li>DNA双螺旋结构<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>Spigot1.10.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和和<strong>Java基础</strong>的知识</li>
+<li>DNA双螺旋结构</li>
 </ul>
+<h4 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h4><p>导读<br>本教程需要读者有一定的空间想象能力(因为我也懒得画图了233)<br>本教程使用的 <strong>Spigot1.10.2-R0.1-SNAPSHOT</strong> 核心<br>在阅读之前请确保你具有<strong>高中数学必修4</strong>和和<strong>Java基础</strong>的知识</p>
 <p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
 <hr>
 <h4 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h4><p>首先我们来看一张图<br><img src="https://upload-images.jianshu.io/upload_images/8109631-883bd87e3ee0eaab.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="正弦余弦的空间展示"></p>
@@ -253,7 +254,7 @@
     y += <span class="hljs-number">0.005</span>;
 &#125;</code></pre>
 <p>看过MC特效第一章的都可以发现这其实就是一个<strong>利用参数方程绘制圆的代码</strong>，那么不同与第一章的，我<strong>在Y轴上</strong>额外加了个参数，也就是代码中的y，这个y我让其在<strong>每次循环中增加0.005个单位</strong>，那么就可以<strong>将每次粒子绘制时比之前多一个y的单位，进而形成螺旋的效果</strong></p>
-<h4 id="龙卷风"><a href="#龙卷风" class="headerlink" title="龙卷风"></a>龙卷风</h4><p>有了前面的基础，我们可以来思考，龙卷风要怎么弄？<br>首先我们来看圆的参数方程<br><strong>x = r * cosθ</strong><br><strong>y = r * sinθ</strong><br>上方的r其实就是<strong>圆的半径</strong>，那么我们可以这么分析，如果<strong>将r变成一个可变参数</strong>，并且让它<strong>逐渐发散</strong>的话，那么不就是一个<strong>龙卷风</strong>的效果么？我们来看下方的代码</p>
+<h4 id="龙卷风"><a href="#龙卷风" class="headerlink" title="龙卷风"></a>龙卷风</h4><p>有了前面的基础，我们可以来思考，龙卷风要怎么弄？<br>首先我们来看圆的参数方程<br><strong>x &#x3D; r * cosθ</strong><br><strong>y &#x3D; r * sinθ</strong><br>上方的r其实就是<strong>圆的半径</strong>，那么我们可以这么分析，如果<strong>将r变成一个可变参数</strong>，并且让它<strong>逐渐发散</strong>的话，那么不就是一个<strong>龙卷风</strong>的效果么？我们来看下方的代码</p>
 <pre><code class="hljs routeros"><span class="hljs-keyword">for</span> (double<span class="hljs-built_in"> radius </span>= 0, y = 0, degree = 0; degree &lt; 360 * 4; degree++, y += 0.01,<span class="hljs-built_in"> radius </span>+= 0.01) &#123;
     double radians = Math.toRadians(degree);
     double x =<span class="hljs-built_in"> radius </span>* Math.cos(radians);

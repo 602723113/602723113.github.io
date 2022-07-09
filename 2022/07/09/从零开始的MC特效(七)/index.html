@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/crafttable.png">
+  <link rel="icon" type="image/png" href="/img/crafttable.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2775b6">
+  <meta name="description" content="一个个人博客">
+  <meta name="author" content="Zoyn">
+  <meta name="keywords" content="Blog|博客|Zoyn">
+  <title>从零开始的MC特效(七 | 矩阵) - Zoyn的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Zoyn的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/particle.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2022-07-09 09:49" pubdate>
+      2022年7月9日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">从零开始的MC特效(七 | 矩阵)</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h4 id="目录"><a href="#目录" class="headerlink" title="目录:"></a>目录:</h4><ul>
+<li>一、导读</li>
+<li>二、矩阵介绍</li>
+<li>三、2维向量旋转</li>
+<li>四、3维向量旋转</li>
+</ul>
+<h4 id="一、导读"><a href="#一、导读" class="headerlink" title="一、导读"></a>一、导读</h4><ul>
+<li>本教程需要读者有一定的空间想象能力</li>
+<li>本教程使用的 <strong>PaperSpigot1.15.2-R0.1-SNAPSHOT</strong> 核心</li>
+<li>在阅读之前请确保你具有 <strong>线性代数</strong> 和 <strong>Java基础</strong> 的知识</li>
+<li>本教程会使用 ParticleLib 中所使用的 Matrix 作为工具</li>
+</ul>
+<hr>
+<h4 id="二、矩阵介绍"><a href="#二、矩阵介绍" class="headerlink" title="二、矩阵介绍"></a>二、矩阵介绍</h4><h5 id="一-定义"><a href="#一-定义" class="headerlink" title="(一) 定义"></a>(一) 定义</h5><p>由 $m \times n$ 个数排成如下 $m$ 行 $n$ 列的一个表格<br>$$A&#x3D;\begin{bmatrix}<br>{a_{11}}&amp;{a_{12}}&amp;{\cdots}&amp;{a_{1n}}\\<br>{a_{21}}&amp;{a_{22}}&amp;{\cdots}&amp;{a_{2n}}\\<br>{\vdots}&amp;{\vdots}&amp;{\ddots}&amp;{\vdots}\\<br>{a_{m1}}&amp;{a_{m2}}&amp;{\cdots}&amp;{a_{mn}}\\<br>\end{bmatrix}$$<br>称为是一个 $m \times n$ 矩阵, 当 $m &#x3D; n$ 时, 矩阵 $A$ 称为 $n$ 阶矩阵或 $n$ 阶方阵</p>
+<h5 id="二-运算法则"><a href="#二-运算法则" class="headerlink" title="(二) 运算法则"></a>(二) 运算法则</h5><p><strong>为了方便, 以下内容我们会尽可能的使用方阵进行解释</strong></p>
+<h6 id="和运算"><a href="#和运算" class="headerlink" title="和运算"></a>和运算</h6><p>设有矩阵 $A$ 和矩阵 $B$ , 且这两个矩阵并且行列个数相等, 即可进行和运算<br>$$A&#x3D;\begin{bmatrix}<br>{1}\\<br>{3}\\<br>\end{bmatrix}B&#x3D;\begin{bmatrix}<br>{1}\\<br>{0}\\<br>\end{bmatrix}$$<br>则结果矩阵 $C$ 为<br>$$C&#x3D;\begin{bmatrix}<br>{2}\\<br>{3}\\<br>\end{bmatrix}$$<br>你可能发现了, 和运算即为将对应行列进行相加减即可</p>
+<h6 id="乘积"><a href="#乘积" class="headerlink" title="乘积"></a>乘积</h6><p>这部分的内容你可能会看不明白，我建议你可以看看<a href="https://www.bilibili.com/video/BV1ns41167b9" target="_blank" rel="noopener"><strong>这个视频</strong></a></p>
+<p>设矩阵 $A$ 为 $m$ 行 $n$ 列的矩阵, 矩阵 $B$ 为 $n$ 行 $s$ 列的矩阵<br>则 $AB$ 为 $C$ 矩阵是一个 $m$ 行 $s$ 列的矩阵</p>
+<p><img src="/img/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95.png" srcset="/img/loading.gif" alt="矩阵乘法"></p>
+<p>举个例子：<br>$$A&#x3D;\begin{bmatrix}<br>{1}&amp;{-3}\\<br>{2}&amp;{4}\\<br>\end{bmatrix}B&#x3D;\begin{bmatrix}<br>{5}\\<br>{7}\\<br>\end{bmatrix}$$<br>则结果矩阵 $C$ 为<br>$$C&#x3D;\begin{bmatrix}<br>{1\times5 + -3\times7}\\<br>{2\times5 + 4\times7}\\<br>\end{bmatrix}&#x3D;\begin{bmatrix}<br>{-16}\\<br>{38}\\<br>\end{bmatrix}$$<br><strong>请牢记</strong>: $$AB \neq BA$$ 由于乘积运算<em><strong>会改变行列个数</strong></em>, 因此不满足我们熟知的乘法交换律<br>并且我们可以知道, 在矩阵当中, 向量左乘和右乘的得到的结果不是相同的</p>
+<h6 id="转置"><a href="#转置" class="headerlink" title="转置"></a>转置</h6><p>像这样, 将矩阵的行列互换, 即为向量的转置, 并且记为 $A^T$<br>$$A&#x3D;\begin{bmatrix}<br>{5}\\<br>{2}\\<br>\end{bmatrix}A^T&#x3D;\begin{bmatrix}<br>{5}&amp;{2}<br>\end{bmatrix}$$</p>
+<h4 id="三、2维向量的变换-Transformation"><a href="#三、2维向量的变换-Transformation" class="headerlink" title="三、2维向量的变换(Transformation)"></a>三、2维向量的变换(Transformation)</h4><p>讲了这么多，我们如果不经历实操的话, 那么可能你明天就会忘记掉这些知识, 让我们以一种全新的方式来理解矩阵, 并且我希望你带着这样的一个问题，在矩阵乘法时, <strong>在图像上是发生了怎样的一个变换</strong>?</p>
+<p>首先我们在二维的$XY$平面上取一点 $(1, 1)$ ,并且我们建立一个向量, 我们称之为 $v$ 吧, 在这里我将这个向量丢入矩阵当中<br>$$v&#x3D;\begin{pmatrix}<br>{1}\\<br>{1}<br>\end{pmatrix}$$<br><em><strong>HINT</strong></em>：请注意, 矩阵的书写可以为上方的<strong>中括号</strong>, 也可以为 $v$ 这样的<strong>小括号</strong></p>
+<h5 id="案例1-将向量扩大一倍"><a href="#案例1-将向量扩大一倍" class="headerlink" title="案例1: 将向量扩大一倍"></a>案例1: 将向量扩大一倍</h5><p>那么我想有一个问题, 我能不能通过矩阵计算的方式, 将该向量 $v$ <strong>扩大一倍</strong> 使其落在 $(2, 2)$, 答案是可以的<br>让我们建立两个基向量<br>$$\hat{i}&#x3D;\begin{pmatrix}<br>{1}\\<br>{0}<br>\end{pmatrix}\hat{j}&#x3D;\begin{pmatrix}<br>{0}\\<br>{1}<br>\end{pmatrix}$$<br>我们将这两个基向量扩大到原来的两倍, 也就是乘以2, 因此我们可以得到这两个向量这样的变换<br>$$\hat{i}&#x3D;2\begin{pmatrix}<br>{1}\\<br>{0}<br>\end{pmatrix}&#x3D;\begin{pmatrix}<br>{2}\\<br>{0}<br>\end{pmatrix}$$<br>$$\hat{j}&#x3D;2\begin{pmatrix}<br>{0}\\<br>{1}<br>\end{pmatrix}&#x3D;\begin{pmatrix}<br>{0}\\<br>{2}<br>\end{pmatrix}$$<br>之后我们将这两个基向量丢进一个矩阵 $T$ 当中<br>$$T&#x3D;\begin{pmatrix}<br>{2}&amp;{0}\\<br>{0}&amp;{2}<br>\end{pmatrix}$$<br>如果我们将 $T$ 乘 $v$, 我们看看可以得到什么<br>$$Result&#x3D;\begin{pmatrix}<br>{2}&amp;{0}\\<br>{0}&amp;{2}<br>\end{pmatrix}\begin{pmatrix}<br>{1}\\<br>{1}<br>\end{pmatrix}$$<br>根据矩阵乘积计算我们可以得到<br>$$Result&#x3D;\begin{pmatrix}<br>{2\times1+0\times1}\\<br>{0\times1+2\times1}<br>\end{pmatrix}&#x3D;\begin{pmatrix}<br>{2}\\<br>{2}<br>\end{pmatrix}$$<br>我们惊喜的发现, 我们成功的将原来的向量 $v$ 放大了一倍<br>难道是巧合吗? 我们可以试试将 (1,1) 改成任何的数, 不难发现这其实是一种通法</p>
+<p>我们重新回顾一下上面的内容</p>
+<ol>
+<li>首先我们选取了向量 $v$ 让他变成了一个矩阵</li>
+<li>我们建立了两个基向量, 将其放大一倍, 并且我们按顺序将其丢进一个矩阵 $T$ 里</li>
+<li>我们用矩阵T乘以矩阵 $v$，结果得到了上面的内容</li>
+</ol>
+<p>因此我们可以认为, 首先我们将这个变换Transformation给<strong>定义</strong>好, 把他弄得像一个函数一样, 不管代入什么向量矩阵, 我们都可以将其做相同的操作，抽象一下即可得到<br>$$Result&#x3D;\begin{pmatrix}<br>{2}&amp;{0}\\<br>{0}&amp;{2}<br>\end{pmatrix}\begin{pmatrix}<br>{x}\\<br>{y}<br>\end{pmatrix}&#x3D;\begin{pmatrix}<br>{2\times x+0\times y}\\<br>{0\times x+2\times y}<br>\end{pmatrix}&#x3D;\begin{pmatrix}<br>{2x}\\<br>{2y}<br>\end{pmatrix}$$<br>所以我们可以知道，矩阵其实是一种<strong>已变换后的位置的记号</strong>罢了, 所有没变化之前的向量都可以通过这个<strong>记号</strong>进行变化</p>
+<h5 id="案例2-逆时针旋转45°"><a href="#案例2-逆时针旋转45°" class="headerlink" title="案例2: 逆时针旋转45°"></a>案例2: 逆时针旋转45°</h5><p>我们再来引入另外一个案例, 我们想定义一个矩阵, 所有向量通过这个矩阵后, 都可以逆时针旋转90°</p>
+<p>我们可以这样来定义这个矩阵, 首先我们将基向量定在 (1,0) 和 (0,1) 想象一下它逆时针旋转90°后是怎样的情形<br>$$T&#x3D;\begin{pmatrix}<br>{1}&amp;{0}\\<br>{0}&amp;{1}<br>\end{pmatrix}\rightarrow\begin{pmatrix}<br>{0}&amp;{-1}\\<br>{1}&amp;{0}<br>\end{pmatrix}&#x3D;\begin{pmatrix}<br>{cos(90°)}&amp;{-sin(90°)}\\<br>{sin(90°)}&amp;{cos(90°)}<br>\end{pmatrix}$$<br>如果你对上述操作有疑问不妨可以回顾<strong>参数方程中圆的方程</strong>或者可以看看<a href="https://blog.csdn.net/qq_44864262/article/details/107620539" target="_blank" rel="noopener">这个教程</a><br>$$\begin{equation}<br>C(t)&#x3D;\begin{cases}<br>x&#x3D;cos(t)\\<br>y&#x3D;sin(t)<br>\end{cases}<br>\end{equation}$$<br>并且请关注一下 <strong>第一列的向量</strong> 和 <strong>第二列的向量</strong><br>$$\begin{bmatrix}<br>{cos(t)}&amp;{-sin(t)}\\<br>{sin(t)}&amp;{cos(t)}<br>\end{bmatrix}$$</p>
+<p>我们定义一个向量 $v$ 坐落在 $(1,2)$ 这个点<br>因此可以算出它旋转之后得到的点<br>$$Result&#x3D;\begin{pmatrix}<br>{-2}\\<br>{1}<br>\end{pmatrix}$$</p>
+<h5 id="MC中的实现"><a href="#MC中的实现" class="headerlink" title="MC中的实现"></a>MC中的实现</h5><p>为了减少本篇代码量, 与造福全人类的伟大使命, 我这里直接调用 <a href="https://github.com/602723113/ParticleLib/blob/master/src/main/java/top/zoyn/particlelib/utils/matrix/Matrix.java" target="_blank" rel="noopener">ParticleLib 当中 Matrix</a> 的代码, 你可以直接将该复制到你的项目当中</p>
+<p>首先我们可以看到在同文件夹下有一个叫做Matrixs的类, 这个类装载着一些我写的一些预设的矩阵</p>
+<p>让我们定义一个放大两倍的矩阵</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 定义一个2行2列的单位矩阵</span>
+Matrix T = Matrixs.eyes(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>).multiply(<span class="hljs-number">2</span>);
+<span class="hljs-comment">// 给定一个 (1, 0, 1) 的向量 由于是</span>
+Vector v = <span class="hljs-keyword">new</span> Vector(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+<span class="hljs-comment">// 将矩阵作用至向量上, 得到结果</span>
+Vector result = T.applyVector(v);</code></pre>
+<h5 id="累积矩阵效果"><a href="#累积矩阵效果" class="headerlink" title="累积矩阵效果"></a>累积矩阵效果</h5><p>如果我想做这样的一个矩阵, 先扩大2倍, 再逆时针旋转90°是怎样的呢</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 定义一个2行2列的单位矩阵, 并放大两倍的单位矩阵</span>
+Matrix T = Matrixs.eyes(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>).multiply(<span class="hljs-number">2</span>);
+<span class="hljs-comment">// 定义一个旋转90°的矩阵</span>
+Matrix rot = Matrixs.rotate2D(<span class="hljs-number">90</span>);
+<span class="hljs-comment">// 得到旋转后的矩阵</span>
+Matrix newT = rot.multiply(T); <span class="hljs-comment">// 注意这里, 实际调用时我写成了右乘, 因此不能直接调用 T.multiply(rot)</span>
+T.prettyPrinting();
+System.out.println(<span class="hljs-string">"====="</span>);
+rot.prettyPrinting();
+System.out.println(<span class="hljs-string">"====="</span>);
+newT.prettyPrinting();</code></pre>
+<p><strong>请注意上方</strong> <code>multiply</code> <strong>的部分</strong>, 写的时候写成了右乘, 如果你觉得别扭你可以自己改源码, 这些都是允许的<br>如果上面的代码改成 <code>T.multiply(rot)</code> 意思则是, <strong>先旋转90°, 再进行扩大</strong></p>
+<p>输出结果</p>
+<pre><code class="hljs angelscript">[<span class="hljs-number">2.0</span>, <span class="hljs-number">0.0</span>]
+[<span class="hljs-number">0.0</span>, <span class="hljs-number">2.0</span>]
+=====
+[<span class="hljs-number">6.123233995736766E-17</span>, <span class="hljs-number">1.0</span>]
+[<span class="hljs-number">-1.0</span>, <span class="hljs-number">6.123233995736766E-17</span>]
+=====
+[<span class="hljs-number">1.2246467991473532E-16</span>, <span class="hljs-number">2.0</span>]
+[<span class="hljs-number">-2.0</span>, <span class="hljs-number">1.2246467991473532E-16</span>]</code></pre>
+<p>上方的那两个<strong>极小极小</strong>的数是由于精度缺失而导致的, 大家可以看成 0 即可, 在实际使用当中, 这个很小的数不会有较大的影响</p>
+<pre><code class="hljs angelscript">[<span class="hljs-number">2.0</span>, <span class="hljs-number">0.0</span>]
+[<span class="hljs-number">0.0</span>, <span class="hljs-number">2.0</span>]
+=====
+[<span class="hljs-number">0</span>, <span class="hljs-number">1.0</span>]
+[<span class="hljs-number">-1.0</span>, <span class="hljs-number">0</span>]
+=====
+[<span class="hljs-number">0</span>, <span class="hljs-number">2.0</span>]
+[<span class="hljs-number">-2.0</span>, <span class="hljs-number">0</span>]</code></pre>
+<h4 id="四、3维向量的变换-Transformation"><a href="#四、3维向量的变换-Transformation" class="headerlink" title="四、3维向量的变换(Transformation)"></a>四、3维向量的变换(Transformation)</h4><p>其实3维向量的变换就是在 $2\times2$ 阶的方阵, 变成 $3\times3$ 阶的方阵<br>我们来看一个实际案例</p>
+<pre><code class="hljs java">Vector vector = player.getLocation().getDirection();
+<span class="hljs-comment">// 一个处于1~2之间随机的值</span>
+<span class="hljs-keyword">double</span> random = <span class="hljs-keyword">new</span> Random().nextDouble() + <span class="hljs-number">1</span>;
+<span class="hljs-comment">// 原点选取在一个玩家眼前向前推动一点点的距离</span>
+Arc arc = <span class="hljs-keyword">new</span> Arc(player.getEyeLocation().add(player.getLocation().getDirection().multiply(random)))
+        .setStartAngle(<span class="hljs-number">0</span>) <span class="hljs-comment">// 最开始的旋转角度</span>
+        .setAngle(<span class="hljs-number">180</span>) <span class="hljs-comment">// 旋转角度</span>
+        .setRadius(<span class="hljs-number">2</span>) <span class="hljs-comment">// 半径</span>
+        .setStep(<span class="hljs-number">10</span>D); <span class="hljs-comment">// 步进单位</span>
+arc.addMatrix(Matrixs.rotateAroundZAxis(<span class="hljs-number">30</span>)) <span class="hljs-comment">// 增加围绕Z轴旋转30°</span>
+        .addMatrix(Matrixs.rotateAroundYAxis(-player.getLocation().getYaw())); <span class="hljs-comment">// 增加围绕Y轴旋转关于玩家视角的变换, 这样就会使得特效一直在玩家眼前</span>
+arc.setParticle(Particle.TOTEM)
+        .setCount(<span class="hljs-number">0</span>)
+        .setOffsetX(<span class="hljs-number">2</span> * vector.getX())
+        .setOffsetY(<span class="hljs-number">2</span> * vector.getY())
+        .setOffsetZ(<span class="hljs-number">2</span> * vector.getZ())
+        .setExtra(<span class="hljs-number">0.5</span>)
+        .show();</code></pre>
+<p>具体效果<br><img src="/img/%E7%9F%A9%E9%98%B5%E4%B8%89%E7%BB%B4.gif" srcset="/img/loading.gif" alt="矩阵三维"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Bukkit%E6%95%99%E7%A8%8B/">Bukkit教程</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Bukkit/">Bukkit</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Minecraft/">Minecraft</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MC%E7%89%B9%E6%95%88/">MC特效</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/18/220319-%E9%9A%8F%E4%BE%BF%E8%81%8A%E8%81%8A/">
+                        <span class="hidden-mobile">随便聊聊最近的事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">桂ICP备2021000145号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "从零开始的MC特效(七 | 矩阵)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

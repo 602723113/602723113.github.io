@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      31
        分钟
     </span>
   
@@ -240,16 +240,16 @@
 <p>&lt;To初中生&gt;: 如果你是初中的话，别慌，你有趋向的概念就可以读懂本教程(应该吧…)<br>&lt;To高中生&gt;: 如果你还未学到关于上面的那本书，别慌学到了再来看也行233 (雾<br>&lt;To大学生&gt;: 没什么好说的…</p>
 <hr>
 <h4 id="1-数学上的向量与BukkitAPI中的向量"><a href="#1-数学上的向量与BukkitAPI中的向量" class="headerlink" title="1.数学上的向量与BukkitAPI中的向量"></a>1.数学上的向量与BukkitAPI中的向量</h4><p><strong>此处只讲平面向量</strong></p>
-<p>在教程开始之前我们来谈一下数学上对向量的定义<br>*<em>定义:<br>*</em><br>向量由长度和方向组成，总是用来描述从一个点到另一个的移动。<br>和我们平常所说的数量不同的是，向量则是有了方向这一概念<br>那么我们利用图来理解一下向量</p>
+<p>在教程开始之前我们来谈一下数学上对向量的定义<br>**定义:<br>**<br>向量由长度和方向组成，总是用来描述从一个点到另一个的移动。<br>和我们平常所说的数量不同的是，向量则是有了方向这一概念<br>那么我们利用图来理解一下向量</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/8109631-f9171d288c45fa74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 1-1"></p>
 <p>在 图 1-1 当中我们定义两个点一个是<strong>点A</strong>一个是<strong>点B</strong>，那么我们<strong>以A为起点，B为终点作一条有向线段</strong>，得到下图<br><img src="http://upload-images.jianshu.io/upload_images/8109631-b4f38fb09033b50d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="图 1-2"></p>
 <p>在 图1-2 当中我们作了一条<strong>有向线段</strong>，而这条有向线段我们称之为<strong>向量AB</strong>，那么这就是向量的一个基本定义</p>
-<p><strong>向量的坐标表示: 假设A = (1, 3), B = (2, 4)，则向量AB = (2 - 1, 4 - 3)，即终点减起点<br>(在BukkitAPI中，向量以坐标来表示所以突出这一段)</strong></p>
+<p><strong>向量的坐标表示: 假设A &#x3D; (1, 3), B &#x3D; (2, 4)，则向量AB &#x3D; (2 - 1, 4 - 3)，即终点减起点<br>(在BukkitAPI中，向量以坐标来表示所以突出这一段)</strong></p>
 <p>我们再来谈谈关于向量的一些相关概念<br><strong>向量的模:</strong> 若我们有一个向量AB，那么它的模可以使用 <strong>|AB|</strong> 来进行表示，表示的则是<strong>AB之间的距离，即向量AB的长度</strong><br><strong>单位向量:</strong> 我们把一个模等于1个单位长度的向量叫做单位向量<br><strong>相反向量:</strong> 与<strong>向量A</strong>长度相等，方向相反的向量，叫做向量<strong>A的相反向量</strong><br><strong>零向量:</strong> 我们把<strong>模长等于0</strong>的向量叫做零向量</p>
 <hr>
-<h4 id="向量的基本运算"><a href="#向量的基本运算" class="headerlink" title="向量的基本运算"></a>向量的基本运算</h4><p>向量是有加和乘的，那么我们根据以下的一些图来了解一下它们的基本运算，<br><img src="http://upload-images.jianshu.io/upload_images/8109631-aebba809ea979a09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"><br><strong>向量相加应满足平行四边形定则或三角形定则<br>若向量A = (1, 3), 向量B = (2, 4)，则向量A+向量B = (3, 7)</strong></p>
+<h4 id="向量的基本运算"><a href="#向量的基本运算" class="headerlink" title="向量的基本运算"></a>向量的基本运算</h4><p>向量是有加和乘的，那么我们根据以下的一些图来了解一下它们的基本运算，<br><img src="http://upload-images.jianshu.io/upload_images/8109631-aebba809ea979a09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"><br><strong>向量相加应满足平行四边形定则或三角形定则<br>若向量A &#x3D; (1, 3), 向量B &#x3D; (2, 4)，则向量A+向量B &#x3D; (3, 7)</strong></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/8109631-239da7f92cda0b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
-<p><strong>在上方我们给一个向量乘以-1，得到了反方向的向量，这个我们称之为相反向量<br>若向量A = (1, 3),向量A * 2 = (2, 4)<br>若向量A = (1, 3),向量A * -1 = (-1, -3)</strong></p>
+<p><strong>在上方我们给一个向量乘以-1，得到了反方向的向量，这个我们称之为相反向量<br>若向量A &#x3D; (1, 3),向量A * 2 &#x3D; (2, 4)<br>若向量A &#x3D; (1, 3),向量A * -1 &#x3D; (-1, -3)</strong></p>
 <hr>
 <h4 id="BukkitAPI上的向量-——-Vector"><a href="#BukkitAPI上的向量-——-Vector" class="headerlink" title="BukkitAPI上的向量 —— Vector"></a>BukkitAPI上的向量 —— Vector</h4><p>那么BukkitAPI上对向量的定义又是怎么样的呢？首先我们在 <strong>org.bukkit.util</strong> 包下找到一个叫<a href="https://docs.windit.net/Chinese_BukkitAPI/org/bukkit/util/Vector.html" target="_blank" rel="noopener">Vector</a>的类</p>
 <p><strong>那么在BukkitAPI上，Vector类用于表示从一个Location到另一个Location的”趋势”。</strong></p>
@@ -282,7 +282,7 @@
 &#96;&#96;&#96;double vectorLength &#x3D; vectorAB.length();</code></pre>
 <p>然后我们再把该向量转为单位向量</p>
 <pre><code class="hljs vectorAB.normalize();```">然后我们就需要利用for循环**来计算出一个每一个需要multiply的值**</code></pre>
-<p>for (double i = 0; i &lt; vectorLength; i += 0.1) {<br>     // 这里如果我们直接进行multiply的话则会修改vectorAB的值，所以我们先clone再multiply<br>     Vector vector = vectorAB.clone().multiply(i);<br>}</p>
+<p>for (double i &#x3D; 0; i &lt; vectorLength; i +&#x3D; 0.1) {<br>     &#x2F;&#x2F; 这里如果我们直接进行multiply的话则会修改vectorAB的值，所以我们先clone再multiply<br>     Vector vector &#x3D; vectorAB.clone().multiply(i);<br>}</p>
 <pre><code class="hljs markdown"><span class="hljs-strong">**i的类型:**</span>
 <span class="hljs-bullet">- </span>首先我们来解释为什么这里的i的类型为double
 <span class="hljs-bullet">- </span>因为在坐标运算中，精确度是比较高的，当两个点相近时可能他们的值还没有到1，可能只有0.8左右的长度，所以我们使用double来修饰
@@ -292,9 +292,9 @@
 <span class="hljs-strong">**步长:**</span> 这里我们依然修改了循环的步长，那么它的作用是什么？其实就是在设定每一个add出来后的点的<span class="hljs-strong">**间距**</span> （这里我不懂怎么解释，直接画了个图给你们，按照图来理解会很好哦~）
 ![<span class="hljs-string">image</span>](<span class="hljs-link">http://upload-images.jianshu.io/upload_images/8109631-03035b9b0cddc4f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)
 那么我就会得到每一次从点A往点B进行逐步偏移的一个效果，然后我们每次给locA，进行add的操作就可以得到当前循环应该得到的Location</code></pre>
-<p>locA.add(vector);<br>locA.getWorld().playEffect(locA, Effect.HAPPY_VILLAGER, 1); // 这里是播放粒子的代码…<br>locA.subtract(vector);</p>
+<p>locA.add(vector);<br>locA.getWorld().playEffect(locA, Effect.HAPPY_VILLAGER, 1); &#x2F;&#x2F; 这里是播放粒子的代码…<br>locA.subtract(vector);</p>
 <pre><code class="hljs asciidoc">*<span class="hljs-strong">*完整代码:*</span><span class="hljs-strong">*</span></code></pre>
-<p>public static void buildLine(Location locA, Location locB) {<br>    Vector vectorAB = locB.clone().subtract(locA).toVector();<br>    double vectorLength = vectorAB.length();<br>    vectorAB.normalize();<br>    for (double i = 0; i &lt; vectorLength; i += 0.1) {<br>        Vector vector = vectorAB.clone().multiply(i);<br>        locA.add(vector);<br>        locA.getWorld().playEffect(locA, Effect.HAPPY_VILLAGER, 1);<br>        locA.subtract(vector);<br>    }<br>}</p>
+<p>public static void buildLine(Location locA, Location locB) {<br>    Vector vectorAB &#x3D; locB.clone().subtract(locA).toVector();<br>    double vectorLength &#x3D; vectorAB.length();<br>    vectorAB.normalize();<br>    for (double i &#x3D; 0; i &lt; vectorLength; i +&#x3D; 0.1) {<br>        Vector vector &#x3D; vectorAB.clone().multiply(i);<br>        locA.add(vector);<br>        locA.getWorld().playEffect(locA, Effect.HAPPY_VILLAGER, 1);<br>        locA.subtract(vector);<br>    }<br>}</p>
 <pre><code class="hljs markdown">游戏内的效果:
 ![<span class="hljs-string">image</span>](<span class="hljs-link">http://upload-images.jianshu.io/upload_images/8109631-c32ef6631b2344a8.gif?imageMogr2/auto-orient/strip</span>)
 
@@ -314,9 +314,9 @@
 
 我们把它放入代码中看看要怎么操作
 我们依然使用玩家的location作为原点O，之后我们实例化一个List用于保存这五个点</code></pre>
-<p>Location playerLocation = player.getLocation();<br>List<Location> locations = Lists.newArrayList();</p>
+<p>Location playerLocation &#x3D; player.getLocation();<br>List<Location> locations &#x3D; Lists.newArrayList();</p>
 <pre><code class="hljs angelscript">因为我们只是需要<span class="hljs-number">72</span>的倍数的角度，所以我们把步长修改为 i += <span class="hljs-number">72</span> (等价于 i = i + <span class="hljs-number">72</span>)</code></pre>
-<p>for (int i = 0; i &lt; 360; i += 72) {<br>    // 转弧度制<br>    double radians = Math.toRadians(i);<br>    locations.add(playerLocation.clone().add(3 *<br>    Math.cos(radians), 0D, 3 * Math.sin(radians)));<br>}</p>
+<p>for (int i &#x3D; 0; i &lt; 360; i +&#x3D; 72) {<br>    &#x2F;&#x2F; 转弧度制<br>    double radians &#x3D; Math.toRadians(i);<br>    locations.add(playerLocation.clone().add(3 *<br>    Math.cos(radians), 0D, 3 * Math.sin(radians)));<br>}</p>
 <pre><code class="hljs markdown">为了以便于观看我将每次cos和sin计算的值都乘以3来扩大点到原点的距离
 之后我们的locations里就存放有那5个点了
 如果我们现在对这五个点播放粒子的话你可以看到以下这样的图
@@ -326,9 +326,9 @@
 
 <span class="hljs-section">#### 4.一个五角星</span>
 其实也没什么好说的...看代码吧...</code></pre>
-<p>Location playerLocation = player.getLocation();<br>List<Location> locations = Lists.newArrayList();<br>for (int i = 0; i &lt; 360; i += 72) {<br>    // 转弧度制<br>    double radians = Math.toRadians(i);<br>    locations.add(playerLocation.clone().add(3 * Math.cos(radians), 0D, 3 * Math.sin(radians)));<br>}</p>
+<p>Location playerLocation &#x3D; player.getLocation();<br>List<Location> locations &#x3D; Lists.newArrayList();<br>for (int i &#x3D; 0; i &lt; 360; i +&#x3D; 72) {<br>    &#x2F;&#x2F; 转弧度制<br>    double radians &#x3D; Math.toRadians(i);<br>    locations.add(playerLocation.clone().add(3 * Math.cos(radians), 0D, 3 * Math.sin(radians)));<br>}</p>
 <p>buildLine(locations.get(0), locations.get(2));<br>buildLine(locations.get(0), locations.get(3));<br>buildLine(locations.get(1), locations.get(3));<br>buildLine(locations.get(1), locations.get(4));<br>buildLine(locations.get(2), locations.get(4));</p>
-<p>```<br><strong>备注: 这里的buildLine是上方我所发出来的一个方法哦</strong></p>
+<p>&#96;&#96;&#96;<br><strong>备注: 这里的buildLine是上方我所发出来的一个方法哦</strong></p>
 <p>上方的locations的画线操作我们可以利用图来理解一下就可以</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/8109631-6bebbbb151b102c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image"></p>
 <p>为了方便解释我给每个点都起了名字括号内的是它在locations中的下标</p>
